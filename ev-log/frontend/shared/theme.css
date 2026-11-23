@@ -1,0 +1,194 @@
+/* =========================================================================
+   EV Log 공용 테마 — 발표 슬라이드(AI_car.pptx)의 색·간격을 그대로 옮긴 값
+   팀원 페이지도 이 파일 하나만 불러오면 사이드바/상단바/카드/버튼이 통일됩니다.
+   ========================================================================= */
+:root {
+  --bg: #0d1420;            /* 본문 배경 */
+  --sidebar: #111c2a;       /* 사이드바 */
+  --card: #172535;          /* 기본 카드 */
+  --card-2: #1c2d40;        /* 카드 안 보조 영역 */
+  --line: #26394d;          /* 구분선·테두리 */
+  --hero: #204639;          /* 강조 카드(초록) */
+  --hero-line: #2c5a49;
+  --nav-active: #263d39;    /* 선택된 메뉴 */
+  --lime: #c7f485;          /* 주 버튼·로고 */
+  --on-lime: #132115;       /* 라임 위 글자 */
+  --teal: #90d6c8;          /* 라벨·보조 강조 */
+  --text: #f0f5fb;
+  --muted: #a9bcd0;
+  --hero-text: #d3eadd;
+  --input: #0d1420;
+  --warn: #f4c97a;
+  --danger: #ff9b8f;
+
+  --radius: 10px;
+  --radius-sm: 8px;
+  --sidebar-w: 220px;
+  --font: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+a { color: var(--teal); }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------------------------------------------------------------- 레이아웃 */
+.app {
+  display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100vh; min-height: 100dvh;
+  /* 사이드바 열 배경이 페이지 끝까지 이어지도록 */
+  background: linear-gradient(to right, var(--sidebar) calc(var(--sidebar-w) - 1px), var(--line) 0 var(--sidebar-w), var(--bg) 0);
+}
+
+.sidebar {
+  position: sticky; top: 0; height: 100vh; height: 100dvh;
+  display: flex; flex-direction: column;
+  background: var(--sidebar);
+  border-right: 1px solid var(--line);
+  padding: 22px 16px 20px;
+}
+.brand { display: flex; align-items: center; gap: 12px; padding: 0 6px; margin-bottom: 40px; text-decoration: none; color: var(--text); }
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: grid; place-items: center;
+  background: var(--lime); color: var(--on-lime); font-weight: 800; font-size: 18px;
+}
+.brand-name { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+
+.nav { display: flex; flex-direction: column; gap: 6px; }
+.nav a {
+  display: flex; align-items: center; gap: 14px;
+  padding: 9px 14px; border-radius: var(--radius-sm);
+  color: var(--muted); text-decoration: none; font-size: 15px;
+}
+.nav a:hover { color: var(--text); background: rgba(255, 255, 255, 0.03); }
+.nav a[aria-current="page"] { background: var(--nav-active); color: var(--lime); font-weight: 700; }
+.nav-icon { width: 16px; text-align: center; font-size: 13px; }
+
+.vehicle-card { margin-top: auto; background: var(--card); border-radius: var(--radius-sm); padding: 14px 18px; }
+.vehicle-card .k { font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+.vehicle-card .name { font-size: 17px; font-weight: 700; margin: 0; }
+.vehicle-card .year { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+
+.main-col { min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px; padding: 0 34px;
+  border-bottom: 1px solid var(--line);
+}
+.crumbs { display: flex; gap: 12px; color: var(--muted); font-size: 14px; margin: 0; padding: 0; list-style: none; }
+.crumbs li + li::before { content: "/"; margin-right: 12px; color: var(--muted); }
+.topbar-badge { font-size: 13px; font-weight: 700; color: var(--teal); }
+
+.content { width: 100%; max-width: 1080px; padding: 26px 34px 48px; }
+.page-head { margin: 0 0 22px; }
+.page-head h1 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.2; margin: 0 0 10px; font-weight: 800; letter-spacing: -0.02em; }
+.page-sub { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* 모바일 하단 탭바 */
+.tabbar { display: none; }
+
+/* ---------------------------------------------------------------- 공통 컴포넌트 */
+.card { background: var(--card); border-radius: var(--radius); padding: 22px 26px; }
+.card + .card { margin-top: 14px; }
+.card-title { font-size: 20px; font-weight: 700; margin: 0 0 14px; }
+.card--hero { background: var(--hero); color: var(--text); }
+
+.field-label { display: block; font-size: 13px; color: var(--muted); font-weight: 600; margin: 0 0 8px; }
+.input {
+  width: 100%; border: 1px solid transparent; border-radius: var(--radius-sm);
+  background: var(--input); color: var(--text);
+  padding: 10px 16px; font-size: 15px;
+}
+.input::placeholder { color: #7f93a8; }
+.input:focus { outline: none; border-color: var(--teal); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 40px; padding: 0 18px; border-radius: var(--radius-sm);
+  border: 1px solid transparent; background: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary { background: var(--lime); color: var(--on-lime); }
+.btn-primary:hover:not(:disabled) { filter: brightness(1.06); }
+.btn-outline { border-color: var(--lime); color: var(--lime); }
+.btn-outline:hover:not(:disabled) { background: rgba(199, 244, 133, 0.08); }
+.btn-text { color: var(--teal); padding: 0 14px; }
+.btn-text:hover:not(:disabled) { background: rgba(144, 214, 200, 0.08); }
+.btn-quiet { color: var(--muted); padding: 0 10px; min-height: 34px; font-weight: 600; }
+.btn-quiet:hover:not(:disabled) { color: var(--text); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border-radius: 999px; padding: 2px 9px; font-size: 12px; font-weight: 700; line-height: 1.6;
+}
+.chip-ai { background: rgba(199, 244, 133, 0.14); color: var(--lime); }
+.chip-teal { background: rgba(144, 214, 200, 0.14); color: var(--teal); }
+.chip-warn { background: rgba(244, 201, 122, 0.14); color: var(--warn); }
+
+/* 토스트 */
+.toast-wrap { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 50; display: grid; gap: 8px; width: min(92vw, 420px); }
+.toast {
+  background: #24384c; color: var(--text); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 12px 16px; font-size: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  animation: toast-in 0.18s ease-out;
+}
+.toast[data-type="error"] { border-color: #6b3a36; }
+.toast[data-type="success"] { border-color: #3d6b47; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(6px); } }
+
+/* 다이얼로그 */
+dialog.sheet {
+  border: 1px solid var(--line); border-radius: 14px; padding: 0;
+  background: var(--card); color: var(--text);
+  width: min(94vw, 460px);
+}
+dialog.sheet::backdrop { background: rgba(5, 9, 15, 0.7); }
+.sheet-body { padding: 24px 24px 8px; }
+.sheet-body h2 { font-size: 19px; margin: 0 0 12px; }
+.sheet-body p, .sheet-body li { color: var(--muted); font-size: 14px; }
+.sheet-body ul { padding-left: 18px; margin: 0 0 8px; }
+.sheet-body li + li { margin-top: 4px; }
+.sheet-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 20px 20px; }
+
+/* ---------------------------------------------------------------- 모바일 */
+@media (max-width: 820px) {
+  .app { grid-template-columns: 1fr; background: var(--bg); }
+  .sidebar { display: none; }
+  .topbar { height: 54px; padding: 0 16px; position: sticky; top: 0; z-index: 20; background: rgba(13, 20, 32, 0.92); backdrop-filter: blur(8px); }
+  .topbar .mobile-brand { display: flex; }
+  .crumbs { display: none; }
+  .content { padding: 18px 16px calc(92px + env(safe-area-inset-bottom)); }
+  .card { padding: 18px; }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: var(--sidebar); border-top: 1px solid var(--line);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  }
+  .tabbar a {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 6px 0; border-radius: var(--radius-sm);
+    color: var(--muted); text-decoration: none; font-size: 11px;
+  }
+  .tabbar a[aria-current="page"] { color: var(--lime); background: var(--nav-active); font-weight: 700; }
+  .tabbar .nav-icon { font-size: 15px; width: auto; }
+  .toast-wrap { bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
+.mobile-brand { display: none; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+.mobile-brand .brand-mark { width: 28px; height: 28px; font-size: 15px; border-radius: 7px; }
+.mobile-brand small { color: var(--muted); font-weight: 400; font-size: 12px; }

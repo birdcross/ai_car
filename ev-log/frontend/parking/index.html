@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1420">
+  <title>주차 위치 · EV Log</title>
+  <link rel="icon" href="/shared/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/theme.css">
+  <link rel="stylesheet" href="./parking.css">
+  <!-- 프론트를 백엔드와 다른 도메인에 배포할 때만: <script>window.EVLOG_API_BASE = 'https://백엔드주소';</script> -->
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="main-col">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="content" id="main">
+      <header class="page-head">
+        <h1>내 차 주차 위치</h1>
+        <p class="page-sub">주차장에서 돌아올 때 층과 구역을 바로 확인하세요.</p>
+      </header>
+
+      <div class="pending-banner" id="pendingBanner" role="status" hidden>
+        <span id="pendingText">오프라인에서 저장한 기록이 있어요. 연결되면 자동으로 올라가요.</span>
+        <button type="button" class="btn btn-quiet" id="btnRetryPending">지금 다시 시도</button>
+      </div>
+
+      <!-- ① 최근 주차 기록 -->
+      <section class="card card--hero hero" id="hero" aria-labelledby="heroLabel">
+        <div class="hero-body">
+          <p class="eyebrow">
+            <span aria-hidden="true">⌖</span>
+            <span id="heroEyebrow">최근 주차 기록</span>
+            <span class="chip chip-ai" id="heroAiChip" title="AI가 사진에서 읽은 표기를 그대로 저장한 기록이에요" hidden>AI 인식</span>
+          </p>
+          <h2 class="hero-label" id="heroLabel">지하 2층 A-17</h2>
+          <p class="hero-meta" id="heroMeta">2026.11.23 오후 7:20 · 샘플 기록</p>
+
+          <p class="hero-memo" id="heroMemo" hidden></p>
+          <form class="memo-edit" id="memoEditForm" hidden>
+            <label class="sr-only" for="memoEditInput">메모 수정</label>
+            <textarea class="input textarea" id="memoEditInput" rows="2" maxlength="500"></textarea>
+            <div class="memo-edit-actions">
+              <button type="button" class="btn btn-quiet on-hero" id="btnMemoCancel">취소</button>
+              <button type="submit" class="btn btn-primary">메모 저장</button>
+            </div>
+          </form>
+
+          <div class="hero-actions" id="heroActions" hidden>
+            <button type="button" class="btn btn-hero" id="btnDistance">⌖ 차까지 거리 보기</button>
+            <a class="btn btn-hero" id="linkMapApp" target="_blank" rel="noopener" hidden>카카오맵에서 열기 ↗</a>
+            <button type="button" class="btn btn-hero" id="btnEditMemo">메모 수정</button>
+            <button type="button" class="btn btn-hero" id="btnBackToLatest" hidden>최근 기록 보기</button>
+          </div>
+          <p class="distance-result" id="distanceResult" role="status" hidden></p>
+        </div>
+
+        <div class="hero-media" id="heroMedia" hidden>
+          <div class="media-tabs" role="tablist" id="mediaTabs" hidden>
+            <button type="button" role="tab" id="tabMap" aria-controls="mapPanel" aria-selected="true">지도</button>
+            <button type="button" role="tab" id="tabPhoto" aria-controls="photoPanel" aria-selected="false">사진</button>
+          </div>
+          <div class="media-panel" id="mapPanel" role="tabpanel">
+            <div class="map" id="map" aria-label="주차 위치 지도"></div>
+            <div class="map-fallback" id="mapFallback" hidden>
+              <p class="mf-title">지도를 불러오지 못했어요</p>
+              <p class="mf-coords" id="mapCoords"></p>
+              <a id="mapGoogle" target="_blank" rel="noopener">Google 지도에서 보기 ↗</a>
+            </div>
+          </div>
+          <div class="media-panel" id="photoPanel" role="tabpanel" hidden>
+            <button type="button" class="photo-view" id="btnHeroPhoto" aria-label="주차 사진 크게 보기">
+              <img id="heroPhoto" alt="주차한 자리 사진">
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ② 새 위치 저장 -->
+      <section class="card save-card" aria-labelledby="saveTitle">
+        <h2 class="card-title" id="saveTitle">새 위치 저장</h2>
+        <form id="saveForm" novalidate>
+          <label class="field-label" for="labelInput">층·구역 또는 위치 메모</label>
+          <input class="input" id="labelInput" maxlength="60" placeholder="예: 지하 2층 A-17" autocomplete="off">
+
+          <div class="capture-grid">
+            <div class="capture-tile" id="gpsTile" data-state="idle">
+              <p class="tile-label"><span class="dot" aria-hidden="true"></span>GPS 위치</p>
+              <p class="tile-value" id="gpsValue">아직 가져오지 않았어요</p>
+              <p class="tile-help" id="gpsHelp">주차한 자리에서 ‘휴대폰 위치 가져오기’를 눌러주세요.</p>
+            </div>
+
+            <div class="capture-tile" id="photoTile" data-state="empty">
+              <p class="tile-label"><span class="dot" aria-hidden="true"></span>주차 사진</p>
+              <div class="photo-preview" id="photoPreview" hidden>
+                <img id="photoPreviewImg" alt="찍은 주차 사진 미리보기">
+                <button type="button" class="photo-remove" id="btnPhotoRemove" aria-label="사진 빼기">✕</button>
+              </div>
+              <p class="tile-value" id="photoValue">기둥 번호나 층 표지판을 찍어두세요</p>
+              <p class="tile-help" id="photoHelp">AI가 사진 속 표지판에서 층·구역을 읽어줘요.</p>
+              <button type="button" class="btn-link" id="btnGallery">앨범에서 선택</button>
+            </div>
+          </div>
+
+          <div class="ai-loading" id="aiLoading" role="status" hidden>
+            <span class="spinner" aria-hidden="true"></span> AI가 사진 속 표지판을 읽고 있어요…
+          </div>
+
+          <div class="ai-result" id="aiResult" aria-live="polite" hidden>
+            <div class="ai-head">
+              <span class="chip chip-ai" id="aiChip">AI 인식 결과</span>
+              <span class="chip" id="aiConfidence"></span>
+            </div>
+            <p class="ai-label" id="aiLabel"></p>
+            <p class="ai-line" id="aiEvidence" hidden></p>
+            <p class="ai-line" id="aiLandmarks" hidden></p>
+            <p class="ai-line ai-note" id="aiNote" hidden></p>
+            <div class="ai-foot">
+              <p class="ai-disclaimer" id="aiDisclaimer">AI가 사진을 보고 만든 결과예요. 틀릴 수 있으니 저장 전에 확인해주세요.</p>
+              <button type="button" class="btn btn-text" id="btnApplyAi" hidden>입력칸에 적용</button>
+            </div>
+          </div>
+
+          <label class="field-label memo-label" for="memoInput">메모 <span class="optional">(선택)</span></label>
+          <textarea class="input textarea" id="memoInput" rows="3" maxlength="500"
+                    placeholder="예: 엘리베이터 2번 오른쪽, 충전기 앞 기둥 옆"></textarea>
+          <p class="counter"><span id="memoCount">0</span>/500</p>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="btnGps">휴대폰 위치 가져오기</button>
+            <button type="button" class="btn btn-outline" id="btnPhoto">주차 사진 찍기</button>
+            <button type="submit" class="btn btn-text" id="btnSave">주차 위치 저장</button>
+          </div>
+
+          <input type="file" id="fileCamera" accept="image/*" capture="environment" hidden>
+          <input type="file" id="fileGallery" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden>
+        </form>
+      </section>
+
+      <!-- ③ 지난 주차 기록 -->
+      <section class="card history-card" aria-labelledby="historyTitle">
+        <div class="card-head">
+          <h2 class="card-title" id="historyTitle">지난 주차 기록</h2>
+          <span class="card-count" id="historyCount"></span>
+        </div>
+        <ul class="history-list" id="historyList"></ul>
+        <p class="empty" id="historyEmpty">아직 저장한 주차 기록이 없어요. 위에서 첫 위치를 저장해보세요.</p>
+        <footer class="privacy">
+          <p>위치와 사진은 주차 위치 확인에만 쓰이고, 사진은 층·구역 인식을 위해 AI 서비스로 전송돼요. 언제든 지울 수 있어요.</p>
+          <div class="privacy-actions">
+            <button type="button" class="btn btn-quiet" id="btnConsentManage">동의 관리</button>
+            <button type="button" class="btn btn-quiet danger" id="btnDeleteAll">전체 기록 삭제</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="tabbar" id="tabbar"></nav>
+</div>
+
+<dialog class="sheet photo-sheet" id="photoDialog" aria-label="주차 사진">
+  <form method="dialog">
+    <img id="photoDialogImg" alt="주차한 자리 사진">
+    <div class="sheet-actions"><button class="btn btn-primary">닫기</button></div>
+  </form>
+</dialog>
+
+<noscript><p style="padding:24px">이 페이지는 JavaScript가 필요해요.</p></noscript>
+<script type="module" src="./parking.js"></script>
+</body>
+</html>
