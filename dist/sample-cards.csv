@@ -1,0 +1,5 @@
+id,date,merchant,amount,status,original_id
+EV001,2026-11-23,EV충전 사업자 A,9600,approved,
+EV002,2026-11-23,OO에너지 주유소,12000,approved,
+EV003,2026-11-18,EV충전 사업자 A,7200,approved,
+EV004,2026-11-23,EV충전 사업자 A,7200,cancelled,EV003

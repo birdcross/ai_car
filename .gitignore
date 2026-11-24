@@ -1,0 +1,6 @@
+__pycache__/
+.vercel/
+supabase-auth.local.json
+.env
+.env.*
+!.env.example

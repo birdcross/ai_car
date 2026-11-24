@@ -1,0 +1,307 @@
+[
+  {
+    "make": "BMW",
+    "model": "i3",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "i4",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "i5",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "i7",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "iX1",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "iX3",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "iX40",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "iX50",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BMW",
+    "model": "미니쿠퍼 일렉트릭",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "BYD",
+    "model": "T4K",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "CEVO 모빌리티",
+    "model": "캠시스 CEVO-C",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "Evion",
+    "model": "E6",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "KGM",
+    "model": "무쏘EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "KGM",
+    "model": "토레스EVX",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "MASADA(마사다)",
+    "model": "마사다 밴",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "MaiV(마이브)",
+    "model": "마이브 M1",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "SE-A(세아)",
+    "model": "세아2밴",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "SMART EV",
+    "model": "EV Z",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "EV6",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "EV9",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "니로 EV(24년형~)",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "니로 EV(~22년형)",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "레이 EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "기아",
+    "model": "봉고 EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "닛산",
+    "model": "리프",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "대창모터스",
+    "model": "다니고",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "디피코",
+    "model": "POTRO",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "렉서스",
+    "model": "UX300e",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "르노코리아",
+    "model": "ZOE",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "르노코리아",
+    "model": "르노 삼성 트위지",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "마이크로리노",
+    "model": "리노",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQB",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQC",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQE",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQE SUV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQS",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQS SUV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "메르세데스-벤츠",
+    "model": "EQV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "볼보",
+    "model": "C40 리차지",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "볼보",
+    "model": "XC40 리차지",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "비바모빌리티",
+    "model": "VBUS 60",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "쉐보레",
+    "model": "볼트 EUV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "쉐보레",
+    "model": "볼트 EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "아우디",
+    "model": "Q4 e-트론",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "에스에스 라이트",
+    "model": "젤라(ZELLA) EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "재규어",
+    "model": "I-페이스",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "제이스 모빌리티",
+    "model": "이티밴",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "테슬라",
+    "model": "모델 3",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "테슬라",
+    "model": "모델 S",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "테슬라",
+    "model": "모델 X",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "테슬라",
+    "model": "모델 Y",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "파워프라자",
+    "model": "피스",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "폭스바겐",
+    "model": "ID.4",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "폴스타",
+    "model": "폴스타 2",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "한신자동차",
+    "model": "플러스2.0카고",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "블루온",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "아이오닉 5",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "아이오닉 6",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "코나EV(23년형~)",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "코나EV(~22년형)",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  },
+  {
+    "make": "현대",
+    "model": "포터 EV",
+    "source": "https://www.data.go.kr/data/15039549/fileData.do"
+  }
+]
