@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="auth.js" defer></script></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="charging-monitor.js" defer></script><script src="auth.js" defer></script></head><body>
 <div class="shell"><aside><a class="brand" href="#home"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#home">⌂　대시보드</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#monitor">◉　모니터링</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a><a href="#sources">≡　데이터 출처</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
 <main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
 <section id="home" hidden><p class="eyebrow">MY GARAGE</p><h1>전기차 생활 관리</h1><p class="sub">충전비를 기록하고, 주차한 곳과 계기판 경고를 확인하세요.</p><div class="hero"><div><p>이번 달 충전비</p><strong id="total">₩0</strong><div id="summary"></div><a class="button" href="#ledger">충전 기록 추가</a></div><div class="energy" aria-hidden="true">ϟ</div></div>
@@ -27,9 +27,23 @@
 <div class="panel"><div class="heading"><div><h2>카드 내역 가져오기</h2><a href="sample-cards.csv" download>샘플 CSV 내려받기</a></div><button type="button" id="importSample">샘플 가져오기</button></div>
 <label>거래 파일<input id="cardFile" type="file" accept=".csv,text/csv"></label><p id="cardStatus" role="status"></p></div>
 <div class="panel"><h2>거래 검토</h2><ul id="cardRows" class="records"></ul></div></section>
-<section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">차량 데이터 시뮬레이션</p>
+<section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">현대 블루링크 충전 상태를 화면을 보는 동안 1분마다 확인합니다.</p>
+<div class="panel monitor-panel">
+  <div class="heading"><h2>연결 차량 충전 상태</h2><a href="#parking">현대 차량 연결</a></div>
+  <label id="liveVehicleField" hidden>조회할 차량 <select id="liveVehicle"></select></label>
+  <p id="liveMonitorStatus" role="status"></p>
+  <dl id="liveChargingDetails" class="charging-grid" hidden>
+    <div><dt>배터리 잔량</dt><dd id="liveSoc"></dd></div>
+    <div><dt>충전 상태</dt><dd id="liveCharging"></dd></div>
+    <div><dt>플러그 연결</dt><dd id="livePlug"></dd></div>
+    <div><dt>충전 목표</dt><dd id="liveTarget"></dd></div>
+    <div><dt>남은 시간</dt><dd id="liveRemaining"></dd></div>
+    <div><dt>차량 전송 시각</dt><dd id="liveReported"></dd></div>
+  </dl>
+</div>
+<details class="panel monitor-panel"><summary>충전 시뮬레이션</summary>
 <div class="hero"><div><p>배터리 잔량</p><strong id="soc">72%</strong><p id="chargeStatus"></p></div><div class="energy" aria-hidden="true">ϟ</div></div>
-<div class="panel monitor-panel"><progress id="battery" max="100" value="72" aria-label="배터리 잔량"></progress><p id="received"></p><button id="toggleMonitor" type="button">시뮬레이션 시작</button> <button id="simulateWarning" type="button" class="soft">경고 이벤트 생성</button><ul id="vehicleEvents" class="records"></ul></div></section>
+<div class="monitor-panel"><progress id="battery" max="100" value="72" aria-label="배터리 잔량"></progress><p id="received"></p><button id="toggleMonitor" type="button">시뮬레이션 시작</button> <button id="simulateWarning" type="button" class="soft">경고 이벤트 생성</button><ul id="vehicleEvents" class="records"></ul></div></details></section>
 <section id="settings" hidden>
 <h1 id="vehicleHeading">내 전기차 설정</h1><p class="sub" id="vehicleIntro">목록에서 고르거나 제조사와 차종을 직접 입력하세요.</p>
 <div class="panel"><div id="vehicleLoginPrompt"><h2>로그인 후 차량을 저장할 수 있어요</h2><p class="sub">저장한 차량은 로그인한 계정에 표시됩니다.</p><a class="button" href="#account">로그인 또는 회원가입</a></div><form id="vehicleForm" hidden><div class="fields">

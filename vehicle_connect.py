@@ -2,10 +2,12 @@
 import base64
 import json
 import os
+import re
 import secrets
 import threading
 import time
-from urllib.parse import urlencode, urlsplit
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote, urlencode, urlsplit
 from urllib.request import Request, urlopen
 
 from vehicle_oauth_store import SupabaseOAuthStore
@@ -16,6 +18,8 @@ BRANDS = {"hyundai": "현대 블루링크", "kia": "기아 커넥트"}
 LOCK = threading.Lock()
 PENDING = {}
 CONNECTED = {}
+CAR_ID = re.compile(r"[A-Za-z0-9_-]{1,128}")
+KOREA_TIME = timezone(timedelta(hours=9))
 
 
 def configuration(brand):
@@ -51,6 +55,50 @@ def provider_json(url, headers, fields=None):
         return json.load(response)
 
 
+def car_list(origin, headers):
+    rows = provider_json(origin + "/api/v1/car/profile/carlist", headers).get("cars")
+    if not isinstance(rows, list):
+        raise ValueError("제조사 차량 목록을 확인할 수 없어요. 차량 데이터 제공 동의와 API 권한을 확인해주세요.")
+    return [row for row in rows if isinstance(row, dict) and row.get("carType") == "EV"]
+
+
+def charging_snapshot(payload):
+    def number(value, upper=None):
+        if (isinstance(value, bool) or not isinstance(value, (int, float))
+                or not 0 <= value < float("inf") or (upper is not None and value > upper)):
+            raise ValueError("현대 충전 상태 응답의 숫자 항목을 확인할 수 없어요.")
+        return value
+
+    def enum(value, upper):
+        if type(value) is not int:
+            raise ValueError("현대 충전 상태 응답의 코드 항목을 확인할 수 없어요.")
+        return number(value, upper)
+
+    charging = payload.get("batteryCharge")
+    timestamp = payload.get("timestamp")
+    if not isinstance(charging, bool) or not isinstance(timestamp, str) or not re.fullmatch(r"[0-9]{14}", timestamp):
+        raise ValueError("현대 충전 상태 또는 차량 전송 시각을 확인할 수 없어요.")
+    try:
+        reported = datetime.strptime(timestamp, "%Y%m%d%H%M%S").replace(tzinfo=KOREA_TIME)
+    except ValueError as error:
+        raise ValueError("현대 충전 상태의 차량 전송 시각이 올바르지 않아요.") from error
+    target = payload.get("targetSOC") or {}
+    remaining = payload.get("remainTime") or {}
+    message_id = payload.get("msgId")
+    return {
+        "battery_plugin": enum(payload.get("batteryPlugin"), 2),
+        "battery_charge": charging,
+        "soc": number(payload.get("soc"), 100),
+        "target_plug_type": enum(target["plugType"], 2) if target.get("plugType") is not None else None,
+        "target_soc": number(target["targetSOClevel"], 100) if target.get("targetSOClevel") is not None else None,
+        "remaining_value": number(remaining["value"]) if remaining.get("value") is not None else None,
+        "remaining_unit": enum(remaining["unit"], 3) if remaining.get("unit") is not None else None,
+        "vehicle_reported_at": reported.isoformat(),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "message_id": message_id[:128] if isinstance(message_id, str) else None,
+    }
+
+
 def handle(user_id, request):
     if not isinstance(request, dict):
         raise ValueError("차량 연결 요청 형식을 확인해주세요.")
@@ -72,7 +120,7 @@ def handle(user_id, request):
         if action == "disconnect":
             store.disconnect()
             return {"connected": False}
-        if config and action in {"status", "vehicles"}:
+        if config and action in {"status", "vehicles", "monitor-vehicles", "charging"}:
             link = store.token(now)
     else:
         with LOCK:
@@ -128,16 +176,25 @@ def handle(user_id, request):
             with LOCK:
                 CONNECTED[key] = (access, time.monotonic() + expires)
         return {"connected": True}
-    if action == "vehicles":
+    if action in {"vehicles", "monitor-vehicles", "charging"}:
+        if action != "vehicles" and brand != "hyundai":
+            raise ValueError("충전 모니터링은 현재 현대 전기차를 지원해요.")
         if not link:
             raise ValueError("먼저 제조사 계정을 연결해주세요.")
-        payload = provider_json(origin + "/api/v1/car/profile/carlist", {"Authorization": "Bearer " + link[0]})
-        rows = payload.get("cars")
-        if not isinstance(rows, list):
-            raise ValueError("제조사 차량 목록을 확인할 수 없어요. 차량 데이터 제공 동의와 API 권한을 확인해주세요.")
+        headers = {"Authorization": "Bearer " + link[0]}
+        rows = car_list(origin, headers)
+        if action == "charging":
+            car_id = request.get("carId")
+            if not isinstance(car_id, str) or not CAR_ID.fullmatch(car_id) or not any(row.get("carId") == car_id for row in rows):
+                raise ValueError("연결된 현대 전기차를 다시 선택해주세요.")
+            payload = provider_json(origin + "/api/v1/car/status/" + quote(car_id, safe="") + "/ev/charging", headers)
+            snapshot = charging_snapshot(payload)
+            if store:
+                store.save_charging_status(car_id, snapshot)
+            return {"snapshot": snapshot}
         return {"vehicles": [
             {"name": row.get("carSellname") or row.get("carName") or "모델명 미제공",
-             "nickname": row.get("carNickname") or ""}
-            for row in rows if isinstance(row, dict) and row.get("carType") == "EV"
+             "nickname": row.get("carNickname") or ""} | ({"id": row["carId"]} if action == "monitor-vehicles" else {})
+            for row in rows if action == "vehicles" or (isinstance(row.get("carId"), str) and CAR_ID.fullmatch(row["carId"]))
         ]}
     raise ValueError("지원하지 않는 차량 연결 요청입니다.")

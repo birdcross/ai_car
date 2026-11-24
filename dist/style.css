@@ -5,3 +5,12 @@
 #dashboardPreview{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin:12px 0}#dashboardImage{width:min(100%,280px);max-height:180px;object-fit:contain;border-radius:8px;background:#0d1420}#photoResult,#generationNotice{color:#a9bcd0}
 .trip-layout{display:grid;grid-template-columns:minmax(190px,1fr) minmax(0,2fr);gap:18px}.trip-layout h3{margin:8px 0;font-size:16px}.trip-choice{display:block;width:100%;text-align:left;margin:4px 0;background:#24364a;color:#f0f6ff}.trip-choice[aria-pressed=true]{background:#c7f485;color:#132115}#tripMap{height:375px;border-radius:10px;background:#223246}#tripStatus,#tripSummary,#tripMapStatus{color:#a9bcd0}#tripMap a{color:#164b70}@media(max-width:700px){.trip-layout{grid-template-columns:1fr}#tripMap{height:310px}}
 #lastParkingMap{height:340px;border-radius:12px;background:#223246;margin:12px 0}#lastParkingMap a{color:#164b70}.parking-address{font-size:1.1rem;font-weight:700;margin:8px 0}#parkingMapStatus{color:#a9bcd0}
+.charging-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:18px 0 0}
+.charging-grid[hidden]{display:none}
+.charging-grid>div{padding:14px;border:1px solid #26394d;border-radius:12px;background:#111c2a}
+.charging-grid dt{color:#a9bcd0;font-size:.84rem}
+.charging-grid dd{margin:4px 0 0;font-weight:650;overflow-wrap:anywhere}
+#liveVehicleField{display:block;max-width:360px}
+#liveVehicleField[hidden]{display:none}
+.monitor-panel summary{cursor:pointer;font-weight:650}
+.monitor-panel[open] summary{margin-bottom:16px}
