@@ -1,0 +1,6 @@
+.env
+.env.*
+supabase-auth.local.json
+__pycache__/
+.git/
+.openai/

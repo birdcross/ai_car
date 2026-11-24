@@ -1,0 +1,60 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="auth.js" defer></script></head><body>
+<div class="shell"><aside><a class="brand" href="#home"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#home">⌂　대시보드</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#monitor">◉　모니터링</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a><a href="#sources">≡　데이터 출처</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
+<main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
+<section id="home" hidden><p class="eyebrow">MY GARAGE</p><h1>전기차 생활 관리</h1><p class="sub">충전비를 기록하고, 주차한 곳과 계기판 경고를 확인하세요.</p><div class="hero"><div><p>이번 달 충전비</p><strong id="total">₩0</strong><div id="summary"></div><a class="button" href="#ledger">충전 기록 추가</a></div><div class="energy" aria-hidden="true">ϟ</div></div>
+<div class="tiles"><article><span class="icon">⌖</span><h2>내 차 주차 위치</h2><p id="homeParking"></p><a href="#parking">주차 기록 열기</a></article><article><span class="icon amber">◇</span><h2>경고등 안내</h2><p>공식 설명서에서 경고의 의미와 권장 조치를 확인하세요.</p><a href="#guide">경고등 확인하기</a></article></div>
+<div class="panel"><div class="heading"><h2>최근 지출</h2><a href="#ledger">전체 기록</a></div><ul id="recent" class="records"></ul></div></section>
+<section id="ledger" hidden><h1>차계부</h1><p class="sub">충전비와 정비비를 기록하세요.</p><div class="panel"><h2>지출 추가</h2><a href="#cards">카드 내역 가져오기</a><form id="expense"><div class="fields"><label>거래일<input name="date" type="date" required></label><label>유형<select name="type"><option>충전</option><option>정비</option></select></label><label>금액 (원)<input name="amount" type="number" min="1" max="100000000" required></label><label>충전량 (kWh, 선택)<input name="kwh" type="number" min="0.01" max="1000" step="0.01"></label></div><button>기록 저장</button></form></div><div class="panel"><h2>저장한 기록</h2><ul id="all" class="records"></ul></div></section>
+<section id="parking" hidden><h1>내 차 주차 위치</h1>
+<div class="panel"><h2>마지막 주차 위치</h2>
+<p id="parkCurrent" class="parking-address"></p><p id="parkDetail" class="sub"></p>
+<div id="lastParkingMap" aria-label="마지막 주차 위치 지도" hidden></div>
+<p id="parkingMapStatus" role="status"></p>
+<a id="map" target="_blank" rel="noopener noreferrer" hidden>큰 지도에서 보기</a></div>
+<div class="panel"><h2>제조사 차량 연결</h2><p class="sub">현대·기아 계정에서 승인한 전기차 목록을 가져옵니다.</p>
+<div class="tiles"><article><h3>현대 블루링크</h3><button data-brand="hyundai" data-vehicle-action="start">현대 연결</button> <button class="soft" data-brand="hyundai" data-vehicle-action="vehicles">차량 조회</button> <button class="soft" data-brand="hyundai" data-vehicle-action="disconnect">연결 해제</button></article>
+<article><h3>기아 커넥트</h3><button data-brand="kia" data-vehicle-action="start">기아 연결</button> <button class="soft" data-brand="kia" data-vehicle-action="vehicles">차량 조회</button> <button class="soft" data-brand="kia" data-vehicle-action="disconnect">연결 해제</button></article></div>
+<p id="connectedVehicleStatus" role="status"></p><ul id="connectedVehicleList" class="records"></ul></div>
+<div class="panel"><h2>내 주행</h2>
+<p class="sub" id="tripExampleNotice" hidden>저장된 주행이 없어 예시 경로를 표시합니다.</p>
+<p id="tripStatus" role="status"></p>
+<div class="trip-layout"><div id="tripList"></div><div><h3 id="tripTitle">주행 경로</h3><p id="tripSummary">목록에서 기록을 선택하세요.</p><div id="tripMap" aria-label="주행 경로 지도" hidden></div><p id="tripMapStatus" role="status"></p></div></div>
+</div></section>
+<section id="guide" hidden><h1>AI 경고등 안내</h1><p class="sub" id="guideSubtitle"></p><p id="guideSettings"><a class="button" href="#settings">차량 등록하기</a></p><div class="panel"><form id="diagnose"><label>계기판 경고 문구<input name="warning" maxlength="300" placeholder="예: 파워다운과 서비스 경고등이 같이 켜졌어요"></label><label>계기판 사진<input id="dashboardPhoto" type="file" accept="image/jpeg,image/png,image/webp"></label>
+<div id="dashboardPreview" hidden><img id="dashboardImage" alt="첨부한 계기판 사진"><button class="soft" type="button" id="removeDashboardPhoto">사진 삭제</button></div>
+<p class="sub">경고 문구나 사진 중 하나를 입력하세요. AI 분석을 요청하면 입력 내용이 COPA의 Claude 서비스로 전송됩니다. 번호판이나 개인정보가 보이는 사진은 제외해주세요.</p><button>설명서 안내 보기</button></form></div><div class="panel" id="answer" hidden aria-live="polite"><h2 id="answerTitle"></h2><p id="photoResult" hidden></p><p id="guidance"></p><p id="generationNotice" hidden></p><p id="manualExcerpt" hidden></p><a id="guideSource" target="_blank" rel="noopener noreferrer">제조사 공식 설명서</a></div></section>
+<section id="cards" hidden><h1>카드 지출 자동 등록</h1><p class="sub">샘플 또는 같은 형식의 UTF-8 CSV를 가져오면 거래를 분류합니다.</p>
+<div class="panel"><div class="heading"><div><h2>카드 내역 가져오기</h2><a href="sample-cards.csv" download>샘플 CSV 내려받기</a></div><button type="button" id="importSample">샘플 가져오기</button></div>
+<label>거래 파일<input id="cardFile" type="file" accept=".csv,text/csv"></label><p id="cardStatus" role="status"></p></div>
+<div class="panel"><h2>거래 검토</h2><ul id="cardRows" class="records"></ul></div></section>
+<section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">차량 데이터 시뮬레이션</p>
+<div class="hero"><div><p>배터리 잔량</p><strong id="soc">72%</strong><p id="chargeStatus"></p></div><div class="energy" aria-hidden="true">ϟ</div></div>
+<div class="panel monitor-panel"><progress id="battery" max="100" value="72" aria-label="배터리 잔량"></progress><p id="received"></p><button id="toggleMonitor" type="button">시뮬레이션 시작</button> <button id="simulateWarning" type="button" class="soft">경고 이벤트 생성</button><ul id="vehicleEvents" class="records"></ul></div></section>
+<section id="settings" hidden>
+<h1 id="vehicleHeading">내 전기차 설정</h1><p class="sub" id="vehicleIntro">목록에서 고르거나 제조사와 차종을 직접 입력하세요.</p>
+<div class="panel"><div id="vehicleLoginPrompt"><h2>로그인 후 차량을 저장할 수 있어요</h2><p class="sub">저장한 차량은 로그인한 계정에 표시됩니다.</p><a class="button" href="#account">로그인 또는 회원가입</a></div><form id="vehicleForm" hidden><div class="fields">
+<label>이름 또는 닉네임<input name="displayName" minlength="1" maxlength="40" required autocomplete="nickname" placeholder="앱에서 표시할 이름"></label>
+<label>제조사<input name="make" list="makes" maxlength="60" required placeholder="예: 현대"></label>
+<datalist id="makes"></datalist>
+<label>차종<input name="model" list="models" maxlength="80" required placeholder="예: 아이오닉 6"></label>
+<datalist id="models"></datalist>
+<label>연식<input name="year" type="number" min="1900" max="2100" step="1" required placeholder="예: 2025"></label>
+</div><button id="vehicleSave">저장하기</button></form><p id="vehicleStatus" role="status"></p></div>
+</section>
+<section id="account"><h1 id="accountHeading">로그인</h1>
+<div class="panel"><p id="authStatus" role="status">로그인 설정을 확인하고 있어요.</p>
+<form id="authForm" novalidate hidden><label>이메일<input type="email" name="email" required autocomplete="username"></label>
+<label>비밀번호<input type="password" name="password" required autocomplete="current-password"></label>
+<fieldset id="signupVehicle" hidden disabled><legend>내 전기차</legend>
+<div class="fields">
+<label>이름 또는 닉네임<input name="displayName" maxlength="40" autocomplete="nickname" required></label>
+<label>제조사<input name="make" list="makes" maxlength="60" required placeholder="예: 현대"></label>
+<label>차종<input name="model" list="signupModels" maxlength="80" required placeholder="예: 아이오닉 6"></label>
+<datalist id="signupModels"></datalist>
+<label>연식<input name="year" type="number" min="1900" max="2100" step="1" required placeholder="예: 2025"></label>
+</div>
+<label class="consent"><input name="vehicleConsent" type="checkbox" required> 이름과 차량 정보를 가입 계정에 저장하는 데 동의합니다.</label>
+</fieldset>
+<button id="authSubmit" type="submit">로그인</button> <button id="authMode" type="button" class="soft">회원가입</button></form></div>
+</section><section id="sources" hidden><h1>데이터 출처</h1><p class="sub">카드 샘플과 차량 시뮬레이션은 가상 데이터입니다.</p><div class="panel sources"><a href="https://www.data.go.kr/data/15039549/fileData.do">한국전력공사 전기차량 제조사별 모델 정보</a><p>차량 설정의 제조사·모델 검색에 사용합니다.</p><a href="https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/warning_indicator_lights.html">현대차 아이오닉 6 공식 설명서</a><p>경고등·표시등 안내에 참고합니다.</p><a href="https://www.data.go.kr/data/3048950/fileData.do">자동차결함 리콜현황 CSV</a><p>관련 차종의 생산 기간과 리콜 사유 조회에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15012896/standard.do">전국주차장정보표준데이터</a><p>주변 주차장 검색에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15076352/openapi.do">한국환경공단 충전소 API</a><p>충전소 위치와 충전기 상태 조회에 활용할 수 있습니다.</p></div></section>
+<p id="feedback" role="status" aria-live="polite"></p></main></div></body></html>
