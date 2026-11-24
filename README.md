@@ -16,7 +16,7 @@ python server.py
 - **차계부**에 충전량과 금액을 직접 기록할 수 있습니다.
 - **카드 지출**에서 샘플 가져오기를 누르면 결제 분류, 거래 ID 중복 제거, 원거래 취소를 확인할 수 있습니다. 실제 카드 API는 연동 전입니다. CSV는 UTF-8이며 거래 ID, 날짜, 가맹점, 양수 금액, 상태, 원거래 ID를 사용합니다. 샘플 거래일은 2026년 11월이므로 다른 달에는 차계부 전체 목록에서 확인하세요.
 - **주차 위치**에서 층·구역 메모와 사용자 권한을 받은 위치를 저장합니다. 지도 링크를 열 때 좌표가 지도 서비스에 전달됩니다.
-- **모니터링**에서 배터리 업데이트와 경고 이벤트를 시뮬레이션합니다. 실제 차량 연결은 필요 권한과 API 확인 후 진행합니다.
+- **모니터링**에서 조회가 승인된 현대 전기차의 충전 상태를 확인합니다. 충전 시뮬레이션은 접힌 영역에서 따로 실행할 수 있습니다.
 - **경고등 안내**는 공식 설명서의 관련 항목을 검색하고, 문구가 모호하면 추가 정보를 요청합니다. 현재 전용 설명서 검색 범위는 현대 아이오닉 6 2025년형이며 지원 항목은 파워다운, 서비스 경고등, 타이어 공기압입니다.
 
 ## 생성형 AI 연결
@@ -78,3 +78,11 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 2. Vercel의 Production 환경 변수에 `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `COPA_API_KEY`, `HYUNDAI_CLIENT_ID`, `HYUNDAI_CLIENT_SECRET`을 등록합니다. `HYUNDAI_REDIRECT_URI`에는 `https://<배포 도메인>/vehicle-connect/callback`을 입력합니다. 환경 변수 변경 후 재배포합니다.
 3. 현대 개발자 콘솔의 계정 API Redirect URL에 위와 동일한 주소를 저장합니다. Supabase Auth의 URL Configuration에도 배포 도메인을 등록합니다. 가입 확인 메일의 기본 도착 주소로 사용하려면 Site URL을 배포 도메인으로 지정합니다.
 4. HTTPS 배포 주소로 로그인한 뒤 주차 위치의 **현대 연결**을 눌러 제조사 로그인, 앱 복귀, 차량 조회 순서로 확인합니다.
+
+## 현대 충전 상태 모니터링
+
+Supabase SQL Editor에서 `supabase/migrations/202611240007_vehicle_charging_status.sql`을 적용한 뒤 배포합니다. 연결 데이터 제공이 승인된 현대 전기차를 모니터링 화면에서 선택합니다. 화면이 열려 있을 때 1분 간격으로 조회하며, 현대가 보낸 시각과 EV Log가 조회한 시각을 각각 표시합니다. 국내 API의 차량 전송 시각은 서울 시간으로 해석합니다.
+
+Supabase는 계정·차량별 최신 관측값을 저장합니다. 조회 API가 제공하는 값은 배터리 잔량, 충전 여부, 플러그 상태, 목표 잔량과 남은 시간입니다. 실제 충전량이나 결제 금액은 이 응답에 포함되지 않습니다.
+
+[현대 전기차 충전 상태 조회 규격](https://developers.hyundai.com/web/v1/hyundai/specification/data/status_evcharging)

@@ -152,6 +152,7 @@ function route() {
     tripMap?.invalidateSize();
   }, 0);
   window.scrollTo(0, 0);
+  document.dispatchEvent(new Event('evlog-route'));
 }
 function recordList(list, rows) {
   list.replaceChildren();
