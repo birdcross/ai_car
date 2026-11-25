@@ -126,7 +126,7 @@ async function initializeAuth() {
           status.textContent = authErrorMessage(result.error, signup);
         } else {
           form.reset();
-          if (result.data.session) location.hash = needsOnboarding() ? 'settings' : 'home';
+          if (result.data.session) location.hash = needsOnboarding() ? 'settings' : 'monitor';
           else if (signup) {
             const message = '가입 확인 메일 발송 요청이 정상적으로 처리되었어요. 받은 편지함을 확인해주세요.';
             status.textContent = message;

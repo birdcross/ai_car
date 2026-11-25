@@ -8,7 +8,6 @@ const load = (key, fallback) => {
   catch { return fallback; }
 };
 const today = new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Seoul'}).format(new Date());
-const month = today.slice(0, 7);
 const money = n => '₩' + n.toLocaleString('ko-KR');
 let expenses = [];
 let parking = null;
@@ -102,7 +101,7 @@ vehicleForm.onsubmit = event => {
     $('answer').hidden = true;
     $('vehicleStatus').textContent = '내 전기차를 저장했어요.';
     if (onboarding) {
-      location.hash = 'home';
+      location.hash = 'monitor';
       route();
     }
   } catch {
@@ -130,8 +129,8 @@ loadVehicleCatalog();
 
 function route() {
   const id = location.hash.slice(1);
-  const pages = ['home', 'ledger', 'parking', 'guide', 'cards', 'monitor', 'settings', 'sources', 'account'];
-  const active = !recordOwner ? 'account' : needsOnboarding() && id !== 'account' ? 'settings' : pages.includes(id) ? id : 'home';
+  const pages = ['monitor', 'ledger', 'parking', 'guide', 'cards', 'settings', 'sources', 'account'];
+  const active = !recordOwner ? 'account' : needsOnboarding() && id !== 'account' ? 'settings' : pages.includes(id) ? id : 'monitor';
   for (const key of ['mainNav', 'vehicleSidebar', 'headerVehicle']) $(key).hidden = !recordOwner || needsOnboarding();
   pages.forEach(page => $(page).hidden = page !== active);
   document.querySelectorAll('nav a').forEach(a => {
@@ -139,9 +138,9 @@ function route() {
     else a.removeAttribute('aria-current');
   });
   $('feedback').textContent = '';
-  if (recordOwner && (active === 'home' || active === 'parking')) setTimeout(refreshParking, 0);
   if (recordOwner && active === 'parking') setTimeout(() => {
     if ($('parking').hidden) return;
+    void refreshParking();
     void loadTrips();
     renderParking();
     parkedMap?.invalidateSize();
@@ -178,11 +177,7 @@ function recordList(list, rows) {
 function render() {
   const records = [...expenses, ...cardExpenses()];
   renderCards();
-  const charges = records.filter(e => e.type === '충전' && e.date.startsWith(month));
-  $('total').textContent = money(charges.reduce((sum, e) => sum + e.amount, 0));
-  $('summary').textContent = '충전 ' + charges.length + '회 · ' + Number(charges.reduce((sum, e) => sum + (e.kwh ?? 0), 0).toFixed(2)) + ' kWh';
   const sorted = records.sort((a,b) => b.date.localeCompare(a.date));
-  recordList($('recent'), sorted.slice(0,3));
   recordList($('all'), sorted);
   renderParking();
 }
@@ -237,7 +232,6 @@ async function showParkingMap(row) {
 function renderParking() {
   const row = parking ?? (parkingLoaded ? exampleParking : null);
   const spot = row?.spot?.trim();
-  $('homeParking').textContent = parking ? spot || '마지막 주차 위치' : '저장된 주차 위치가 없어요.';
   $('parkCurrent').textContent = spot || (row ? '주소 정보가 없어요.' : '최근 주차 위치를 확인하고 있어요.');
   $('parkDetail').textContent = parking
     ? '마지막 갱신 · ' + new Date(parking.updated_at).toLocaleString('ko-KR', {timeZone:'Asia/Seoul'})
