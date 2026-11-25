@@ -222,19 +222,20 @@ async function showParkingMap(row) {
     const L = await leaflet();
     if (epoch !== recordEpoch || pendingParkingKey !== key || $('parking').hidden) return;
     if (!parkedMap) {
-      parkedMap = L.map(map, {scrollWheelZoom:false});
+      parkedMap = L.map('lastParkingMap', {scrollWheelZoom:false}).setView(point,17);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom:19, attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(parkedMap);
       parkingMarker = L.circleMarker(point, {radius:9,color:'#165741',fillColor:'#c7f485',fillOpacity:1}).addTo(parkedMap);
     } else {
       parkingMarker.setLatLng(point);
+      parkedMap.setView(point,17);
     }
-    parkedMap.setView(point,17);
     parkedMap.invalidateSize();
     mappedParkingKey = key;
     status.textContent = '';
-  } catch {
+  } catch (error) {
+    console.warn('Parking map could not be initialized:', error.name, error.message);
     if (epoch === recordEpoch && pendingParkingKey === key) status.textContent = '지도를 불러오지 못했어요. 큰 지도에서 열 수 있어요.';
   } finally {
     if (epoch === recordEpoch && pendingParkingKey === key) pendingParkingKey = null;
