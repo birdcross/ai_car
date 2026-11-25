@@ -29,8 +29,14 @@
 <section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">현대 블루링크 충전 상태를 화면을 보는 동안 1분마다 확인합니다.</p>
 <div class="panel monitor-panel">
   <div class="heading"><h2>연결 차량 충전 상태</h2><a href="#parking">현대 차량 연결</a></div>
+  <button type="button" class="soft" id="showHyundaiSample" aria-pressed="false">현대 공식 샘플 보기</button>
   <label id="liveVehicleField" hidden>조회할 차량 <select id="liveVehicle"></select></label>
   <p id="liveMonitorStatus" role="status"></p>
+  <dl id="vehicleSummary" class="charging-grid" hidden>
+    <div><dt>주행 가능 거리</dt><dd id="summaryRange"></dd></div>
+    <div><dt>누적 운행 거리</dt><dd id="summaryOdometer"></dd></div>
+    <div><dt>배터리 잔량 조회</dt><dd id="summaryBattery"></dd></div>
+  </dl>
   <dl id="liveChargingDetails" class="charging-grid" hidden>
     <div><dt>배터리 잔량</dt><dd id="liveSoc"></dd></div>
     <div><dt>충전 상태</dt><dd id="liveCharging"></dd></div>

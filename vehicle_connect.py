@@ -6,6 +6,7 @@ import re
 import secrets
 import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote, urlencode, urlsplit
 from urllib.request import Request, urlopen
@@ -19,6 +20,7 @@ PENDING = {}
 CONNECTED = {}
 CAR_ID = re.compile(r"[A-Za-z0-9_-]{1,128}")
 KOREA_TIME = timezone(timedelta(hours=9))
+SUMMARY_PATHS = {"range": "/dte", "odometer": "/odometer", "battery": "/ev/battery", "charging": "/ev/charging"}
 
 
 def configuration():
@@ -116,7 +118,7 @@ def handle(user_id, request):
         if action == "disconnect":
             store.disconnect()
             return {"connected": False}
-        if config and action in {"status", "vehicles", "monitor-vehicles", "charging"}:
+        if config and action in {"status", "vehicles", "monitor-vehicles", "charging", "vehicle-summary"}:
             link = store.token(now)
     else:
         with LOCK:
@@ -172,20 +174,39 @@ def handle(user_id, request):
             with LOCK:
                 CONNECTED[key] = (access, time.monotonic() + expires)
         return {"connected": True}
-    if action in {"vehicles", "monitor-vehicles", "charging"}:
+    if action in {"vehicles", "monitor-vehicles", "charging", "vehicle-summary"}:
         if not link:
             raise ValueError("먼저 제조사 계정을 연결해주세요.")
         headers = {"Authorization": "Bearer " + link[0]}
         rows = car_list(origin, headers)
-        if action == "charging":
+        if action in {"charging", "vehicle-summary"}:
             car_id = request.get("carId")
             if not isinstance(car_id, str) or not CAR_ID.fullmatch(car_id) or not any(row.get("carId") == car_id for row in rows):
                 raise ValueError("연결된 현대 전기차를 다시 선택해주세요.")
-            payload = provider_json(origin + "/api/v1/car/status/" + quote(car_id, safe="") + "/ev/charging", headers)
-            snapshot = charging_snapshot(payload)
-            if store:
+            status_url = origin + "/api/v1/car/status/" + quote(car_id, safe="")
+            if action == "charging":
+                snapshot = charging_snapshot(provider_json(status_url + SUMMARY_PATHS["charging"], headers))
+                if store:
+                    store.save_charging_status(car_id, snapshot)
+                return {"snapshot": snapshot}
+            with ThreadPoolExecutor(max_workers=len(SUMMARY_PATHS)) as pool:
+                requests = {field: pool.submit(provider_json, status_url + path, headers)
+                            for field, path in SUMMARY_PATHS.items()}
+                summary = {}
+                for field, pending in requests.items():
+                    try:
+                        payload = pending.result()
+                        if not isinstance(payload, dict) or "errCode" in payload:
+                            raise ValueError("Invalid vehicle status response")
+                        if field == "charging":
+                            payload = charging_snapshot(payload)
+                        summary[field] = payload
+                    except (OSError, ValueError, AttributeError):
+                        summary[field] = None
+            snapshot = summary["charging"]
+            if snapshot and store:
                 store.save_charging_status(car_id, snapshot)
-            return {"snapshot": snapshot}
+            return {"summary": summary}
         return {"vehicles": [
             {"name": row.get("carSellname") or row.get("carName") or "모델명 미제공",
              "nickname": row.get("carNickname") or ""} | ({"id": row["carId"]} if action == "monitor-vehicles" else {})

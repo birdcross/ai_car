@@ -85,4 +85,6 @@ Supabase SQL Editor에서 `supabase/migrations/202611240007_vehicle_charging_sta
 
 Supabase는 계정·차량별 최신 관측값을 저장합니다. 조회 API가 제공하는 값은 배터리 잔량, 충전 여부, 플러그 상태, 목표 잔량과 남은 시간입니다. 실제 충전량이나 결제 금액은 이 응답에 포함되지 않습니다.
 
+차량을 선택하면 주행 가능 거리, 누적 운행 거리, 전기차 배터리 잔량과 충전 상태를 함께 조회합니다. 이후에는 충전 상태만 1분마다 갱신합니다. 테스트 차량이 없으면 **현대 공식 샘플 보기**에서 각 API 규격서의 응답 예시를 확인할 수 있습니다. 샘플은 서로 다른 예시 시점의 값이며 DB에 저장하지 않습니다.
+
 [현대 전기차 충전 상태 조회 규격](https://developers.hyundai.com/web/v1/hyundai/specification/data/status_evcharging)
