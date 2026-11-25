@@ -21,6 +21,8 @@ let pendingParkingKey = null;
 const exampleParking = {spot:'서울특별시 중구 세종대로 110', latitude:37.5665, longitude:126.9780};
 let recordEpoch = 0;
 let cards = [];
+let registeredCards = [];
+let cardImportPending = false;
 $('expense').elements.date.value = today;
 const vehicleModels = {
   '현대': ['아이오닉 5', '아이오닉 5 N', '아이오닉 6', '아이오닉 6 N', '아이오닉 9', '코나 일렉트릭',
@@ -597,6 +599,11 @@ function cardSummary() {
   const counts = new Map();
   for (const tx of cards) {
     if (tx.status !== 'cancelled') continue;
+    const originalCard = originals.get(tx.original)?.cardId;
+    if (tx.cardId && originalCard && tx.cardId !== originalCard) {
+      results.set(tx.id, '원거래 카드 확인 필요');
+      continue;
+    }
     const left = remaining.get(tx.original) ?? 0;
     if (left < tx.amount) {
       results.set(tx.id, left ? '취소 금액 확인 필요' : '반영 가능한 원거래 없음');
@@ -609,8 +616,7 @@ function cardSummary() {
   return {originals, remaining, results, counts};
 }
 
-function cardExpenses() {
-  const {originals, remaining} = cardSummary();
+function cardExpenses({originals, remaining} = cardSummary()) {
   return [...originals.values()]
     .filter(tx => tx.category === 'charge' && remaining.get(tx.id) > 0)
     .map(tx => ({date:tx.date, type:'충전', amount:remaining.get(tx.id), merchant:tx.merchant}));
@@ -623,8 +629,98 @@ function saveCards(next) {
   render();
 }
 
+function cardLabel(card) {
+  return card.nickname + ' · ' + card.issuer + ' · 끝 ' + card.lastFour;
+}
+
+function saveRegisteredCards(next) {
+  try { store('registeredCards', next); }
+  catch { throw new Error('카드 정보를 브라우저에 저장하지 못했어요.'); }
+  registeredCards = next;
+  renderRegisteredCards();
+}
+
+function renderRegisteredCards() {
+  const rows = $('registeredCardRows');
+  const picker = $('importCardChoice');
+  const selected = picker.value;
+  rows.replaceChildren();
+  const placeholder = new Option('카드를 선택하세요', '');
+  picker.replaceChildren(placeholder);
+  if (!registeredCards.length) {
+    const empty = document.createElement('li');
+    empty.textContent = '등록한 카드가 없어요.';
+    rows.append(empty);
+  }
+  for (const card of registeredCards) {
+    picker.add(new Option(cardLabel(card), card.id));
+    const row = document.createElement('li');
+    const info = document.createElement('div');
+    const nickname = document.createElement('strong');
+    nickname.textContent = card.nickname;
+    const details = document.createElement('small');
+    details.textContent = card.issuer + ' · 끝 ' + card.lastFour;
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'soft';
+    remove.textContent = '등록 해제';
+    remove.setAttribute('aria-label', card.nickname + ' 등록 해제');
+    remove.onclick = () => {
+      const status = $('registerCardStatus');
+      try {
+        saveRegisteredCards(registeredCards.filter(item => item.id !== card.id));
+        status.textContent = '카드 등록을 해제했어요. 가져온 거래는 차계부에서 확인할 수 있어요.';
+      } catch (error) { status.textContent = error.message; }
+    };
+    info.append(nickname, details);
+    row.append(info, remove);
+    rows.append(row);
+  }
+  picker.value = registeredCards.some(card => card.id === selected) ? selected
+    : registeredCards.length === 1 ? registeredCards[0].id : '';
+  $('cardImportHint').textContent = registeredCards.length
+    ? '카드를 고르고 결제 내역 파일을 선택하세요.'
+    : '카드를 등록하면 결제 내역을 가져올 수 있어요.';
+  setCardImportPending(cardImportPending);
+}
+
+function setCardImportPending(pending) {
+  cardImportPending = pending;
+  for (const id of ['importCardChoice', 'cardFile', 'importCardSubmit']) {
+    $(id).disabled = pending || !registeredCards.length;
+  }
+}
+
+$('registerCard').onsubmit = event => {
+  event.preventDefault();
+  if (!recordOwner) return;
+  const form = event.currentTarget;
+  const {issuer, nickname, lastFour} = form.elements;
+  const card = {issuer:issuer.value, nickname:nickname.value.trim(), lastFour:lastFour.value.trim()};
+  const status = $('registerCardStatus');
+  if (!card.issuer || !card.nickname || !/^[0-9]{4}$/.test(card.lastFour)) {
+    status.textContent = '카드사, 별명, 끝 4자리를 확인해주세요.';
+    return;
+  }
+  if (registeredCards.some(item => item.issuer === card.issuer && item.lastFour === card.lastFour && item.nickname === card.nickname)) {
+    status.textContent = '이미 같은 카드가 등록되어 있어요.';
+    return;
+  }
+  try {
+    card.id = cards.find(tx => tx.cardLabel === cardLabel(card))?.cardId ?? crypto.randomUUID();
+    saveRegisteredCards([...registeredCards, card]);
+    if (!cardImportPending) $('importCardChoice').value = card.id;
+    form.reset();
+    status.textContent = '카드를 등록했어요.';
+  } catch (error) { status.textContent = error.message; }
+};
+
 function renderCards() {
-  const {remaining, results, counts} = cardSummary();
+  const summary = cardSummary();
+  const {remaining, results, counts} = summary;
+  const applied = cardExpenses(summary);
+  $('cardChargeSummary').textContent = '차계부에 반영된 카드 충전비 ' + applied.length + '건 · '
+    + money(applied.reduce((sum, tx) => sum + tx.amount, 0));
   const list = $('cardRows');
   list.replaceChildren();
   if (!cards.length) {
@@ -642,7 +738,7 @@ function renderCards() {
       : tx.category === 'charge' ? (counts.has(tx.id) ? '부분 취소 · 차계부 반영' : '차계부 반영')
       : tx.category === 'review' ? '확인 대기' : '제외';
     name.textContent = tx.merchant + ' · ' + money(tx.amount);
-    meta.textContent = tx.date + ' · ' + status;
+    meta.textContent = [tx.date, tx.cardLabel, status].filter(Boolean).join(' · ');
     detail.append(name, meta);
     li.append(detail);
     if (status === '확인 대기') {
@@ -666,45 +762,51 @@ function renderCards() {
   }
 }
 
-async function importCards(readContent) {
-  $('importSample').disabled = $('cardFile').disabled = true;
+$('importCardTransactions').onsubmit = async event => {
+  event.preventDefault();
+  if (!recordOwner || cardImportPending) return;
+  const epoch = recordEpoch;
+  const card = registeredCards.find(item => item.id === $('importCardChoice').value);
+  const file = $('cardFile').files[0];
+  if (!card || !file) return;
+  setCardImportPending(true);
+  $('cardStatus').textContent = '결제 내역을 확인하고 있어요.';
   try {
-    const incoming = await api('cards', await readContent(), 'text/csv; charset=utf-8');
+    const content = await file.text();
     if (epoch !== recordEpoch) return;
+    const incoming = await api('cards', content, 'text/csv; charset=utf-8');
+    if (epoch !== recordEpoch) return;
+    if (!registeredCards.some(item => item.id === card.id)) throw new Error('등록된 카드를 선택하고 다시 가져와주세요.');
     const known = new Map(cards.map(tx => [tx.id, tx]));
     let added = 0;
     for (const tx of incoming) {
       const existing = known.get(tx.id);
       if (existing) {
+        if (existing.cardId && existing.cardId !== card.id) {
+          throw new Error('다른 카드에 같은 거래 ID가 있어요. 선택한 카드와 CSV를 확인해주세요.');
+        }
         if (['date','merchant','amount','status','original'].some(key => existing[key] !== tx[key])) {
           throw new Error('같은 거래 ID에 서로 다른 내역이 있어요. 파일을 확인하세요.');
         }
         continue;
       }
-      known.set(tx.id, tx);
+      known.set(tx.id, {...tx, cardId:card.id, cardLabel:cardLabel(card)});
       added++;
     }
     saveCards([...known.values()]);
     $('cardStatus').textContent = added + '건 가져옴 · 중복 ' + (incoming.length - added) + '건 제외';
   } catch (error) {
-    $('cardStatus').textContent = error.message;
+    if (epoch === recordEpoch) $('cardStatus').textContent = error.message;
   } finally {
-    $('importSample').disabled = $('cardFile').disabled = false;
-    $('cardFile').value = '';
+    if (epoch === recordEpoch) {
+      setCardImportPending(false);
+      $('cardFile').value = '';
+    }
   }
-}
-
-$('importSample').onclick = () => importCards(async () => {
-  const response = await fetch('sample-cards.csv');
-  if (!response.ok) throw new Error('샘플 파일을 불러오지 못했어요.');
-  return response.text();
-});
-$('cardFile').onchange = event => {
-  const file = event.currentTarget.files[0];
-  if (file) importCards(() => file.text());
 };
 
 window.addEventListener('hashchange', route);
+renderRegisteredCards();
 route();
 render();
 
@@ -716,6 +818,8 @@ function setRecordOwner(userId, signupVehicle) {
   clearManufacturerView();
   expenses = userId ? load('expenses', []) : [];
   cards = userId ? load('cards', []) : [];
+  registeredCards = userId ? load('registeredCards', []) : [];
+  cardImportPending = false;
   parking = null;
   parkingLoaded = parkingReading = false;
   resetParkingMap();
@@ -734,8 +838,9 @@ function setRecordOwner(userId, signupVehicle) {
   guideHistory.open = false;
   guideHistoryList.replaceChildren();
   guideHistoryStatus.textContent = '';
-  for (const id of ['expense', 'vehicleForm']) $(id).reset();
-  for (const id of ['feedback', 'cardStatus', 'vehicleStatus']) $(id).textContent = '';
+  for (const id of ['expense', 'vehicleForm', 'registerCard', 'importCardTransactions']) $(id).reset();
+  $('importCardChoice').value = '';
+  for (const id of ['feedback', 'cardStatus', 'registerCardStatus', 'vehicleStatus']) $(id).textContent = '';
   $('expense').elements.date.value = today;
   vehicleForm.elements.displayName.value = vehicle?.displayName ?? '';
   vehicleForm.elements.make.value = vehicle?.make ?? '';
@@ -743,6 +848,7 @@ function setRecordOwner(userId, signupVehicle) {
   vehicleForm.elements.year.value = vehicle?.year ?? '';
   refreshModelChoices();
   renderVehicle();
+  renderRegisteredCards();
   render();
   route();
 }

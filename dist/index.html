@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="charging-monitor.css"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=guide-history" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="charging-monitor.js?v=monitor-graphs" defer></script><script src="auth.js?v=monitor-first" defer></script></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="charging-monitor.css"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=card-registration" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="charging-monitor.js?v=monitor-graphs" defer></script><script src="auth.js?v=monitor-first" defer></script></head><body>
 <div class="shell"><aside><a class="brand" href="#monitor"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#monitor">◉　모니터링</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a><a href="#sources">≡　데이터 출처</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
 <main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
 <section id="ledger" hidden><h1>차계부</h1><p class="sub">충전비와 정비비를 기록하세요.</p><div class="panel"><h2>지출 추가</h2><a href="#cards">카드 내역 가져오기</a><form id="expense"><div class="fields"><label>거래일<input name="date" type="date" required></label><label>유형<select name="type"><option>충전</option><option>정비</option></select></label><label>금액 (원)<input name="amount" type="number" min="1" max="100000000" required></label><label>충전량 (kWh, 선택)<input name="kwh" type="number" min="0.01" max="1000" step="0.01"></label></div><button>기록 저장</button></form></div><div class="panel"><h2>저장한 기록</h2><ul id="all" class="records"></ul></div></section>
@@ -38,10 +38,39 @@
     <button type="button" class="soft" id="retryGuideSave" hidden>대화 저장 다시 시도</button>
   </form>
 </div></section>
-<section id="cards" hidden><h1>카드 지출 자동 등록</h1><p class="sub">샘플 또는 같은 형식의 UTF-8 CSV를 가져오면 거래를 분류합니다.</p>
-<div class="panel"><div class="heading"><div><h2>카드 내역 가져오기</h2><a href="sample-cards.csv" download>샘플 CSV 내려받기</a></div><button type="button" id="importSample">샘플 가져오기</button></div>
-<label>거래 파일<input id="cardFile" type="file" accept=".csv,text/csv"></label><p id="cardStatus" role="status"></p></div>
-<div class="panel"><h2>거래 검토</h2><ul id="cardRows" class="records"></ul></div></section>
+<section id="cards" hidden><h1>카드 지출</h1><p class="sub">카드를 등록하고 결제 내역을 가져오면 확인된 충전비가 차계부에 반영돼요.</p>
+<div class="panel">
+  <h2>내 카드</h2>
+  <ul id="registeredCardRows" class="records" aria-label="등록한 카드"></ul>
+  <form id="registerCard">
+    <div class="fields">
+      <label>카드사<select name="issuer" required><option value="">선택하세요</option><option>신한카드</option><option>삼성카드</option><option>현대카드</option><option>KB국민카드</option><option>롯데카드</option><option>하나카드</option><option>우리카드</option><option>NH농협카드</option><option>BC카드</option><option>기타</option></select></label>
+      <label>카드 별명<input name="nickname" required maxlength="24" placeholder="예: 충전용 카드"></label>
+      <label>카드번호 끝 4자리<input name="lastFour" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required placeholder="0000"></label>
+    </div>
+    <button type="submit">카드 등록</button>
+    <p id="registerCardStatus" class="sub" role="status"></p>
+  </form>
+</div>
+<div class="panel">
+  <h2>결제 내역 가져오기</h2>
+  <p class="sub" id="cardImportHint">카드를 등록하면 결제 내역을 가져올 수 있어요.</p>
+  <form id="importCardTransactions">
+    <div class="fields">
+      <label>카드 선택<select id="importCardChoice" required></select></label>
+      <label>결제 내역 CSV<input id="cardFile" type="file" accept=".csv,text/csv" required></label>
+    </div>
+    <button id="importCardSubmit" type="submit">내역 가져오기</button>
+  </form>
+  <details><summary>CSV 형식과 테스트 파일</summary>
+    <p class="sub">파일을 UTF-8 CSV로 저장하고 열 이름을 예제와 맞춰주세요. 거래 ID, 날짜, 가맹점, 금액, 상태, 원거래 ID가 필요해요. 카드번호와 개인정보가 들어간 열은 제외해주세요.</p>
+    <a href="sample-cards.csv" download>테스트용 CSV 내려받기</a>
+  </details>
+  <p id="cardStatus" role="status"></p>
+</div>
+<div class="panel"><div class="heading"><h2>충전 지출 확인</h2><a href="#ledger">차계부 보기</a></div>
+  <p id="cardChargeSummary" class="sub"></p><ul id="cardRows" class="records"></ul>
+</div></section>
 <section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">현대 블루링크 충전 상태를 화면을 보는 동안 1분마다 확인합니다.</p>
 <div class="panel monitor-panel">
   <div class="heading monitor-controls"><h2>현대 블루링크</h2><div><button type="button" class="soft" id="showHyundaiSample" aria-pressed="false">현대 공식 샘플 보기</button><a href="#parking">차량 연결</a></div></div>
