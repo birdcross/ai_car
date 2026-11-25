@@ -27,7 +27,7 @@ def demo_search(question, vehicle):
     query = normalize(question)
     chunks = [
         chunk for chunk in DEMO_CHUNKS
-        if (normalize(chunk["make"]), normalize(chunk["model"]), chunk["year"]) == vehicle
+        if manual_rag.vehicle_key(chunk["make"], chunk["model"], chunk["year"]) == vehicle
     ]
     for chunk in chunks:
         if any(all(word in query for word in alias.split("+")) for alias in chunk["aliases"]):
@@ -93,7 +93,7 @@ def guide(question, vehicle, photo=None, history=()):
     make, model, year = (vehicle.get(key) for key in ("make", "model", "year"))
     if not isinstance(make, str) or not make.strip() or not isinstance(model, str) or not model.strip() or type(year) is not int or not 1900 <= year <= 2100:
         raise ValueError("제조사, 차종, 연식을 확인해주세요.")
-    vehicle_key = normalize(make), normalize(model), year
+    vehicle_key = manual_rag.vehicle_key(make, model, year)
     key = os.getenv("COPA_API_KEY")
     model = os.getenv("EVLOG_MODEL") or "claude-haiku-4"
     photo_warning = ""
