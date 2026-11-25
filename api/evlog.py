@@ -3,7 +3,7 @@ import sys
 from time import perf_counter
 from urllib.parse import parse_qs, urlsplit
 
-from server import Handler
+from server import Handler as BaseRequestHandler
 
 ROUTES = {
     "auth-config": "/api/auth-config",
@@ -15,7 +15,7 @@ ROUTES = {
 }
 
 
-class EvLogRequestHandler(Handler):
+class Handler(BaseRequestHandler):
     def dispatch(self, allowed, handle):
         self.request_started_at = perf_counter()
         self.log_route = "unmatched"
@@ -58,5 +58,5 @@ class EvLogRequestHandler(Handler):
         print(json.dumps(event), file=stream, flush=True)
 
 
-# The Vercel Python runtime imports the handler module variable by name.
-handler = EvLogRequestHandler
+# Vercel detects the Handler class at build time and imports this variable at runtime.
+handler = Handler
