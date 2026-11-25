@@ -6,7 +6,7 @@
 
 - [기획서](docs/project-plan.md)
 - [기능·비기능 요구사항과 시스템 아키텍처](docs/requirements.md)
-- [사용자 테스트와 개선 기록 양식](docs/user-testing.md)
+- [사용자 평가 설문](https://docs.google.com/forms/d/e/1FAIpQLSdl1SGuH1rTBWtg4KjX2Dl0LimusXAKpOl-wWKNPCHDW72Xfg/viewform)
 - [Supabase 테이블 설계와 캡처](docs/database-design.md)
 - [Vercel 운영 사이트](https://aicar-qyat.vercel.app/)
 
@@ -50,12 +50,6 @@
 ![충전량과 정비 비고가 보이는 차계부](docs/screenshots/ledger.png)
 
 ![카드 등록과 CODEF 샌드박스](docs/screenshots/cards.png)
-
-## 제출 전 확인할 항목
-
-- 실제 사용자 5명 이상이 직접 테스트한 뒤 관찰과 개선 결과를 기록합니다.
-- 제출 링크에서 로그인과 사진 질문을 재확인합니다. Vercel 운영 주소에 적용된 기능 범위와 GitHub `lch`의 최신 변경을 확인합니다.
-- 모니터링의 이상 감지 결과는 테스트 데이터로 검증했습니다. 카드 캡처의 승인 응답은 샌드박스 결과입니다.
 
 ## 로컬 실행
 
