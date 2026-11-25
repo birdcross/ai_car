@@ -64,7 +64,7 @@ function renderVehicle() {
   $('garageLabel').textContent = vehicle?.displayName ? vehicle.displayName + '님의 차고' : '내 전기차';
   $('vehicleHeading').textContent = onboarding ? '내 전기차 등록' : '내 전기차 설정';
   $('vehicleIntro').textContent = onboarding
-    ? '이름 또는 닉네임과 차량을 등록하면 대시보드를 사용할 수 있어요.'
+    ? '이름 또는 닉네임과 차량을 등록하면 EV Log를 사용할 수 있어요.'
     : '목록에서 고르거나 제조사와 차종을 직접 입력하세요.';
   $('vehicleSave').textContent = onboarding ? '저장하고 시작하기' : '저장하기';
   vehicleForm.hidden = !recordOwner;
@@ -73,10 +73,10 @@ function renderVehicle() {
   $('selectedYear').textContent = vehicle ? vehicle.year + '년형' : '내 전기차를 등록하세요';
   $('headerVehicle').textContent = vehicle ? vehicle.model + ' · ' + vehicle.year : '차량 등록';
   $('guideSubtitle').textContent = vehicle
-    ? vehicle.make + ' ' + vehicle.model + ' ' + vehicle.year + '년형 설명서 지원 여부를 확인합니다.'
+    ? vehicle.make + ' ' + vehicle.model + ' ' + vehicle.year + '년형'
     : '먼저 내 전기차를 등록해주세요.';
   $('guideSettings').hidden = Boolean(vehicle);
-  $('diagnose').hidden = !vehicle;
+  $('guideChat').hidden = !vehicle;
 }
 fillOptions($('makes'), Object.keys(vehicleModels));
 vehicleForm.elements.make.value = vehicle?.make ?? '';
@@ -98,7 +98,7 @@ vehicleForm.onsubmit = event => {
     store('vehicle', next);
     vehicle = next;
     renderVehicle();
-    $('answer').hidden = true;
+    resetGuideChat();
     $('vehicleStatus').textContent = '내 전기차를 저장했어요.';
     if (onboarding) {
       location.hash = 'monitor';
@@ -287,7 +287,12 @@ async function api(path, body, contentType) {
 }
 
 const dashboardPhoto = $('dashboardPhoto');
+const guideForm = $('diagnose');
+const guideMessages = $('guideMessages');
+const guideChatStatus = $('guideChatStatus');
 let dashboardPhotoUrl = null;
+let guideConversation = 0;
+let guideTurns = [];
 
 function renderDashboardPreview() {
   if (dashboardPhotoUrl) URL.revokeObjectURL(dashboardPhotoUrl);
@@ -305,10 +310,10 @@ function checkDashboardFile(file) {
 dashboardPhoto.onchange = () => {
   try {
     if (dashboardPhoto.files[0]) checkDashboardFile(dashboardPhoto.files[0]);
-    $('feedback').textContent = '';
+    guideChatStatus.textContent = '';
   } catch (error) {
     dashboardPhoto.value = '';
-    $('feedback').textContent = error.message;
+    guideChatStatus.textContent = error.message;
   }
   renderDashboardPreview();
 };
@@ -334,46 +339,104 @@ async function encodeDashboardPhoto(file) {
   return data;
 }
 
-async function requestGuide(question, file) {
-  $('answer').hidden = true;
-  $('feedback').textContent = file ? '사진을 읽고 설명서를 찾고 있어요.' : '설명서를 검색하고 있어요.';
-  try {
-    const requestedVehicle = vehicle;
-    const epoch = recordEpoch;
-    const photo = file ? await encodeDashboardPhoto(file) : null;
-    if (epoch !== recordEpoch || requestedVehicle !== vehicle) return;
-    const answer = await api('guide', JSON.stringify({question, vehicle: requestedVehicle, photo}), 'application/json');
-    if (epoch !== recordEpoch || requestedVehicle !== vehicle) return;
-    $('answerTitle').textContent = answer.kind;
-    $('guidance').textContent = answer.text;
-    const photoResult = answer.photo_warning ? '사진에서 읽은 내용: ' + answer.photo_warning : answer.photo_notice;
-    $('photoResult').textContent = photoResult || '';
-    $('photoResult').hidden = !photoResult;
-    $('generationNotice').textContent = answer.generation_notice || '';
-    $('generationNotice').hidden = !answer.generation_notice;
-    $('manualExcerpt').hidden = !answer.manual;
-    $('manualExcerpt').textContent = answer.manual ? '설명서 근거: ' + answer.manual : '';
-    $('guideSource').href = answer.source;
-    $('answer').hidden = false;
-    $('feedback').textContent = '';
-  } catch (error) {
-    $('feedback').textContent = error.message;
+function setGuidePending(pending) {
+  for (const control of [$('sendGuide'), dashboardPhoto, $('removeDashboardPhoto'), guideForm.elements.warning]) {
+    control.disabled = pending;
   }
 }
 
-$('diagnose').onsubmit = async event => {
+function resetGuideChat() {
+  guideConversation++;
+  guideTurns = [];
+  guideMessages.replaceChildren();
+  guideForm.reset();
+  renderDashboardPreview();
+  setGuidePending(false);
+  guideChatStatus.textContent = '';
+  $('guideWelcome').hidden = false;
+  $('clearGuideChat').hidden = true;
+}
+
+function appendGuideMessage(role, data) {
+  const item = document.createElement('li');
+  item.className = 'guide-message guide-message-' + role;
+  const bubble = document.createElement('article');
+  const label = document.createElement('strong');
+  label.className = 'guide-message-label';
+  label.textContent = role === 'user' ? '나' : data.kind;
+  bubble.append(label);
+  if (data.photo) {
+    const image = document.createElement('img');
+    image.src = data.photo;
+    image.alt = '질문에 첨부한 계기판 사진';
+    bubble.append(image);
+  }
+  if (data.text) {
+    const text = document.createElement('p');
+    text.className = 'guide-message-text';
+    text.textContent = data.text;
+    bubble.append(text);
+  }
+  for (const note of [data.photo_warning && '사진에서 읽은 내용 · ' + data.photo_warning, data.photo_notice, data.generation_notice]) {
+    if (!note) continue;
+    const detail = document.createElement('p');
+    detail.className = 'guide-message-note';
+    detail.textContent = note;
+    bubble.append(detail);
+  }
+  const sources = data.sources ?? (data.source ? [{url:data.source,title:data.title}] : []);
+  for (const source of sources) {
+    if (typeof source.url !== 'string' || !source.url.startsWith('https://')) continue;
+    const link = document.createElement('a');
+    link.href = source.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = source.title || '제조사 공식 설명서';
+    bubble.append(link);
+  }
+  item.append(bubble);
+  guideMessages.append(item);
+  $('guideWelcome').hidden = true;
+  $('clearGuideChat').hidden = false;
+  const transcript = guideMessages.parentElement;
+  transcript.scrollTop = transcript.scrollHeight;
+}
+
+$('clearGuideChat').onclick = resetGuideChat;
+guideForm.elements.warning.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' || event.shiftKey || event.isComposing || event.keyCode === 229) return;
   event.preventDefault();
-  const form = event.currentTarget;
-  const button = form.querySelector('button');
-  const question = form.elements.warning.value.trim();
+  if (!$('sendGuide').disabled) guideForm.requestSubmit();
+});
+guideForm.onsubmit = async event => {
+  event.preventDefault();
+  if ($('sendGuide').disabled) return;
+  const question = guideForm.elements.warning.value.trim();
   const file = dashboardPhoto.files[0];
   if (!question && !file) {
-    $('feedback').textContent = '계기판 문구를 입력하거나 사진을 첨부해주세요.';
+    guideChatStatus.textContent = '계기판 문구를 입력하거나 사진을 첨부해주세요.';
     return;
   }
-  button.disabled = dashboardPhoto.disabled = $('removeDashboardPhoto').disabled = true;
-  try { await requestGuide(question, file); }
-  finally { button.disabled = dashboardPhoto.disabled = $('removeDashboardPhoto').disabled = false; }
+  const conversation = guideConversation;
+  setGuidePending(true);
+  guideChatStatus.textContent = file ? '사진을 읽고 있어요.' : '답변을 준비하고 있어요.';
+  try {
+    const photo = file ? await encodeDashboardPhoto(file) : null;
+    if (conversation !== guideConversation) return;
+    appendGuideMessage('user', {text: question, photo});
+    guideForm.reset();
+    renderDashboardPreview();
+    const answer = await api('guide', JSON.stringify({question, vehicle, photo, history: guideTurns}), 'application/json');
+    if (conversation !== guideConversation) return;
+    appendGuideMessage('assistant', answer);
+    const userText = [question, answer.photo_warning].filter(Boolean).join(' / ') || '계기판 사진을 첨부했어요.';
+    guideTurns = [...guideTurns, {role:'user', text:userText}, {role:'assistant', text:answer.text.slice(0, 1200)}].slice(-8);
+    guideChatStatus.textContent = '';
+  } catch (error) {
+    if (conversation === guideConversation) guideChatStatus.textContent = error.message;
+  } finally {
+    if (conversation === guideConversation) setGuidePending(false);
+  }
 };
 
 function cardSummary() {
@@ -515,9 +578,8 @@ function setRecordOwner(userId, signupVehicle) {
     try { store('vehicle', vehicle); }
     catch { /* Account metadata can restore the initial vehicle on the next sign-in. */ }
   }
-  $('answer').hidden = true;
-  for (const id of ['expense', 'diagnose', 'vehicleForm']) $(id).reset();
-  renderDashboardPreview();
+  resetGuideChat();
+  for (const id of ['expense', 'vehicleForm']) $(id).reset();
   for (const id of ['feedback', 'cardStatus', 'vehicleStatus']) $(id).textContent = '';
   $('expense').elements.date.value = today;
   vehicleForm.elements.displayName.value = vehicle?.displayName ?? '';
