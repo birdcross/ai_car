@@ -3,6 +3,7 @@ const liveMonitorStatus = $('liveMonitorStatus');
 const liveChargingDetails = $('liveChargingDetails');
 const vehicleSummary = $('vehicleSummary');
 const sampleToggle = $('showHyundaiSample');
+const liveBatteryVisual = $('liveBatteryVisual');
 const hyundaiSampleSummary = {
   range: {value: 32.3, unit: 1},
   odometer: {odometers: [{date: '20190821', value: 12320, unit: 1}]},
@@ -20,6 +21,33 @@ let chargingMonitorRun = 0;
 let chargingMonitorTimer;
 let lastChargingSnapshot = null;
 let showingHyundaiSample = false;
+const chargingHistory = new Map();
+let chargingHistoryOwner;
+const trendTime = new Intl.DateTimeFormat('ko-KR', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Seoul'});
+
+function renderChargingTrend(points, target) {
+  const toY = soc => 150 - 1.3 * soc;
+  const first = points[0];
+  const last = points.at(-1);
+  const span = last.time - first.time;
+  const plot = points.map(({time, soc}) => [span ? 48 + 414 * (time - first.time) / span : 255, toY(soc)]);
+  const coords = plot.map(point => point.join(',')).join(' ');
+  const [lastX, lastY] = plot.at(-1);
+  $('chartLine').setAttribute('points', span ? coords : '');
+  $('chartArea').setAttribute('d', span ? `M${coords.replaceAll(' ', ' L')} L${lastX},150 L48,150 Z` : '');
+  $('chartPoint').setAttribute('cx', lastX);
+  $('chartPoint').setAttribute('cy', lastY);
+  const targetLine = $('chartTargetLine');
+  targetLine.toggleAttribute('hidden', target == null);
+  if (target != null) {
+    targetLine.setAttribute('y1', toY(target));
+    targetLine.setAttribute('y2', toY(target));
+  }
+  $('chartFirstTime').textContent = trendTime.format(first.time);
+  $('chartLastTime').textContent = span ? trendTime.format(last.time) : '';
+  $('chargingTrendNote').textContent = showingHyundaiSample ? '공식 예시 관측값 1건' : span ? `이 탭에서 받은 최근 ${points.length}건` : '새 차량 전송값이 들어오면 추이가 표시돼요.';
+  $('chargingChartDescription').textContent = `최근 차량 잔량 ${last.soc}%${target == null ? '' : `, 충전 목표 ${target}%`}`;
+}
 
 function displayDistance(row) {
   const unit = ['ft', 'km', 'm', 'mi'][row?.unit];
@@ -40,12 +68,27 @@ function showVehicleSummary(summary) {
 function showChargingSnapshot(snapshot) {
   $('liveSoc').textContent = snapshot.soc + '%';
   $('liveCharging').textContent = snapshot.battery_charge ? '충전 중' : '충전 중 아님';
+  $('liveCharging').classList.toggle('is-charging', snapshot.battery_charge);
+  $('batteryMeter').setAttribute('aria-valuenow', snapshot.soc);
+  $('batteryFill').style.width = `${snapshot.soc}%`;
+  $('batteryGoal').textContent = snapshot.target_soc == null ? '' : `목표 ${snapshot.target_soc}%`;
+  const targetMarker = $('batteryTargetMarker');
+  targetMarker.hidden = snapshot.target_soc == null;
+  targetMarker.style.left = `${snapshot.target_soc ?? 0}%`;
   $('livePlug').textContent = ['미연결', '급속 연결', '완속 연결'][snapshot.battery_plugin];
   $('liveTarget').textContent = snapshot.target_soc == null ? '미제공' : snapshot.target_soc + '%';
   const unit = ['시간', '분', '밀리초', '초'][snapshot.remaining_unit];
   $('liveRemaining').textContent = !snapshot.battery_charge ? '—' : snapshot.remaining_value != null && unit
     ? snapshot.remaining_value + ' ' + unit : '미제공';
   $('liveReported').textContent = chargingTime.format(new Date(snapshot.vehicle_reported_at));
+  const point = {time: Date.parse(snapshot.vehicle_reported_at), soc: snapshot.soc};
+  const history = showingHyundaiSample ? [] : chargingHistory.get(liveVehicle.value) ?? [];
+  if (point.time === history.at(-1)?.time) history[history.length - 1] = point;
+  else if (!history.length || point.time > history.at(-1).time) history.push(point);
+  if (history.length > 30) history.shift();
+  if (!showingHyundaiSample) chargingHistory.set(liveVehicle.value, history);
+  renderChargingTrend(history, snapshot.target_soc);
+  liveBatteryVisual.hidden = false;
   liveChargingDetails.hidden = false;
 }
 
@@ -80,6 +123,11 @@ async function refreshChargingStatus(run, includeSummary = false) {
 }
 
 async function loadChargingMonitor() {
+  if (recordOwner !== chargingHistoryOwner) {
+    chargingHistory.clear();
+    chargingHistoryOwner = recordOwner;
+    showingHyundaiSample = false;
+  }
   if (showingHyundaiSample && accessToken && !$('monitor').hidden) return;
   showingHyundaiSample = false;
   sampleToggle.textContent = '현대 공식 샘플 보기';
@@ -89,6 +137,7 @@ async function loadChargingMonitor() {
   const previous = liveVehicle.value;
   lastChargingSnapshot = null;
   liveChargingDetails.hidden = true;
+  liveBatteryVisual.hidden = true;
   vehicleSummary.hidden = true;
   $('liveVehicleField').hidden = true;
   liveVehicle.replaceChildren();
@@ -115,6 +164,7 @@ liveVehicle.addEventListener('change', () => {
   clearTimeout(chargingMonitorTimer);
   lastChargingSnapshot = null;
   liveChargingDetails.hidden = true;
+  liveBatteryVisual.hidden = true;
   vehicleSummary.hidden = true;
   liveMonitorStatus.textContent = '충전 상태를 확인하고 있어요.';
   void refreshChargingStatus(++chargingMonitorRun, true);

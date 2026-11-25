@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="charging-monitor.js?v=vehicle-summary" defer></script><script src="auth.js" defer></script></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="charging-monitor.css"><script src="app.js?v=monitor-graphs" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js" defer></script><script src="charging-monitor.js?v=monitor-graphs" defer></script><script src="auth.js" defer></script></head><body>
 <div class="shell"><aside><a class="brand" href="#home"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#home">⌂　대시보드</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#monitor">◉　모니터링</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a><a href="#sources">≡　데이터 출처</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
 <main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
 <section id="home" hidden><p class="eyebrow">MY GARAGE</p><h1>전기차 생활 관리</h1><p class="sub">충전비를 기록하고, 주차한 곳과 계기판 경고를 확인하세요.</p><div class="hero"><div><p>이번 달 충전비</p><strong id="total">₩0</strong><div id="summary"></div><a class="button" href="#ledger">충전 기록 추가</a></div><div class="energy" aria-hidden="true">ϟ</div></div>
@@ -28,27 +28,44 @@
 <div class="panel"><h2>거래 검토</h2><ul id="cardRows" class="records"></ul></div></section>
 <section id="monitor" hidden><h1>실시간 차량 모니터링</h1><p class="sub">현대 블루링크 충전 상태를 화면을 보는 동안 1분마다 확인합니다.</p>
 <div class="panel monitor-panel">
-  <div class="heading"><h2>연결 차량 충전 상태</h2><a href="#parking">현대 차량 연결</a></div>
-  <button type="button" class="soft" id="showHyundaiSample" aria-pressed="false">현대 공식 샘플 보기</button>
+  <div class="heading monitor-controls"><h2>현대 블루링크</h2><div><button type="button" class="soft" id="showHyundaiSample" aria-pressed="false">현대 공식 샘플 보기</button><a href="#parking">차량 연결</a></div></div>
   <label id="liveVehicleField" hidden>조회할 차량 <select id="liveVehicle"></select></label>
   <p id="liveMonitorStatus" role="status"></p>
+  <div id="liveBatteryVisual" class="monitor-visuals" hidden>
+    <section class="battery-card" aria-labelledby="batteryCardHeading">
+      <div class="battery-caption"><h3 id="batteryCardHeading">배터리 잔량</h3><span id="liveCharging" class="battery-state"></span></div>
+      <div class="battery-power"><strong id="liveSoc"></strong><span id="batteryGoal"></span></div>
+      <div id="batteryMeter" class="battery-meter" role="meter" aria-label="배터리 잔량" aria-valuemin="0" aria-valuemax="100">
+        <div class="battery-track" aria-hidden="true"><div class="battery-fill" id="batteryFill"></div><div class="battery-divider"></div><div id="batteryTargetMarker" class="battery-target" hidden></div></div>
+      </div>
+      <div class="battery-scale" aria-hidden="true"><span>0%</span><span>100%</span></div>
+    </section>
+    <figure class="trend-card" aria-labelledby="chargingChartTitle">
+      <figcaption><h3 id="chargingChartTitle">배터리 잔량 추이</h3><p id="chargingTrendNote"></p></figcaption>
+      <svg id="chargingChart" viewBox="0 0 480 180" role="img" aria-labelledby="chargingChartTitle chargingChartDescription">
+        <desc id="chargingChartDescription"></desc>
+        <defs><linearGradient id="chargingAreaGradient" x2="0" y2="100%"><stop stop-color="#b8f283" stop-opacity=".28"/><stop offset="1" stop-color="#b8f283" stop-opacity="0"/></linearGradient></defs>
+        <g class="trend-grid"><path d="M48 20H462 M48 85H462 M48 150H462"/><text x="0" y="24">100%</text><text x="7" y="89">50%</text><text x="14" y="154">0%</text></g>
+        <line id="chartTargetLine" class="trend-goal" x1="48" x2="462" hidden/>
+        <path id="chartArea" fill="url(#chargingAreaGradient)"/>
+        <polyline id="chartLine" class="trend-line"/>
+        <circle id="chartPoint" class="trend-point" r="5"/>
+        <g class="trend-grid"><text id="chartFirstTime" x="48" y="174"></text><text id="chartLastTime" x="462" y="174" text-anchor="end"></text></g>
+      </svg>
+    </figure>
+  </div>
   <dl id="vehicleSummary" class="charging-grid" hidden>
     <div><dt>주행 가능 거리</dt><dd id="summaryRange"></dd></div>
     <div><dt>누적 운행 거리</dt><dd id="summaryOdometer"></dd></div>
     <div><dt>배터리 잔량 조회</dt><dd id="summaryBattery"></dd></div>
   </dl>
   <dl id="liveChargingDetails" class="charging-grid" hidden>
-    <div><dt>배터리 잔량</dt><dd id="liveSoc"></dd></div>
-    <div><dt>충전 상태</dt><dd id="liveCharging"></dd></div>
     <div><dt>플러그 연결</dt><dd id="livePlug"></dd></div>
     <div><dt>충전 목표</dt><dd id="liveTarget"></dd></div>
     <div><dt>남은 시간</dt><dd id="liveRemaining"></dd></div>
     <div><dt>차량 전송 시각</dt><dd id="liveReported"></dd></div>
   </dl>
-</div>
-<details class="panel monitor-panel"><summary>충전 시뮬레이션</summary>
-<div class="hero"><div><p>배터리 잔량</p><strong id="soc">72%</strong><p id="chargeStatus"></p></div><div class="energy" aria-hidden="true">ϟ</div></div>
-<div class="monitor-panel"><progress id="battery" max="100" value="72" aria-label="배터리 잔량"></progress><p id="received"></p><button id="toggleMonitor" type="button">시뮬레이션 시작</button> <button id="simulateWarning" type="button" class="soft">경고 이벤트 생성</button><ul id="vehicleEvents" class="records"></ul></div></details></section>
+</div></section>
 <section id="settings" hidden>
 <h1 id="vehicleHeading">내 전기차 설정</h1><p class="sub" id="vehicleIntro">목록에서 고르거나 제조사와 차종을 직접 입력하세요.</p>
 <div class="panel"><div id="vehicleLoginPrompt"><h2>로그인 후 차량을 저장할 수 있어요</h2><p class="sub">저장한 차량은 로그인한 계정에 표시됩니다.</p><a class="button" href="#account">로그인 또는 회원가입</a></div><form id="vehicleForm" hidden><div class="fields">
@@ -75,5 +92,5 @@
 <label class="consent"><input name="vehicleConsent" type="checkbox" required> 이름과 차량 정보를 가입 계정에 저장하는 데 동의합니다.</label>
 </fieldset>
 <button id="authSubmit" type="submit">로그인</button> <button id="authMode" type="button" class="soft">회원가입</button></form></div>
-</section><section id="sources" hidden><h1>데이터 출처</h1><p class="sub">카드 샘플과 차량 시뮬레이션은 가상 데이터입니다.</p><div class="panel sources"><a href="https://www.data.go.kr/data/15039549/fileData.do">한국전력공사 전기차량 제조사별 모델 정보</a><p>차량 설정의 제조사·모델 검색에 사용합니다.</p><a href="https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/warning_indicator_lights.html">현대차 아이오닉 6 공식 설명서</a><p>경고등·표시등 안내에 참고합니다.</p><a href="https://www.data.go.kr/data/3048950/fileData.do">자동차결함 리콜현황 CSV</a><p>관련 차종의 생산 기간과 리콜 사유 조회에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15012896/standard.do">전국주차장정보표준데이터</a><p>주변 주차장 검색에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15076352/openapi.do">한국환경공단 충전소 API</a><p>충전소 위치와 충전기 상태 조회에 활용할 수 있습니다.</p></div></section>
+</section><section id="sources" hidden><h1>데이터 출처</h1><p class="sub">카드 샘플은 가상 데이터입니다.</p><div class="panel sources"><a href="https://www.data.go.kr/data/15039549/fileData.do">한국전력공사 전기차량 제조사별 모델 정보</a><p>차량 설정의 제조사·모델 검색에 사용합니다.</p><a href="https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/warning_indicator_lights.html">현대차 아이오닉 6 공식 설명서</a><p>경고등·표시등 안내에 참고합니다.</p><a href="https://www.data.go.kr/data/3048950/fileData.do">자동차결함 리콜현황 CSV</a><p>관련 차종의 생산 기간과 리콜 사유 조회에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15012896/standard.do">전국주차장정보표준데이터</a><p>주변 주차장 검색에 활용할 수 있습니다.</p><a href="https://www.data.go.kr/data/15076352/openapi.do">한국환경공단 충전소 API</a><p>충전소 위치와 충전기 상태 조회에 활용할 수 있습니다.</p></div></section>
 <p id="feedback" role="status" aria-live="polite"></p></main></div></body></html>

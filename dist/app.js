@@ -496,53 +496,6 @@ $('cardFile').onchange = event => {
   if (file) importCards(() => file.text());
 };
 
-const target = 80;
-let battery = 72;
-let timer = null;
-const timeNow = () => new Date().toLocaleTimeString('ko-KR', {timeZone:'Asia/Seoul'});
-function drawMonitor() {
-  $('soc').textContent = battery + '%';
-  $('battery').value = battery;
-  $('chargeStatus').textContent = battery >= target ? '목표 80% 도달' : timer ? '충전 중 · 6.4 kW' : '시뮬레이션 대기';
-  $('toggleMonitor').textContent = timer ? '일시 정지' : battery >= target ? '다시 시작' : '시뮬레이션 시작';
-}
-function logVehicle(label, question) {
-  const li = document.createElement('li');
-  li.textContent = timeNow() + ' · ' + label;
-  if (question) {
-    const link = document.createElement('a');
-    link.href = '#guide';
-    link.textContent = '설명서에서 확인';
-    link.onclick = () => { $('diagnose').elements.warning.value = question; };
-    li.append(link);
-  }
-  const list = $('vehicleEvents');
-  list.prepend(li);
-  if (list.children.length > 8) list.lastElementChild.remove();
-}
-$('toggleMonitor').onclick = () => {
-  if (timer) {
-    clearInterval(timer);
-    timer = null;
-  } else {
-    if (battery >= target) battery = 72;
-    logVehicle('충전 시작');
-    timer = setInterval(() => {
-      battery++;
-      $('received').textContent = '마지막 샘플 수신 · ' + timeNow();
-      if (battery >= target) {
-        clearInterval(timer);
-        timer = null;
-        logVehicle('목표 충전량 도달');
-      }
-      drawMonitor();
-    }, 2000);
-  }
-  drawMonitor();
-};
-$('simulateWarning').onclick = () => logVehicle('서비스 경고등 점등', '서비스 경고등');
-drawMonitor();
-
 window.addEventListener('hashchange', route);
 route();
 render();
@@ -568,12 +521,6 @@ function setRecordOwner(userId, signupVehicle) {
     try { store('vehicle', vehicle); }
     catch { /* Account metadata can restore the initial vehicle on the next sign-in. */ }
   }
-  clearInterval(timer);
-  timer = null;
-  battery = 72;
-  $('received').textContent = '';
-  $('vehicleEvents').replaceChildren();
-  drawMonitor();
   $('answer').hidden = true;
   for (const id of ['expense', 'diagnose', 'vehicleForm']) $(id).reset();
   renderDashboardPreview();
