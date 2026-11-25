@@ -35,7 +35,7 @@ function distanceKm(points) {
   }
   return total;
 }
-function leaflet() {
+function loadMapLibrary() {
   if (!leafletReady) {
     leafletReady = new Promise((resolve,reject) => {
       const css = document.createElement('link');
@@ -66,7 +66,7 @@ async function showTrip(trip) {
   $('tripMapStatus').textContent = '지도를 불러오고 있어요.';
   renderTripList();
   try {
-    const L = await leaflet();
+    const L = await loadMapLibrary();
     if (epoch !== recordEpoch || selectedTrip !== trip.id || $('parking').hidden) return;
     if (!tripMap) {
       tripMap = L.map('tripMap', {scrollWheelZoom:false});

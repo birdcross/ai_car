@@ -219,7 +219,7 @@ async function showParkingMap(row) {
   link.href = 'https://www.openstreetmap.org/?mlat=' + latitude + '&mlon=' + longitude + '#map=17/' + latitude + '/' + longitude;
   link.hidden = false;
   try {
-    const L = await leaflet();
+    const L = await loadMapLibrary();
     if (epoch !== recordEpoch || pendingParkingKey !== key || $('parking').hidden) return;
     if (!parkedMap) {
       parkedMap = L.map('lastParkingMap', {scrollWheelZoom:false}).setView(point,17);
@@ -234,8 +234,7 @@ async function showParkingMap(row) {
     parkedMap.invalidateSize();
     mappedParkingKey = key;
     status.textContent = '';
-  } catch (error) {
-    console.warn('Parking map could not be initialized:', error.name, error.message);
+  } catch {
     if (epoch === recordEpoch && pendingParkingKey === key) status.textContent = '지도를 불러오지 못했어요. 큰 지도에서 열 수 있어요.';
   } finally {
     if (epoch === recordEpoch && pendingParkingKey === key) pendingParkingKey = null;
