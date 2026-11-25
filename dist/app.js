@@ -164,15 +164,22 @@ function recordList(list, rows) {
     const title = document.createElement('strong');
     title.textContent = item.merchant || (item.type === '충전' ? '전기차 충전' : '차량 정비');
     const meta = document.createElement('small');
-    meta.textContent = item.date + (item.type === '충전' && item.kwh ? ' · ' + item.kwh + ' kWh' : '');
+    meta.textContent = item.date;
+    const detail = document.createElement('dl');
+    detail.className = 'ledger-record-detail';
+    const detailLabel = document.createElement('dt');
+    const detailValue = document.createElement('dd');
+    if (item.type === '충전') {
+      detailLabel.textContent = '충전량';
+      detailValue.textContent = Number.isFinite(item.kwh) && item.kwh > 0 ? item.kwh + ' kWh' : '미기록';
+    } else {
+      detailLabel.textContent = '정비 비고';
+      detailValue.textContent = item.maintenanceNote || '미기록';
+    }
+    detail.append(detailLabel, detailValue);
     const amount = document.createElement('strong');
     amount.textContent = money(item.amount);
-    label.append(title, meta);
-    if (item.type === '정비' && item.maintenanceNote) {
-      const note = document.createElement('small');
-      note.textContent = '비고 · ' + item.maintenanceNote;
-      label.append(note);
-    }
+    label.append(title, meta, detail);
     li.append(label, amount);
     list.append(li);
   }

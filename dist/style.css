@@ -12,3 +12,9 @@
 .charging-grid dd{margin:4px 0 0;font-weight:650;overflow-wrap:anywhere}
 #liveVehicleField{display:block;max-width:360px}
 #liveVehicleField[hidden]{display:none}
+
+#all li{align-items:flex-start}
+#all li>strong{white-space:nowrap}
+.ledger-record-detail{display:flex;align-items:baseline;gap:8px;margin:5px 0 0;font-size:.9rem}
+.ledger-record-detail dt{flex:none;color:#a9bcd0}
+.ledger-record-detail dd{min-width:0;margin:0;color:#eff5fc;overflow-wrap:anywhere}
