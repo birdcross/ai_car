@@ -8,13 +8,12 @@ from datetime import date
 from urllib.parse import quote, unquote_plus
 from urllib.request import Request, urlopen
 
-
 TOKEN_URL = "https://oauth.codef.io/oauth/token"
 CARD_API = "https://sandbox.codef.io/v1/kr/card/p/account/"
 SANDBOX_ACCOUNT = {"connectedId": "sandbox_connectedId", "organization": "0309"}
 
 
-class Unavailable(Exception):
+class UnavailableError(Exception):
     """Sandbox configuration or upstream request failed."""
 
 
@@ -22,19 +21,19 @@ def post(url, body, headers):
     with urlopen(Request(url, data=body, headers=headers), timeout=8) as response:
         raw = response.read(500_001)
     if len(raw) > 500_000:
-        raise Unavailable()
+        raise UnavailableError()
     try:
         text = raw.decode("utf-8")
         return json.loads(text if text.lstrip().startswith("{") else unquote_plus(text))
     except ValueError as error:
-        raise Unavailable() from error
+        raise UnavailableError() from error
 
 
 def get_token():
     client_id = os.getenv("CODEF_SANDBOX_CLIENT_ID")
     client_secret = os.getenv("CODEF_SANDBOX_CLIENT_SECRET")
     if not client_id or not client_secret:
-        raise Unavailable("서버에 CODEF 샌드박스 키를 설정하면 테스트 카드를 조회할 수 있어요.")
+        raise UnavailableError("서버에 CODEF 샌드박스 키를 설정하면 테스트 카드를 조회할 수 있어요.")
     credentials = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
     return post(TOKEN_URL, b"grant_type=client_credentials&scope=read", {
         "Authorization": "Basic " + credentials,
@@ -49,14 +48,14 @@ def request_cards(endpoint, token, attributes):
         "Content-Type": "application/json",
     })
     if result["result"]["code"] != "CF-00000":
-        raise Unavailable()
+        raise UnavailableError()
     return result["data"]
 
 
 def sandbox_cards(token):
     cards = request_cards("card-list", token, {})
     if not isinstance(cards, list):
-        raise Unavailable()
+        raise UnavailableError()
     return [
         card for card in cards
         if re.fullmatch(r"[0-9]{4}\*{8}[0-9]{4}", card.get("resCardNo", ""))
@@ -66,7 +65,7 @@ def sandbox_cards(token):
 def approval_preview(response):
     rows = [response] if isinstance(response, dict) and "resApprovalNo" in response else response
     if not isinstance(rows, list):
-        raise Unavailable()
+        raise UnavailableError()
     transactions = []
     for row in rows:
         date_text = row.get("resUsedDate", "")
@@ -111,4 +110,4 @@ def handle(request):
         })
         return {"transactions": approval_preview(rows)}
     except (ValueError, TypeError) as error:
-        raise Unavailable() from error
+        raise UnavailableError() from error

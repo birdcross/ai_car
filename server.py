@@ -3,8 +3,8 @@ import binascii
 import csv
 import io
 import json
-import os
 import logging
+import os
 import re
 from datetime import date
 from functools import partial
@@ -14,8 +14,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
-import manual_rag
 import card_sandbox
+import manual_rag
 import vehicle_connect
 from manual_rag import normalize
 
@@ -324,7 +324,7 @@ class Handler(SimpleHTTPRequestHandler):
                         self.send_json(429, {"error": "AI 요청이 너무 많아요. 잠시 후 다시 시도해주세요."})
                         return
                 result = guide(question.strip(), request.get("vehicle"), photo, history)
-        except card_sandbox.Unavailable as exc:
+        except card_sandbox.UnavailableError as exc:
             self.send_json(503, {"error": str(exc) or "CODEF 테스트 응답을 가져오지 못했어요."})
             return
         except (URLError, TimeoutError, KeyError, AttributeError):

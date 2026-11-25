@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
+
 from manual_embeddings import embed
 
 PROJECT_ROOT = Path(__file__).resolve().parent

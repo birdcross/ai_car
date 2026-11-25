@@ -1,6 +1,6 @@
 """Multilingual sentence embeddings for vehicle manuals and Korean questions."""
-from functools import lru_cache
 import os
+from functools import lru_cache
 from pathlib import Path
 from tempfile import gettempdir
 from threading import Lock
@@ -18,8 +18,8 @@ def load_model():
         # The Xet downloader uses a separate cache from hf_hub_download().
         os.environ.setdefault("HF_XET_CACHE", str(cache / "xet"))
 
-    from huggingface_hub import hf_hub_download
     import onnxruntime as ort
+    from huggingface_hub import hf_hub_download
     from tokenizers import Tokenizer
 
     def model_file(filename):
