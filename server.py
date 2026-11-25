@@ -299,6 +299,8 @@ class Handler(SimpleHTTPRequestHandler):
                 if not isinstance(question, str) or len(question.strip()) > 300 or (not question.strip() and photo is None):
                     raise ValueError("계기판 문구를 300자 이내로 입력하거나 사진을 첨부하세요.")
                 if photo is not None:
+                    if request.get("photoConsent") is not True:
+                        raise ValueError("사진 전송에 동의한 후 보내주세요.")
                     validate_photo(photo)
                 history = guide_history(request.get("history", []))
                 result = guide(question.strip(), request.get("vehicle"), photo, history)

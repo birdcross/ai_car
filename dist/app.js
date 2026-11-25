@@ -321,6 +321,7 @@ async function api(path, body, contentType, signal) {
 }
 
 const dashboardPhoto = $('dashboardPhoto');
+const guidePhotoConsent = $('guidePhotoConsent');
 const guideForm = $('diagnose');
 const guideMessages = $('guideMessages');
 const guideChatStatus = $('guideChatStatus');
@@ -451,6 +452,10 @@ function renderDashboardPreview() {
   if (dashboardPhotoUrl) URL.revokeObjectURL(dashboardPhotoUrl);
   const file = dashboardPhoto.files[0];
   dashboardPhotoUrl = file ? URL.createObjectURL(file) : null;
+  $('guidePhotoConsentLabel').hidden = !file;
+  guidePhotoConsent.disabled = !file;
+  guidePhotoConsent.required = Boolean(file);
+  guidePhotoConsent.checked = false;
   $('dashboardPreview').hidden = !dashboardPhotoUrl;
   if (dashboardPhotoUrl) $('dashboardImage').src = dashboardPhotoUrl;
   else $('dashboardImage').removeAttribute('src');
@@ -497,6 +502,7 @@ function setGuidePending(pending) {
     $('clearGuideChat'), $('retryGuideSave')]) {
     control.disabled = pending;
   }
+  guidePhotoConsent.disabled = pending || !dashboardPhoto.files.length;
 }
 
 function resetGuideChat() {
@@ -582,6 +588,10 @@ guideForm.onsubmit = async event => {
   if ($('sendGuide').disabled) return;
   const question = guideForm.elements.warning.value.trim();
   const file = dashboardPhoto.files[0];
+  if (file && !guidePhotoConsent.checked) {
+    guideChatStatus.textContent = '사진 전송에 동의한 후 보내주세요.';
+    return;
+  }
   if (!question && !file) {
     guideChatStatus.textContent = '계기판 문구를 입력하거나 사진을 첨부해주세요.';
     return;
@@ -595,7 +605,9 @@ guideForm.onsubmit = async event => {
   try {
     const photo = file ? await encodeDashboardPhoto(file) : null;
     if (conversation !== guideConversation) return;
-    const answer = await api('guide', JSON.stringify({question, vehicle:conversationVehicle, photo, history: guideTurns}), 'application/json');
+    const answer = await api('guide', JSON.stringify({
+      question, vehicle:conversationVehicle, photo, photoConsent:Boolean(photo), history:guideTurns,
+    }), 'application/json');
     if (conversation !== guideConversation) return;
     const {text, kind, sources, photo_warning, photo_notice, generation_notice} = answer;
     const turn = {
