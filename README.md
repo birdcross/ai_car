@@ -75,7 +75,9 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 
 ## 계기판 사진 분석
 
-경고등 화면에 JPG, PNG 또는 WebP를 첨부할 수 있습니다. 브라우저는 사진을 JPEG로 줄여 해당 질문에서만 전송합니다. 최근 대화는 탭에만 유지되며, 답변에 최근 8개 메시지의 텍스트를 참고합니다. COPA의 Claude는 사진에서 경고 문구나 이름을 추출하며, 서버는 이 내용으로 해당 차종의 설명서 근거를 검색합니다.
+경고등 화면에 JPG, PNG 또는 WebP를 첨부할 수 있습니다. 브라우저는 사진을 JPEG로 줄여 해당 질문에서만 전송합니다. COPA의 Claude는 사진에서 경고 문구나 이름을 추출하며, 서버는 이 내용으로 해당 차종의 설명서 근거를 검색합니다.
+
+`202611250009_guide_conversations.sql`을 적용하면 로그인한 사용자의 질문, 답변, 출처와 사진에서 읽은 문구가 Supabase에 저장됩니다. 지난 대화를 열면 당시 등록한 차종과 연식으로 이어서 대화하며, 모델에는 최근 8개 메시지의 텍스트를 보냅니다. 첨부 사진 자체는 대화 기록에 저장하지 않습니다. Supabase RLS는 본인 계정의 기록만 조회·저장·삭제할 수 있도록 제한합니다.
 
 서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색에는 서버용 Supabase 키와 적재된 임베딩이 필요합니다.
 

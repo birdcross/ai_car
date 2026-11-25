@@ -101,6 +101,7 @@ vehicleForm.onsubmit = event => {
     vehicle = next;
     renderVehicle();
     resetGuideChat();
+    void refreshGuideHistory();
     $('vehicleStatus').textContent = '내 전기차를 저장했어요.';
     if (onboarding) {
       location.hash = 'monitor';
@@ -295,6 +296,125 @@ const guideChatStatus = $('guideChatStatus');
 let dashboardPhotoUrl = null;
 let guideConversation = 0;
 let guideTurns = [];
+let activeGuideThread = null;
+let guideThreadSaved = false;
+let unsavedGuideTurns = [];
+let guideOpenRequest = 0;
+let guideListRequest = 0;
+const guideHistory = $('guideHistory');
+const guideHistoryList = $('guideHistoryList');
+const guideHistoryStatus = $('guideHistoryStatus');
+const guideDate = new Intl.DateTimeFormat('ko-KR', {dateStyle:'medium', timeStyle:'short', timeZone:'Asia/Seoul'});
+
+function guideVehicleLabel({make, model, year}) {
+  return [make, model, year + '년형'].join(' ');
+}
+
+function guideDB() {
+  return parkingClient.from('guide_conversations');
+}
+
+async function refreshGuideHistory() {
+  if (!recordOwner || !parkingClient || !guideHistory.open) return;
+  const request = ++guideListRequest;
+  const epoch = recordEpoch;
+  guideHistoryStatus.textContent = '대화 목록을 불러오는 중이에요.';
+  const {data, error} = await guideDB().select('id,title,vehicle,updated_at')
+    .eq('user_id', recordOwner).order('updated_at', {ascending:false}).order('id');
+  if (epoch !== recordEpoch || request !== guideListRequest) return;
+  guideHistoryList.replaceChildren();
+  guideHistoryStatus.textContent = error ? '대화 목록을 불러오지 못했어요. 목록을 닫았다가 다시 열어주세요.'
+    : data.length ? '' : '아직 저장된 대화가 없어요.';
+  if (error) return;
+  for (const thread of data) {
+    const row = document.createElement('li');
+    const open = document.createElement('button');
+    open.type = 'button';
+    open.className = 'soft guide-thread-open';
+    open.setAttribute('aria-current', String(thread.id === activeGuideThread?.id));
+    const title = document.createElement('span');
+    title.textContent = thread.title;
+    const info = document.createElement('small');
+    info.textContent = guideVehicleLabel(thread.vehicle) + ' · ' + guideDate.format(new Date(thread.updated_at));
+    open.append(title, info);
+    open.onclick = () => void openGuideThread(thread.id);
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'soft';
+    remove.textContent = '삭제';
+    remove.setAttribute('aria-label', thread.title + ' 대화 삭제');
+    remove.onclick = () => void deleteGuideThread(thread);
+    row.append(open, remove);
+    guideHistoryList.append(row);
+  }
+}
+
+async function openGuideThread(id) {
+  if ($('sendGuide').disabled) return;
+  const request = ++guideOpenRequest;
+  const epoch = recordEpoch;
+  const {data, error} = await guideDB().select('id,title,vehicle,turns')
+    .eq('id', id).eq('user_id', recordOwner).single();
+  if (epoch !== recordEpoch || request !== guideOpenRequest || $('sendGuide').disabled) return;
+  if (error) {
+    guideHistoryStatus.textContent = '대화를 열지 못했어요.';
+    return;
+  }
+  resetGuideChat();
+  activeGuideThread = data;
+  guideThreadSaved = true;
+  const caption = $('guideConversationVehicle');
+  caption.textContent = '이 대화의 차량 · ' + guideVehicleLabel(data.vehicle);
+  caption.hidden = false;
+  for (const turn of data.turns) {
+    appendGuideMessage('user', {text:turn.question});
+    appendGuideMessage('assistant', turn.answer);
+    rememberGuideTurn(turn);
+  }
+  void refreshGuideHistory();
+}
+
+async function deleteGuideThread(thread) {
+  if ($('sendGuide').disabled || !confirm('이 대화를 삭제할까요?')) return;
+  const epoch = recordEpoch;
+  ++guideOpenRequest;
+  const {error} = await guideDB().delete().eq('id', thread.id).eq('user_id', recordOwner);
+  if (epoch !== recordEpoch) return;
+  if (error) {
+    guideHistoryStatus.textContent = '대화를 삭제하지 못했어요.';
+    return;
+  }
+  if (thread.id === activeGuideThread?.id) resetGuideChat();
+  void refreshGuideHistory();
+}
+
+function rememberGuideTurn({question, answer}) {
+  const userText = [question, answer.photo_warning].filter(Boolean).join(' / ');
+  guideTurns = [...guideTurns, {role:'user', text:userText}, {role:'assistant', text:answer.text.slice(0, 1200)}].slice(-8);
+}
+
+async function saveGuideTurns(conversation) {
+  const thread = activeGuideThread;
+  while (unsavedGuideTurns.length) {
+    const {error} = await parkingClient.rpc('save_guide_turn', {
+      conversation_id:thread.id, conversation_title:thread.title,
+      conversation_vehicle:thread.vehicle, new_turn:unsavedGuideTurns[0], new_conversation:!guideThreadSaved,
+    });
+    if (conversation !== guideConversation) return;
+    if (error) {
+      $('retryGuideSave').hidden = false;
+      guideChatStatus.textContent = '답변은 받았지만 대화를 저장하지 못했어요.';
+      return;
+    }
+    guideThreadSaved = true;
+    unsavedGuideTurns.shift();
+  }
+  $('retryGuideSave').hidden = true;
+  guideChatStatus.textContent = '';
+  void refreshGuideHistory();
+}
+
+guideHistory.ontoggle = refreshGuideHistory;
 
 function renderDashboardPreview() {
   if (dashboardPhotoUrl) URL.revokeObjectURL(dashboardPhotoUrl);
@@ -342,13 +462,20 @@ async function encodeDashboardPhoto(file) {
 }
 
 function setGuidePending(pending) {
-  for (const control of [$('sendGuide'), dashboardPhoto, $('removeDashboardPhoto'), guideForm.elements.warning]) {
+  for (const control of [$('sendGuide'), dashboardPhoto, $('removeDashboardPhoto'), guideForm.elements.warning,
+    $('clearGuideChat'), $('retryGuideSave')]) {
     control.disabled = pending;
   }
 }
 
 function resetGuideChat() {
   guideConversation++;
+  guideOpenRequest++;
+  activeGuideThread = null;
+  guideThreadSaved = false;
+  unsavedGuideTurns = [];
+  $('retryGuideSave').hidden = true;
+  $('guideConversationVehicle').hidden = true;
   guideTurns = [];
   guideMessages.replaceChildren();
   guideForm.reset();
@@ -356,7 +483,6 @@ function resetGuideChat() {
   setGuidePending(false);
   guideChatStatus.textContent = '';
   $('guideWelcome').hidden = false;
-  $('clearGuideChat').hidden = true;
 }
 
 function appendGuideMessage(role, data) {
@@ -399,12 +525,22 @@ function appendGuideMessage(role, data) {
   item.append(bubble);
   guideMessages.append(item);
   $('guideWelcome').hidden = true;
-  $('clearGuideChat').hidden = false;
   const transcript = guideMessages.parentElement;
   transcript.scrollTop = transcript.scrollHeight;
 }
 
-$('clearGuideChat').onclick = resetGuideChat;
+$('clearGuideChat').onclick = () => {
+  resetGuideChat();
+  void refreshGuideHistory();
+  guideForm.elements.warning.focus();
+};
+$('retryGuideSave').onclick = async () => {
+  const conversation = guideConversation;
+  setGuidePending(true);
+  guideChatStatus.textContent = '대화를 저장하는 중이에요.';
+  try { await saveGuideTurns(conversation); }
+  finally { if (conversation === guideConversation) setGuidePending(false); }
+};
 guideForm.elements.warning.addEventListener('keydown', event => {
   if (event.key !== 'Enter' || event.shiftKey || event.isComposing || event.keyCode === 229) return;
   event.preventDefault();
@@ -420,20 +556,33 @@ guideForm.onsubmit = async event => {
     return;
   }
   const conversation = guideConversation;
+  const thread = activeGuideThread;
+  const {make, model, year} = thread?.vehicle ?? vehicle;
+  const conversationVehicle = {make, model, year};
   setGuidePending(true);
   guideChatStatus.textContent = file ? '사진을 읽고 있어요.' : '답변을 준비하고 있어요.';
   try {
     const photo = file ? await encodeDashboardPhoto(file) : null;
     if (conversation !== guideConversation) return;
-    appendGuideMessage('user', {text: question, photo});
+    const answer = await api('guide', JSON.stringify({question, vehicle:conversationVehicle, photo, history: guideTurns}), 'application/json');
+    if (conversation !== guideConversation) return;
+    const {text, kind, sources, photo_warning, photo_notice, generation_notice} = answer;
+    const turn = {
+      id: crypto.randomUUID(),
+      question: question || '계기판 사진을 첨부했어요.',
+      answer: {text, kind, sources, photo_warning, photo_notice, generation_notice},
+    };
+    appendGuideMessage('user', {text:turn.question, photo});
+    appendGuideMessage('assistant', turn.answer);
     guideForm.reset();
     renderDashboardPreview();
-    const answer = await api('guide', JSON.stringify({question, vehicle, photo, history: guideTurns}), 'application/json');
-    if (conversation !== guideConversation) return;
-    appendGuideMessage('assistant', answer);
-    const userText = [question, answer.photo_warning].filter(Boolean).join(' / ') || '계기판 사진을 첨부했어요.';
-    guideTurns = [...guideTurns, {role:'user', text:userText}, {role:'assistant', text:answer.text.slice(0, 1200)}].slice(-8);
-    guideChatStatus.textContent = '';
+    rememberGuideTurn(turn);
+    activeGuideThread = thread ?? {
+      id:crypto.randomUUID(), title:[...(question || photo_warning || '계기판 사진 질문')].slice(0, 100).join(''),
+      vehicle:conversationVehicle,
+    };
+    unsavedGuideTurns.push(turn);
+    await saveGuideTurns(conversation);
   } catch (error) {
     if (conversation === guideConversation) guideChatStatus.textContent = error.message;
   } finally {
@@ -581,6 +730,10 @@ function setRecordOwner(userId, signupVehicle) {
     catch { /* Account metadata can restore the initial vehicle on the next sign-in. */ }
   }
   resetGuideChat();
+  guideListRequest++;
+  guideHistory.open = false;
+  guideHistoryList.replaceChildren();
+  guideHistoryStatus.textContent = '';
   for (const id of ['expense', 'vehicleForm']) $(id).reset();
   for (const id of ['feedback', 'cardStatus', 'vehicleStatus']) $(id).textContent = '';
   $('expense').elements.date.value = today;
