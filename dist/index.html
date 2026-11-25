@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css?v=ledger-details"><link rel="stylesheet" href="charging-monitor.css?v=monitor-reception"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=photo-consent" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js?v=monitor-reception" defer></script><script src="charging-monitor.js?v=monitor-reception" defer></script><script src="auth.js?v=monitor-first" defer></script></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css?v=ledger-details"><link rel="stylesheet" href="charging-monitor.css?v=monitor-reception"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=security" defer></script><script src="trips.js?v=security" defer></script><script src="vehicle-connect.js?v=monitor-reception" defer></script><script src="charging-monitor.js?v=monitor-reception" defer></script><script src="auth.js?v=security" defer></script></head><body>
 <div class="shell"><aside><a class="brand" href="#monitor"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#monitor">◉　모니터링</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
 <main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
 <section id="ledger" hidden><h1>차계부</h1><p class="sub">충전비와 정비비를 기록하세요.</p>
@@ -20,6 +20,7 @@
 <section id="parking" hidden><h1>내 차 주차 위치</h1>
 <div class="panel"><h2>마지막 주차 위치</h2>
 <p id="parkCurrent" class="parking-address"></p><p id="parkDetail" class="sub"></p>
+<button class="soft" type="button" id="loadParkingMap" hidden>OpenStreetMap에서 주변 지도 불러오기</button>
 <div id="lastParkingMap" aria-label="마지막 주차 위치 지도" hidden></div>
 <p id="parkingMapStatus" role="status"></p>
 <a id="map" target="_blank" rel="noopener noreferrer" hidden>큰 지도에서 보기</a></div>
@@ -27,6 +28,7 @@
 <button data-brand="hyundai" data-vehicle-action="start">현대 연결</button> <button class="soft" data-brand="hyundai" data-vehicle-action="vehicles">차량 조회</button> <button class="soft" data-brand="hyundai" data-vehicle-action="disconnect">연결 해제</button>
 <p id="connectedVehicleStatus" role="status"></p><ul id="connectedVehicleList" class="records"></ul></div>
 <div class="panel"><h2>내 주행</h2>
+<p class="sub">기록을 선택하면 OpenStreetMap에서 경로 주변의 지도 타일을 불러옵니다.</p>
 <p class="sub" id="tripExampleNotice" hidden>저장된 주행이 없어 예시 경로를 표시합니다.</p>
 <p id="tripStatus" role="status"></p>
 <div class="trip-layout"><div id="tripList"></div><div><h3 id="tripTitle">주행 경로</h3><p id="tripSummary">목록에서 기록을 선택하세요.</p><div id="tripMap" aria-label="주행 경로 지도" hidden></div><p id="tripMapStatus" role="status"></p></div></div>

@@ -18,6 +18,7 @@ let parkedMap = null;
 let parkingMarker = null;
 let mappedParkingKey = null;
 let pendingParkingKey = null;
+let allowedParkingPoint = null;
 const exampleParking = {spot:'서울특별시 중구 세종대로 110', latitude:37.5665, longitude:126.9780};
 let recordEpoch = 0;
 let cards = [];
@@ -246,8 +247,18 @@ function renderParking() {
   $('parkDetail').textContent = parking
     ? '마지막 갱신 · ' + new Date(parking.updated_at).toLocaleString('ko-KR', {timeZone:'Asia/Seoul'})
     : row ? '차량 위치 데이터가 없어 예시 위치를 표시합니다.' : '';
-  if (recordOwner && !$('parking').hidden) void showParkingMap(row);
+  const point = Number.isFinite(row?.latitude) && Number.isFinite(row?.longitude)
+    ? row.latitude + ',' + row.longitude : null;
+  const requiresMapChoice = Boolean(parking && point && allowedParkingPoint !== point);
+  $('loadParkingMap').hidden = !requiresMapChoice;
+  if (requiresMapChoice) resetParkingMap();
+  else if (recordOwner && !$('parking').hidden) void showParkingMap(row);
 }
+$('loadParkingMap').onclick = () => {
+  if (!recordOwner || !parking) return;
+  allowedParkingPoint = parking.latitude + ',' + parking.longitude;
+  renderParking();
+};
 async function refreshParking() {
   if (!recordOwner || !parkingClient || parkingReading) return;
   const epoch = recordEpoch;
@@ -813,8 +824,15 @@ $('importCardTransactions').onsubmit = async event => {
   setCardImportPending(true);
   $('cardStatus').textContent = '결제 내역을 확인하고 있어요.';
   try {
+    if (file.size > 262144) throw new Error('256KB 이하의 CSV 파일을 선택해주세요.');
     const content = await file.text();
     if (epoch !== recordEpoch) return;
+    const expectedFields = ['id', 'date', 'merchant', 'amount', 'status', 'original_id'];
+    const header = content.replace(/^\uFEFF/, '').split(/\r\n|\n|\r/, 1)[0].split(',');
+    if (header.length !== expectedFields.length ||
+        expectedFields.some((field, index) => header[index] !== field && header[index] !== '"' + field + '"')) {
+      throw new Error('샘플과 같은 6개 열만 포함된 CSV를 선택해주세요.');
+    }
     const incoming = await api('cards', content, 'text/csv; charset=utf-8');
     if (epoch !== recordEpoch) return;
     if (!registeredCards.some(item => item.id === card.id)) throw new Error('등록된 카드를 선택하고 다시 가져와주세요.');
@@ -920,6 +938,7 @@ function setRecordOwner(userId, signupVehicle) {
   setSandboxPending(false);
   parking = null;
   parkingLoaded = parkingReading = false;
+  allowedParkingPoint = null;
   resetParkingMap();
   $('parkingMapStatus').textContent = '';
   vehicle = userId ? load('vehicle', null) : null;

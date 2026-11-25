@@ -146,7 +146,9 @@ def guide(question, vehicle, photo=None, history=()):
         return result
     try:
         approach = (
-            "공식 설명서에서 현재 질문에 직접 관련된 안내만 사용하세요. 근거가 부족하면 질문으로 확인하세요. "
+            "제공된 공식 설명서 발췌에서 현재 질문을 뒷받침하는 문장만 짧게 바꿔 쓰세요. "
+            "발췌에 없는 부품, 표기 위치, 수치, 원인과 단계는 일반 지식으로 보충하지 마세요. "
+            "근거가 부족하면 발췌에서 확인할 수 없다고 알려주세요. "
             if article else
             "관련 공식 설명서가 없으므로 일반적인 의미와 상황 확인 질문만 제공하세요. 차량별 해석은 다를 수 있음을 알려주세요. "
         )
@@ -303,6 +305,15 @@ class Handler(SimpleHTTPRequestHandler):
                         raise ValueError("사진 전송에 동의한 후 보내주세요.")
                     validate_photo(photo)
                 history = guide_history(request.get("history", []))
+                if os.getenv("VERCEL"):
+                    try:
+                        allowed = manual_rag.supabase_request("rpc/take_guide_request", {"request_user": user_id})
+                    except (URLError, TimeoutError, KeyError, ValueError, OSError):
+                        self.send_json(503, {"error": "AI 요청을 확인할 수 없어요. 잠시 후 다시 시도해주세요."})
+                        return
+                    if allowed is not True:
+                        self.send_json(429, {"error": "AI 요청이 너무 많아요. 잠시 후 다시 시도해주세요."})
+                        return
                 result = guide(question.strip(), request.get("vehicle"), photo, history)
         except card_sandbox.Unavailable as exc:
             self.send_json(503, {"error": str(exc) or "CODEF 테스트 응답을 가져오지 못했어요."})

@@ -45,7 +45,9 @@ async function initializeAuth() {
       return;
     }
     const sdk = document.createElement('script');
-    sdk.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    sdk.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js';
+    sdk.integrity = 'sha384-A97u3Qnt9GZHURO9YJZRe7VQgGUeFzcv6I1oIGnUTxQrCxnpQMwR0/G8F2zt9abZ';
+    sdk.crossOrigin = 'anonymous';
     await new Promise((resolve, reject) => {
       sdk.onload = resolve;
       sdk.onerror = reject;

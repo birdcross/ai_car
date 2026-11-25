@@ -41,9 +41,13 @@ function leaflet() {
       const css = document.createElement('link');
       css.rel = 'stylesheet';
       css.href = 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';
+      css.integrity = 'sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H';
+      css.crossOrigin = 'anonymous';
       document.head.append(css);
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js';
+      script.integrity = 'sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH';
+      script.crossOrigin = 'anonymous';
       script.onload = () => resolve(window.L);
       script.onerror = () => { script.remove(); css.remove(); leafletReady = null; reject(); };
       document.head.append(script);
@@ -129,8 +133,11 @@ async function loadTrips() {
   $('tripStatus').textContent = '';
   showTripExamples = !tripRows.length;
   if (visibleTrips().some(trip => trip.id === selectedTrip)) renderTripList();
-  else if (!$('parking').hidden) void showTrip(visibleTrips()[0]);
-  else renderTripList();
+  else if (showTripExamples && !$('parking').hidden) void showTrip(visibleTrips()[0]);
+  else {
+    clearTripSelection();
+    renderTripList();
+  }
 }
 function clearTripSelection() {
   selectedTrip = null;

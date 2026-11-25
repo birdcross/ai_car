@@ -148,6 +148,8 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 
 `202611250009_guide_conversations.sql`을 적용하면 로그인한 사용자의 질문, 답변, 출처와 사진에서 읽은 문구가 Supabase에 저장됩니다. 지난 대화를 열면 당시 등록한 차종과 연식으로 이어서 대화하며, 모델에는 최근 8개 메시지의 텍스트를 보냅니다. 첨부 사진 자체는 대화 기록에 저장하지 않습니다. Supabase RLS는 본인 계정의 기록만 조회·저장·삭제할 수 있도록 제한합니다.
 
+Vercel에서 경고등 AI를 운영하려면 `202611250010_guide_request_limits.sql`을 먼저 적용하고 서버 환경에 `SUPABASE_URL`과 `SUPABASE_SECRET_KEY`를 설정합니다. 서버는 계정별 분당 요청 8건까지 처리합니다. 저장된 주차 위치 및 주행 경로의 주변 지도는 사용자가 화면에서 지도 또는 주행 기록을 선택할 때 OpenStreetMap에서 불러옵니다.
+
 서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색에는 서버용 Supabase 키와 적재된 임베딩이 필요합니다.
 
 ## 현대 블루링크 차량 연결 개발 테스트
