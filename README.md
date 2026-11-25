@@ -25,6 +25,8 @@ python server.py
 
 차계부, 카드 등록 정보와 거래, 주차 위치는 브라우저에 저장됩니다. 카드 등록 정보와 거래는 로그인 계정별 저장 영역을 사용합니다. 결제 내역은 CSV 업로드로 반영되며 카드번호 전체나 CVC는 입력하지 않습니다. Python 서버는 카드 CSV를 분류하고 경고등 자료를 검색합니다. 기존 Sites 정적 배포에는 Python API가 포함되지 않습니다.
 
+카드사 연동 테스트는 [CODEF 공식 카드 목록 예제](https://github.com/codef-io/codef-python/blob/master/sandbox/cd/TestKR_CD_P001.py)와 [승인내역 예제](https://github.com/codef-io/codef-python/blob/master/sandbox/cd/TestKR_CD_P002.py)의 테스트 계정을 사용합니다. 서버에 `CODEF_SANDBOX_CLIENT_ID`와 `CODEF_SANDBOX_CLIENT_SECRET`을 설정한 뒤 카드 지출에서 조회할 수 있습니다. 이 모드는 테스트 카드와 마스킹된 승인 응답을 화면에 표시합니다. 실물 카드에 대한 자동 연동을 활성화하려면 운영 이용 권한과 사용자의 카드 연결 승인 절차가 필요합니다.
+
 [현대차 아이오닉 6 2025 경고등 사용설명서](https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/id23C4LH00HL7.html)
 
 현대 국내 전기차 16개 차종의 공식 경고등 근거를 제공합니다. 아래 연식에서 확인된 서비스 경고등, 파워다운, 구동용 배터리 잔량, 타이어 공기압 등의 항목을 요약해 등록했습니다. 각 결과에서 현대 공식 웹 설명서의 항목 또는 PDF 페이지를 열 수 있습니다. [현대자동차 오너스 매뉴얼](https://ownersmanual.hyundai.com/main?countryCode=A99&langCode=ko_KR)

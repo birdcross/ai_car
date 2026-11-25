@@ -4,10 +4,10 @@
   "buildCommand": null,
   "outputDirectory": "dist",
   "functions": {
-    "api/evlog.py": { "includeFiles": "{server.py,manual_rag.py,manual_embeddings.py,vehicle_connect.py,vehicle_oauth_store.py,data/**,dist/index.html}", "maxDuration": 60 }
+    "api/evlog.py": { "includeFiles": "{server.py,manual_rag.py,manual_embeddings.py,card_sandbox.py,vehicle_connect.py,vehicle_oauth_store.py,data/**,dist/index.html}", "maxDuration": 60 }
   },
   "rewrites": [
-    { "source": "/api/:endpoint(auth-config|guide|cards|vehicle-connect)", "destination": "/api/evlog?evlog_route=:endpoint" },
+    { "source": "/api/:endpoint(auth-config|guide|cards|card-sandbox|vehicle-connect)", "destination": "/api/evlog?evlog_route=:endpoint" },
     { "source": "/vehicle-connect/callback", "destination": "/api/evlog?evlog_route=callback" }
   ]
 }

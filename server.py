@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 import manual_rag
+import card_sandbox
 import vehicle_connect
 from manual_rag import normalize
 
@@ -266,7 +267,7 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
-        if self.path not in {"/api/guide", "/api/cards", "/api/vehicle-connect"}:
+        if self.path not in {"/api/guide", "/api/cards", "/api/card-sandbox", "/api/vehicle-connect"}:
             self.send_json(404, {"error": "요청 경로를 찾을 수 없습니다."})
             return
         try:
@@ -285,6 +286,8 @@ class Handler(SimpleHTTPRequestHandler):
             data = self.rfile.read(size).decode("utf-8")
             if self.path == "/api/cards":
                 result = parse_card_csv(data)
+            elif self.path == "/api/card-sandbox":
+                result = card_sandbox.handle(json.loads(data))
             elif self.path == "/api/vehicle-connect":
                 result = vehicle_connect.handle(user_id, json.loads(data))
             else:
@@ -299,8 +302,13 @@ class Handler(SimpleHTTPRequestHandler):
                     validate_photo(photo)
                 history = guide_history(request.get("history", []))
                 result = guide(question.strip(), request.get("vehicle"), photo, history)
+        except card_sandbox.Unavailable as exc:
+            self.send_json(503, {"error": str(exc) or "CODEF 테스트 응답을 가져오지 못했어요."})
+            return
         except (URLError, TimeoutError, KeyError, AttributeError):
-            self.send_json(502, {"error": "차량 연결 정보를 가져오지 못했어요. 제조사 개발자 콘솔의 API 권한과 데이터 제공 동의를 확인해주세요."})
+            error = ("CODEF 테스트 서버에 연결하지 못했어요." if self.path == "/api/card-sandbox"
+                     else "차량 연결 정보를 가져오지 못했어요. 제조사 개발자 콘솔의 API 권한과 데이터 제공 동의를 확인해주세요.")
+            self.send_json(502, {"error": error})
             return
         except (ValueError, csv.Error) as exc:
             self.send_json(400, {"error": str(exc)})

@@ -805,6 +805,58 @@ $('importCardTransactions').onsubmit = async event => {
   }
 };
 
+const sandboxForm = $('sandboxApprovals');
+const sandboxChoice = $('sandboxCardChoice');
+const sandboxStatus = $('cardSandboxStatus');
+const sandboxRows = $('sandboxApprovalRows');
+
+function setSandboxPending(pending) {
+  for (const id of ['loadSandboxCards', 'loadSandboxApprovals', 'sandboxCardChoice']) {
+    $(id).disabled = pending;
+  }
+}
+
+async function queryCardSandbox(payload, show) {
+  if (!recordOwner || $('loadSandboxCards').disabled) return;
+  const epoch = recordEpoch;
+  setSandboxPending(true);
+  sandboxRows.replaceChildren();
+  sandboxStatus.textContent = 'CODEF 테스트 서버에 조회하고 있어요.';
+  try {
+    const result = await api('card-sandbox', JSON.stringify(payload), 'application/json');
+    if (epoch === recordEpoch) show(result);
+  } catch (error) {
+    if (epoch === recordEpoch) sandboxStatus.textContent = error.message;
+  } finally {
+    if (epoch === recordEpoch) setSandboxPending(false);
+  }
+}
+
+$('loadSandboxCards').onclick = () => {
+  sandboxForm.hidden = true;
+  void queryCardSandbox({action:'cards'}, ({cards: testCards}) => {
+    sandboxChoice.replaceChildren(...testCards.map(card => new Option(card.name + ' · 끝 ' + card.lastFour, card.id)));
+    sandboxForm.hidden = !testCards.length;
+    sandboxStatus.textContent = testCards.length ? '테스트 카드 ' + testCards.length + '장을 조회했어요.' : '조회된 테스트 카드가 없어요.';
+  });
+};
+
+sandboxForm.onsubmit = event => {
+  event.preventDefault();
+  if (sandboxChoice.value === '') return;
+  void queryCardSandbox({action:'approvals', card:Number(sandboxChoice.value)}, ({transactions}) => {
+    const masked = transactions.some(tx => !tx.date || !tx.merchant || tx.amount === null);
+    sandboxStatus.textContent = masked ? '승인내역 API가 응답했어요. 날짜·가맹점·금액은 테스트 응답에서 가려질 수 있어요.'
+      : transactions.length ? '테스트 승인내역을 조회했어요.' : '조회된 테스트 승인내역이 없어요.';
+    for (const tx of transactions) {
+      const row = document.createElement('li');
+      row.textContent = [tx.date || '날짜 비공개', tx.merchant || '가맹점 비공개',
+        tx.amount === null ? '금액 비공개' : money(tx.amount), tx.cancelled ? '취소' : '승인'].join(' · ');
+      sandboxRows.append(row);
+    }
+  });
+};
+
 window.addEventListener('hashchange', route);
 renderRegisteredCards();
 route();
@@ -820,6 +872,11 @@ function setRecordOwner(userId, signupVehicle) {
   cards = userId ? load('cards', []) : [];
   registeredCards = userId ? load('registeredCards', []) : [];
   cardImportPending = false;
+  sandboxForm.hidden = true;
+  sandboxChoice.replaceChildren();
+  sandboxRows.replaceChildren();
+  sandboxStatus.textContent = '';
+  setSandboxPending(false);
   parking = null;
   parkingLoaded = parkingReading = false;
   resetParkingMap();

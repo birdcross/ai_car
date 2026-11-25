@@ -7,6 +7,7 @@ ROUTES = {
     "auth-config": "/api/auth-config",
     "guide": "/api/guide",
     "cards": "/api/cards",
+    "card-sandbox": "/api/card-sandbox",
     "vehicle-connect": "/api/vehicle-connect",
     "callback": "/vehicle-connect/callback",
 }
@@ -29,7 +30,7 @@ class handler(Handler):
         self.dispatch({ROUTES["auth-config"], ROUTES["callback"]}, super().do_GET)
 
     def do_POST(self):
-        self.dispatch({ROUTES["guide"], ROUTES["cards"], ROUTES["vehicle-connect"]}, super().do_POST)
+        self.dispatch({ROUTES["guide"], ROUTES["cards"], ROUTES["card-sandbox"], ROUTES["vehicle-connect"]}, super().do_POST)
 
     def do_HEAD(self):
         self.send_error(405)
