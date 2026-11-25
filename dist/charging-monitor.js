@@ -1,5 +1,6 @@
 const liveVehicle = $('liveVehicle');
 const liveMonitorStatus = $('liveMonitorStatus');
+const liveMonitorState = $('liveMonitorState');
 const liveChargingDetails = $('liveChargingDetails');
 const vehicleSummary = $('vehicleSummary');
 const sampleToggle = $('showHyundaiSample');
@@ -18,14 +19,63 @@ const chargingTime = new Intl.DateTimeFormat('ko-KR', {
 });
 const chargingRefreshMs = 60_000;
 const chargingStaleMs = 5 * 60_000;
+const chargingRequestTimeoutMs = 20_000;
 let chargingMonitorRun = 0;
 let chargingMonitorTimer;
+let chargingRequestController;
 let lastChargingSnapshot = null;
 let interruptedCharge = null;
 let showingHyundaiSample = false;
 const chargingHistory = new Map();
 let chargingHistoryOwner;
 const trendTime = new Intl.DateTimeFormat('ko-KR', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Seoul'});
+const monitorStateLabels = {
+  checking: '실시간 점검 중',
+  receiving: '데이터 수신',
+  missing: '데이터 미수신',
+  delayed: '차량 전송 지연',
+  invalid: '데이터 확인 필요',
+  unconnected: '차량 연결 확인',
+  sample: '샘플 데이터',
+};
+
+function setChargingMonitorState(state, detail = '') {
+  liveMonitorState.hidden = !state;
+  liveMonitorState.dataset.state = state;
+  liveMonitorState.textContent = monitorStateLabels[state] ?? '';
+  liveMonitorStatus.textContent = detail;
+}
+
+function cancelChargingRequest() {
+  clearTimeout(chargingMonitorTimer);
+  chargingRequestController?.abort();
+}
+
+async function requestChargingMonitor(action, data) {
+  const controller = new AbortController();
+  chargingRequestController = controller;
+  const timeout = setTimeout(() => controller.abort(new DOMException('Charging status timeout', 'TimeoutError')), chargingRequestTimeoutMs);
+  try {
+    const response = await manufacturerRequest(action, 'hyundai', data, controller.signal);
+    controller.signal.throwIfAborted();
+    return response;
+  } catch (error) {
+    if (controller.signal.reason?.name === 'TimeoutError') {
+      throw new Error('20초 안에 차량 조회 응답이 오지 않았어요.');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+    if (chargingRequestController === controller) chargingRequestController = null;
+  }
+}
+
+function showMissingChargingData(detail) {
+  const reported = Date.parse(lastChargingSnapshot?.vehicle_reported_at);
+  const last = Number.isFinite(reported) ? ' 마지막 수신값 · ' + chargingTime.format(reported) : '';
+  setChargingMonitorState('missing', detail + last);
+  showChargingCheck({type:'data', observation:'이번 조회에서 충전 데이터를 받지 못했어요.'});
+}
 
 const chargingCheckSteps = {
   interrupted: [
@@ -57,7 +107,7 @@ function checkChargingReading(previous, current, interruption, now) {
     return dataIssue('차량이 충전 중이라고 응답했지만 플러그 상태는 미연결로 들어왔어요.');
   if (elapsed < 0) return dataIssue('이전 조회보다 오래된 차량 데이터가 들어왔어요.');
   if (now - reportedAt > chargingStaleMs)
-    return dataIssue('차량이 보낸 충전 상태가 5분 넘게 갱신되지 않았어요.', false);
+    return {...dataIssue('차량이 보낸 충전 상태가 5분 넘게 갱신되지 않았어요.', false), delayed:true};
   if (elapsed === 0 && (previous.soc !== current.soc || previous.battery_charge !== current.battery_charge
       || previous.battery_plugin !== current.battery_plugin))
     return dataIssue('같은 차량 전송 시각에 서로 다른 배터리 또는 충전 상태가 들어왔어요.');
@@ -169,21 +219,30 @@ function chargingMonitorActive() {
 
 async function refreshChargingStatus(run, includeSummary = false) {
   if (run !== chargingMonitorRun || !chargingMonitorActive() || !liveVehicle.value) return;
+  setChargingMonitorState('checking', '현대 블루링크에 충전 상태를 요청하고 있어요.');
+  let nextIncludeSummary = includeSummary;
   try {
-    const result = await manufacturerRequest(includeSummary ? 'vehicle-summary' : 'charging', 'hyundai', {carId: liveVehicle.value});
+    const result = await requestChargingMonitor(includeSummary ? 'vehicle-summary' : 'charging', {carId: liveVehicle.value});
     if (run !== chargingMonitorRun) return;
-    if (includeSummary) showVehicleSummary(result.summary);
-    const snapshot = includeSummary ? result.summary.charging : result.snapshot;
+    if (includeSummary && result.summary) {
+      showVehicleSummary(result.summary);
+      nextIncludeSummary = false;
+    }
+    const snapshot = includeSummary ? result.summary?.charging : result.snapshot;
     if (result.chargingDataIssue) {
       showChargingCheck({type:'data', observation:result.chargingDataIssue});
-      liveMonitorStatus.textContent = lastChargingSnapshot ? '마지막 정상 조회값을 표시하고 있어요.' : '표시할 수 있는 충전 상태가 없어요.';
+      setChargingMonitorState('invalid', lastChargingSnapshot ? '마지막 정상 조회값을 표시하고 있어요.' : '정상 범위의 충전 데이터를 기다리고 있어요.');
       return;
     }
-    if (!snapshot) throw new Error('충전 상태를 가져오지 못했어요. 차량의 데이터 제공 동의와 API 권한을 확인해주세요.');
+    if (!snapshot) {
+      showMissingChargingData('응답에 충전 상태가 비어 있어요. 다음 조회에서 다시 확인할게요.');
+      return;
+    }
     const check = checkChargingReading(lastChargingSnapshot, snapshot, interruptedCharge, Date.now());
-    const summarySoc = includeSummary ? result.summary.battery?.soc : null;
-    showChargingCheck(check ?? (summarySoc != null && !isBatteryPercent(summarySoc)
-      ? {type:'data', observation:'배터리 잔량 조회 응답의 값이 0~100% 범위를 벗어났어요.'} : null));
+    const summarySoc = result.summary?.battery?.soc;
+    const displayedCheck = check ?? (summarySoc != null && !isBatteryPercent(summarySoc)
+      ? {type:'data', observation:'배터리 잔량 조회 응답의 값이 0~100% 범위를 벗어났어요.'} : null);
+    showChargingCheck(displayedCheck);
     if (!check?.discard) {
       if (check?.type !== 'data') interruptedCharge = check;
       lastChargingSnapshot = snapshot;
@@ -191,15 +250,15 @@ async function refreshChargingStatus(run, includeSummary = false) {
     }
     const checkedAt = Date.parse(snapshot.fetched_at);
     const lastChecked = Number.isFinite(checkedAt) ? '마지막 확인 · ' + chargingTime.format(checkedAt) : '';
-    liveMonitorStatus.textContent = (check?.discard && lastChargingSnapshot ? '마지막 정상 조회값을 표시하고 있어요. ' : '') + lastChecked;
+    const status = check?.delayed ? 'delayed' : displayedCheck?.type === 'data' ? 'invalid' : 'receiving';
+    setChargingMonitorState(status, (check?.discard && lastChargingSnapshot ? '마지막 정상 조회값을 표시하고 있어요. ' : '') + lastChecked);
   } catch (error) {
     if (run === chargingMonitorRun) {
-      showChargingCheck({type:'data', observation:'차량의 최신 충전 상태를 확인하지 못했어요.'});
-      liveMonitorStatus.textContent = (lastChargingSnapshot ? '이전 상태를 표시하고 있어요. ' : '') + error.message;
+      showMissingChargingData(error.message);
     }
   } finally {
     if (run === chargingMonitorRun && chargingMonitorActive()) {
-      chargingMonitorTimer = setTimeout(() => void refreshChargingStatus(run), chargingRefreshMs);
+      chargingMonitorTimer = setTimeout(() => void refreshChargingStatus(run, nextIncludeSummary), chargingRefreshMs);
     }
   }
 }
@@ -214,7 +273,7 @@ async function loadChargingMonitor() {
   showingHyundaiSample = false;
   sampleToggle.textContent = '현대 공식 샘플 보기';
   sampleToggle.setAttribute('aria-pressed', 'false');
-  clearTimeout(chargingMonitorTimer);
+  cancelChargingRequest();
   const run = ++chargingMonitorRun;
   const previous = liveVehicle.value;
   resetChargingCheck();
@@ -223,32 +282,37 @@ async function loadChargingMonitor() {
   vehicleSummary.hidden = true;
   $('liveVehicleField').hidden = true;
   liveVehicle.replaceChildren();
-  if (!chargingMonitorActive()) return;
-  liveMonitorStatus.textContent = '연결된 현대 전기차를 확인하고 있어요.';
+  if (!chargingMonitorActive()) {
+    setChargingMonitorState('');
+    return;
+  }
+  if (!navigator.onLine) {
+    showMissingChargingData('인터넷 연결이 끊겼어요. 연결이 돌아오면 다시 조회할게요.');
+    return;
+  }
+  setChargingMonitorState('checking', '연결된 현대 전기차를 확인하고 있어요.');
   try {
-    const {vehicles} = await manufacturerRequest('monitor-vehicles', 'hyundai');
+    const {vehicles} = await requestChargingMonitor('monitor-vehicles');
     if (run !== chargingMonitorRun) return;
     if (!vehicles.length) {
-      liveMonitorStatus.textContent = '조회가 승인된 현대 전기차가 없어요.';
+      setChargingMonitorState('unconnected', '조회가 승인된 현대 전기차가 없어요.');
       return;
     }
     for (const {id, name, nickname} of vehicles) liveVehicle.add(new Option(nickname ? name + ' · ' + nickname : name, id));
     if (vehicles.some(vehicle => vehicle.id === previous)) liveVehicle.value = previous;
     $('liveVehicleField').hidden = false;
-    liveMonitorStatus.textContent = '충전 상태를 확인하고 있어요.';
     void refreshChargingStatus(run, true);
   } catch (error) {
-    if (run === chargingMonitorRun) liveMonitorStatus.textContent = error.message;
+    if (run === chargingMonitorRun) setChargingMonitorState('unconnected', error.message);
   }
 }
 
 liveVehicle.addEventListener('change', () => {
-  clearTimeout(chargingMonitorTimer);
+  cancelChargingRequest();
   resetChargingCheck();
   liveChargingDetails.hidden = true;
   liveBatteryVisual.hidden = true;
   vehicleSummary.hidden = true;
-  liveMonitorStatus.textContent = '충전 상태를 확인하고 있어요.';
   void refreshChargingStatus(++chargingMonitorRun, true);
 });
 sampleToggle.addEventListener('click', () => {
@@ -259,14 +323,29 @@ sampleToggle.addEventListener('click', () => {
   }
   showingHyundaiSample = true;
   chargingMonitorRun++;
-  clearTimeout(chargingMonitorTimer);
+  cancelChargingRequest();
   resetChargingCheck();
   $('liveVehicleField').hidden = true;
   sampleToggle.textContent = '연결 차량 보기';
   sampleToggle.setAttribute('aria-pressed', 'true');
-  liveMonitorStatus.textContent = '현대 공식 규격서 예시 · API별 예시 값이며 실제 차량 데이터는 저장되지 않습니다.';
+  setChargingMonitorState('sample', '현대 공식 규격서의 예시 값입니다.');
   showVehicleSummary(hyundaiSampleSummary);
   showChargingSnapshot(hyundaiSampleSummary.charging);
 });
 document.addEventListener('evlog-route', loadChargingMonitor);
 document.addEventListener('visibilitychange', loadChargingMonitor);
+window.addEventListener('offline', () => {
+  if (showingHyundaiSample || !chargingMonitorActive()) return;
+  cancelChargingRequest();
+  chargingMonitorRun++;
+  showMissingChargingData('인터넷 연결이 끊겼어요. 연결이 돌아오면 다시 조회할게요.');
+});
+window.addEventListener('online', () => {
+  if (showingHyundaiSample || !chargingMonitorActive()) return;
+  if (!liveVehicle.value) {
+    void loadChargingMonitor();
+    return;
+  }
+  cancelChargingRequest();
+  void refreshChargingStatus(++chargingMonitorRun, vehicleSummary.hidden);
+});

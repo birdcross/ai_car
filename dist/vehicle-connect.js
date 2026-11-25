@@ -4,8 +4,8 @@ const vehicleCallbackPath = '/vehicle-connect/callback';
 const vehicleCallback = location.pathname === vehicleCallbackPath ? new URLSearchParams(location.search) : null;
 if (vehicleCallback) history.replaceState(null,'','/#parking');
 
-async function manufacturerRequest(action, brand, extra = {}) {
-  return api('vehicle-connect', JSON.stringify({action,brand,...extra}), 'application/json');
+async function manufacturerRequest(action, brand, extra = {}, signal) {
+  return api('vehicle-connect', JSON.stringify({action,brand,...extra}), 'application/json', signal);
 }
 function clearManufacturerView() {
   connectionList.replaceChildren();

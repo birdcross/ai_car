@@ -274,10 +274,10 @@ $('expense').onsubmit = event => {
   render();
   $('feedback').textContent = '지출 기록을 저장했어요.';
 };
-async function api(path, body, contentType) {
+async function api(path, body, contentType, signal) {
   if (!accessToken) throw new Error('로그인 후 이용해주세요.');
   const response = await fetch('/api/' + path, {
-    method: 'POST', headers: {'Content-Type': contentType, Authorization: 'Bearer ' + accessToken}, body,
+    method: 'POST', headers: {'Content-Type': contentType, Authorization: 'Bearer ' + accessToken}, body, signal,
   });
   const data = await response.json().catch(() => null);
   if (!response.ok || !data) throw new Error(data?.error || 'EV Log Python 서버로 접속해주세요.');

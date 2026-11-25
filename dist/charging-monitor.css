@@ -2,7 +2,12 @@
 .monitor-controls>div{justify-content:flex-end}
 .monitor-controls h2{margin:0}
 #liveVehicleField{margin-top:16px}
-#liveMonitorStatus{color:#aac1d2;margin:14px 0 0}
+.monitor-status{display:flex;align-items:baseline;gap:8px 12px;flex-wrap:wrap;margin-top:14px}
+#liveMonitorStatus{color:#aac1d2;margin:0}
+.monitor-state{padding:3px 8px;border-radius:6px;background:#243344;color:#cfe1f2;font-size:.8rem;font-weight:700}
+.monitor-state[data-state="receiving"]{background:#294739;color:#d5ffad}
+.monitor-state[data-state="missing"],.monitor-state[data-state="delayed"],.monitor-state[data-state="invalid"]{background:#483627;color:#ffd697}
+.monitor-state[data-state="checking"]{background:#253b50;color:#c8e4ff}
 .charging-check{margin-top:14px;padding:16px 18px;border:1px solid #8d6740;border-radius:14px;background:#2b221c}
 .charging-check-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .charging-check h3{margin:0;color:#ffe3b6;font-size:1rem}
