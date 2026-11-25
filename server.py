@@ -5,6 +5,7 @@ import io
 import json
 import os
 import logging
+import re
 from datetime import date
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -34,6 +35,12 @@ def demo_search(question, vehicle):
         if any(all(word in query for word in alias.split("+")) for alias in chunk["aliases"]):
             return True, {"title": chunk["title"], "text": chunk["content"], "source": chunk["source"]}
     return bool(chunks), None
+
+
+def manual_query(question):
+    if re.search(r"\b(?:tire|tyre)\s+pressures?\b|\btpms\b", question, re.IGNORECASE):
+        return "타이어 공기압 경고등\n" + question
+    return question
 
 MODEL_ERRORS = (URLError, TimeoutError, ValueError, KeyError, IndexError, AttributeError, TypeError)
 PHOTO_PREFIX = "data:image/jpeg;base64,"
@@ -118,7 +125,8 @@ def guide(question, vehicle, photo=None, history=()):
 
     context = [turn["text"] for turn in history if turn["role"] == "user" and turn["text"]][-2:]
     follow_up = not photo_warning and bool(context) and (len(question) <= 24 or question.startswith(("그러면", "그럼", "그거", "이거", "그 경고", "이 경고")))
-    query = "\n".join([question, *reversed(context)]) if follow_up else question
+    current_query = manual_query(question)
+    query = manual_query("\n".join([question, *reversed(context)])) if follow_up else current_query
     cloud_search = manual_rag.has_supabase_config()
     articles = []
     if cloud_search:
@@ -128,7 +136,7 @@ def guide(question, vehicle, photo=None, history=()):
             logging.warning("Manual retrieval failed: %s", type(error).__name__)
     source_kind = "공식 설명서 벡터 검색"
     if not articles:
-        _, article = demo_search(question, vehicle_key)
+        _, article = demo_search(current_query, vehicle_key)
         if not article and follow_up:
             _, article = demo_search(query, vehicle_key)
         if article:
@@ -150,7 +158,8 @@ def guide(question, vehicle, photo=None, history=()):
             "발췌에 없는 부품, 표기 위치, 수치, 원인과 단계는 일반 지식으로 보충하지 마세요. "
             "근거가 부족하면 발췌에서 확인할 수 없다고 알려주세요. "
             if article else
-            "관련 공식 설명서가 없으므로 일반적인 의미와 상황 확인 질문만 제공하세요. 차량별 해석은 다를 수 있음을 알려주세요. "
+            "관련 공식 설명서가 없으므로 경고의 일반적 의미와 상황 확인 질문만 제공하세요. "
+            "차량별 부품이나 표시 위치, 수치, 정비 절차를 추정하지 마세요. "
         )
         answer = claude_message(
             model, key,
