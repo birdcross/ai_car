@@ -92,7 +92,6 @@ vehicleForm.onsubmit = event => {
   event.preventDefault();
   if (!recordOwner) return;
   const {make, model, year, displayName} = vehicleForm.elements;
-  const onboarding = needsOnboarding();
   const next = {make: make.value.trim(), model: model.value.trim(), year: Number(year.value), displayName: displayName.value.trim()};
   if (!validVehicle(next)) {
     $('vehicleStatus').textContent = '이름 또는 닉네임, 제조사, 차종, 연식을 확인해주세요.';
@@ -100,18 +99,12 @@ vehicleForm.onsubmit = event => {
   }
   try {
     store('vehicle', next);
-    vehicle = next;
-    renderVehicle();
-    resetGuideChat();
-    void refreshGuideHistory();
-    $('vehicleStatus').textContent = '내 전기차를 저장했어요.';
-    if (onboarding) {
-      location.hash = 'monitor';
-      route();
-    }
   } catch {
     $('vehicleStatus').textContent = '차량을 저장하지 못했어요.';
+    return;
   }
+  window.alert('저장되었습니다.');
+  location.reload();
 };
 renderVehicle();
 
