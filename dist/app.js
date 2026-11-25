@@ -134,7 +134,7 @@ loadVehicleCatalog();
 
 function route() {
   const id = location.hash.slice(1);
-  const pages = ['monitor', 'ledger', 'parking', 'guide', 'cards', 'settings', 'sources', 'account'];
+  const pages = ['monitor', 'ledger', 'parking', 'guide', 'cards', 'settings', 'account'];
   const active = !recordOwner ? 'account' : needsOnboarding() && id !== 'account' ? 'settings' : pages.includes(id) ? id : 'monitor';
   for (const key of ['mainNav', 'vehicleSidebar', 'headerVehicle']) $(key).hidden = !recordOwner || needsOnboarding();
   pages.forEach(page => $(page).hidden = page !== active);
