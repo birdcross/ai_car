@@ -12,12 +12,17 @@ MODEL_LOCK = Lock()
 
 @lru_cache(maxsize=1)
 def load_model():
+    cache = None
+    if os.getenv("VERCEL"):
+        cache = Path(gettempdir()) / "evlog-manual-model"
+        # The Xet downloader uses a separate cache from hf_hub_download().
+        os.environ.setdefault("HF_XET_CACHE", str(cache / "xet"))
+
     from huggingface_hub import hf_hub_download
     import onnxruntime as ort
     from tokenizers import Tokenizer
 
     def model_file(filename):
-        cache = Path(gettempdir()) / "evlog-manual-model" if os.getenv("VERCEL") else None
         return hf_hub_download(REPOSITORY, filename, revision=REVISION, cache_dir=cache)
 
     tokenizer = Tokenizer.from_file(model_file("tokenizer.json"))
