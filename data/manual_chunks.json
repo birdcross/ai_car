@@ -52,5 +52,3778 @@
     ],
     "content": "전기차 제어 시스템 등에 이상이 있을 때 켜질 수 있습니다. 주행 중 켜지거나 시동 후에도 지속되면 현대차 서비스센터에서 점검받으세요.",
     "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "kia-ev6-2025-power-service",
+    "make": "기아",
+    "model": "EV6",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스경고",
+      "거북이+서비스경고"
+    ],
+    "content": "출력 제한을 알리는 파워다운 표시와 전기차 시스템의 서비스 경고가 함께 나타나면 기아 서비스센터에서 점검을 받도록 안내합니다.",
+    "source": "https://ownersmanual.kia.com/full_webhelp/CV1/2025/ko_KR/topics/chapter4_18_2.html"
+  },
+  {
+    "id": "kia-ev6-2025-power-down",
+    "make": "기아",
+    "model": "EV6",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한"
+    ],
+    "content": "구동용 배터리 잔량이나 온도, 구동 시스템 온도 등에 따라 차량이 부품을 보호하려고 출력을 제한할 수 있습니다. 표시 중에는 급출발이나 급가속을 피하도록 설명합니다.",
+    "source": "https://ownersmanual.kia.com/full_webhelp/CV1/2025/ko_KR/topics/chapter1_9_6.html"
+  },
+  {
+    "id": "kia-ev6-2025-service",
+    "make": "기아",
+    "model": "EV6",
+    "year": 2025,
+    "title": "서비스 경고등",
+    "aliases": [
+      "서비스경고",
+      "전기차시스템"
+    ],
+    "content": "시동 과정에서 잠시 켜질 수 있습니다. 주행 중 새로 켜지거나 시동 후 계속 켜져 있으면 전기차 제어 장치 관련 점검을 받도록 안내합니다.",
+    "source": "https://ownersmanual.kia.com/full_webhelp/CV1/2025/ko_KR/topics/chapter4_18_2.html"
+  },
+  {
+    "id": "kia-ev6-2025-tpms",
+    "make": "기아",
+    "model": "EV6",
+    "year": 2025,
+    "title": "타이어 공기압 경보 시스템",
+    "aliases": [
+      "공기압",
+      "tpms",
+      "저압타이어"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.kia.com/full_webhelp/CV1/2025/ko_KR/topics/chapter1_16_1.html"
+  },
+  {
+    "id": "hyundai-a01-2025-power-service",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2025/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-a01-2025-service",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2025/ko_KR#page=125"
+  },
+  {
+    "id": "hyundai-a01-2025-power",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2025/ko_KR#page=58"
+  },
+  {
+    "id": "hyundai-a01-2025-traction-battery",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2025/ko_KR#page=57"
+  },
+  {
+    "id": "hyundai-a01-2025-tpms",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2025/ko_KR#page=128"
+  },
+  {
+    "id": "hyundai-a01-2026-power-service",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2026,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2026/ko_KR#page=55"
+  },
+  {
+    "id": "hyundai-a01-2026-service",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2026/ko_KR#page=123"
+  },
+  {
+    "id": "hyundai-a01-2026-power",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2026/ko_KR#page=57"
+  },
+  {
+    "id": "hyundai-a01-2026-traction-battery",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2026/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-a01-2026-tpms",
+    "make": "현대",
+    "model": "ST1",
+    "year": 2026,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/A01/2026/ko_KR#page=126"
+  },
+  {
+    "id": "hyundai-aeev-2016-power-charge",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2016,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2016/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-aeev-2016-service",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2016,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2016/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-aeev-2016-power",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2016,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2016/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-aeev-2016-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2016,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2016/ko_KR#page=40"
+  },
+  {
+    "id": "hyundai-aeev-2016-tpms",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2016,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2016/ko_KR#page=358"
+  },
+  {
+    "id": "hyundai-aeev-2017-power-charge",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2017,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2017/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-aeev-2017-service",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2017,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2017/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-aeev-2017-power",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2017,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2017/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-aeev-2017-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2017,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2017/ko_KR#page=40"
+  },
+  {
+    "id": "hyundai-aeev-2017-tpms",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2017,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2017/ko_KR#page=358"
+  },
+  {
+    "id": "hyundai-aeev-2018-power-charge",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2018,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2018/ko_KR#page=42"
+  },
+  {
+    "id": "hyundai-aeev-2018-service",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2018,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2018/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-aeev-2018-power",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2018,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2018/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-aeev-2018-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2018,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2018/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-aeev-2018-tpms",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2018,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2018/ko_KR#page=364"
+  },
+  {
+    "id": "hyundai-aeev-2019-power-charge",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2019,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2019/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-aeev-2019-service",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2019,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2019/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-aeev-2019-power",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2019,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2019/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-aeev-2019-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2019,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2019/ko_KR#page=48"
+  },
+  {
+    "id": "hyundai-aeev-2019-tpms",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2019,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2019/ko_KR#page=421"
+  },
+  {
+    "id": "hyundai-aeev-2020-power-charge",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2020,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2020/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-aeev-2020-service",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2020,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2020/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-aeev-2020-power",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2020,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2020/ko_KR#page=56"
+  },
+  {
+    "id": "hyundai-aeev-2020-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2020,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2020/ko_KR#page=48"
+  },
+  {
+    "id": "hyundai-aeev-2020-tpms",
+    "make": "현대",
+    "model": "아이오닉 일렉트릭",
+    "year": 2020,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AEEV/2020/ko_KR#page=421"
+  },
+  {
+    "id": "hyundai-axev-2025-power-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2025/ko_KR#page=132"
+  },
+  {
+    "id": "hyundai-axev-2025-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2025-power",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2025/ko_KR#page=140"
+  },
+  {
+    "id": "hyundai-axev-2025-traction-battery",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2025-tpms",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2026-power-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2026,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2026/ko_KR#page=137"
+  },
+  {
+    "id": "hyundai-axev-2026-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2026-power",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2026/ko_KR#page=144"
+  },
+  {
+    "id": "hyundai-axev-2026-traction-battery",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2026-tpms",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2026,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2027-power-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2027,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2027/ko_KR#page=138"
+  },
+  {
+    "id": "hyundai-axev-2027-service",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2027,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2027-power",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2027,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/AXEV/2027/ko_KR#page=144"
+  },
+  {
+    "id": "hyundai-axev-2027-traction-battery",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2027,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-axev-2027-tpms",
+    "make": "현대",
+    "model": "캐스퍼 일렉트릭",
+    "year": 2027,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/AXEV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ce1-2023-power-service",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2023,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2023-service",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2023-power",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2023-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2023-tpms",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2023,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2024-power-service",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2024,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2024-service",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2024-power",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2024-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1-2024-tpms",
+    "make": "현대",
+    "model": "아이오닉 6",
+    "year": 2024,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ce1n-2025-power-service",
+    "make": "현대",
+    "model": "아이오닉 6 N",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1N/2025/ko_KR/id23C4LH00WTS.html"
+  },
+  {
+    "id": "hyundai-ce1n-2025-service",
+    "make": "현대",
+    "model": "아이오닉 6 N",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1N/2025/ko_KR/id23C4LH00WTS.html"
+  },
+  {
+    "id": "hyundai-ce1n-2025-power-limit",
+    "make": "현대",
+    "model": "아이오닉 6 N",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1N/2025/ko_KR/id23C4LH00WTS.html"
+  },
+  {
+    "id": "hyundai-ce1n-2025-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 6 N",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1N/2025/ko_KR/id23C4LH00WTS.html"
+  },
+  {
+    "id": "hyundai-ce1n-2025-tpms",
+    "make": "현대",
+    "model": "아이오닉 6 N",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/CE1N/2025/ko_KR/id23C4LH00WTS.html"
+  },
+  {
+    "id": "hyundai-csev-2020-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2020,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2020/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-csev-2020-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2020,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2020/ko_KR#page=104"
+  },
+  {
+    "id": "hyundai-csev-2020-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2020,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2020/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-csev-2021-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2021,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2021/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-csev-2021-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2021,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2021/ko_KR#page=106"
+  },
+  {
+    "id": "hyundai-csev-2021-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2021,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2021/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-csev-2022-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2022/ko_KR#page=50"
+  },
+  {
+    "id": "hyundai-csev-2022-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2022/ko_KR#page=121"
+  },
+  {
+    "id": "hyundai-csev-2022-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2022/ko_KR#page=51"
+  },
+  {
+    "id": "hyundai-csev-2023-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2023/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-csev-2023-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2023/ko_KR#page=120"
+  },
+  {
+    "id": "hyundai-csev-2023-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2023/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-csev-2024-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2024/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-csev-2024-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2024/ko_KR#page=122"
+  },
+  {
+    "id": "hyundai-csev-2024-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2024/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-csev-2025-service",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2025/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-csev-2025-power",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2025/ko_KR#page=122"
+  },
+  {
+    "id": "hyundai-csev-2025-traction-battery",
+    "make": "현대",
+    "model": "카운티 일렉트릭",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CSEV/2025/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-cyev-2020-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2020,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2020/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-cyev-2020-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2020,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2020/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2020-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2020,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2020/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2021-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2021,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2021/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-cyev-2021-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2021,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2021/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2021-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2021,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2021/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2022-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2022/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-cyev-2022-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2022/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2022-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2022/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-cyev-2023-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2023/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-cyev-2023-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2023/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2023-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2023/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2024-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2024/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-cyev-2024-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2024/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2024-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2024/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2025-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2025/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-cyev-2025-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2025/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2025-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2025/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2026-service",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2026/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-cyev-2026-power-limit",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2026/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-cyev-2026-traction-battery",
+    "make": "현대",
+    "model": "일렉시티",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/CYEV/2026/ko_KR#page=26"
+  },
+  {
+    "id": "hyundai-ea-2012-service",
+    "make": "현대",
+    "model": "블루온",
+    "year": 2012,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/EA/2012/ko_KR#page=107"
+  },
+  {
+    "id": "hyundai-ea-2012-power",
+    "make": "현대",
+    "model": "블루온",
+    "year": 2012,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/EA/2012/ko_KR#page=108"
+  },
+  {
+    "id": "hyundai-ea-2012-traction-battery",
+    "make": "현대",
+    "model": "블루온",
+    "year": 2012,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/EA/2012/ko_KR#page=113"
+  },
+  {
+    "id": "hyundai-gyev-2023-service",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2023/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2023-power-limit",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2023/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2023-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2023/ko_KR#page=28"
+  },
+  {
+    "id": "hyundai-gyev-2024-service",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2024/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2024-power-limit",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2024/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2024-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2024/ko_KR#page=28"
+  },
+  {
+    "id": "hyundai-gyev-2025-service",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2025/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2025-power-limit",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2025/ko_KR#page=27"
+  },
+  {
+    "id": "hyundai-gyev-2025-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 타운",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/GYEV/2025/ko_KR#page=28"
+  },
+  {
+    "id": "hyundai-hrev-2019-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2019,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2019/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-hrev-2019-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2019,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2019/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-hrev-2019-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2019,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2019/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-hrev-2019-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2019,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2019/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-hrev-2020-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2020,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2020/ko_KR#page=36"
+  },
+  {
+    "id": "hyundai-hrev-2020-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2020,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2020/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-hrev-2020-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2020,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2020/ko_KR#page=41"
+  },
+  {
+    "id": "hyundai-hrev-2020-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2020,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2020/ko_KR#page=36"
+  },
+  {
+    "id": "hyundai-hrev-2021-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2021,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2021/ko_KR#page=42"
+  },
+  {
+    "id": "hyundai-hrev-2021-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2021,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2021/ko_KR#page=47"
+  },
+  {
+    "id": "hyundai-hrev-2021-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2021,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2021/ko_KR#page=47"
+  },
+  {
+    "id": "hyundai-hrev-2021-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2021,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2021/ko_KR#page=42"
+  },
+  {
+    "id": "hyundai-hrev-2022-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2022,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2022/ko_KR#page=42"
+  },
+  {
+    "id": "hyundai-hrev-2022-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2022/ko_KR#page=47"
+  },
+  {
+    "id": "hyundai-hrev-2022-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2022/ko_KR#page=47"
+  },
+  {
+    "id": "hyundai-hrev-2022-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2022/ko_KR#page=42"
+  },
+  {
+    "id": "hyundai-hrev-2023-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2023,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2023/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2023-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2023/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2023-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2023/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2023-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2023/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2024-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2024,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2024/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2024-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2024/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2024-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2024/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2024-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2024/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2025-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2025,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2025/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2025-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2025/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2025-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2025/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2025-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2025/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2026-power-charge",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2026,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2026/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-hrev-2026-service",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2026/ko_KR#page=48"
+  },
+  {
+    "id": "hyundai-hrev-2026-power",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2026/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-hrev-2026-traction-battery",
+    "make": "현대",
+    "model": "포터 II 일렉트릭",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/HREV/2026/ko_KR#page=44"
+  },
+  {
+    "id": "hyundai-jo4-2021-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2021,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2021/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2021-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2021,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2021/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2021-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2021,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2021/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2022-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2022/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2022-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2022/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2022-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2022/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2023-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2023/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2023-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2023/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2023-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2023/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2024-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2024/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2024-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2024/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2024-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2024/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2025-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2025/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2025-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2025/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2025-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2025/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2026-service",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2026/ko_KR#page=31"
+  },
+  {
+    "id": "hyundai-jo4-2026-power-limit",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2026/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-jo4-2026-traction-battery",
+    "make": "현대",
+    "model": "일렉시티 이층버스",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/JO4/2026/ko_KR#page=30"
+  },
+  {
+    "id": "hyundai-me-2025-power-service",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2025/ko_KR#page=177"
+  },
+  {
+    "id": "hyundai-me-2025-service",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2025/ko_KR#page=171"
+  },
+  {
+    "id": "hyundai-me-2025-power-limit",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2025/ko_KR#page=177"
+  },
+  {
+    "id": "hyundai-me-2025-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2025/ko_KR#page=171"
+  },
+  {
+    "id": "hyundai-me-2025-tpms",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2025/ko_KR#page=173"
+  },
+  {
+    "id": "hyundai-me-2027-power-service",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2027,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2027/ko_KR#page=174"
+  },
+  {
+    "id": "hyundai-me-2027-service",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2027,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2027/ko_KR#page=169"
+  },
+  {
+    "id": "hyundai-me-2027-power-limit",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2027,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2027/ko_KR#page=174"
+  },
+  {
+    "id": "hyundai-me-2027-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2027,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2027/ko_KR#page=169"
+  },
+  {
+    "id": "hyundai-me-2027-tpms",
+    "make": "현대",
+    "model": "아이오닉 9",
+    "year": 2027,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/ME/2027/ko_KR#page=171"
+  },
+  {
+    "id": "hyundai-ne1-2021-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2021,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2021/ko_KR#page=51"
+  },
+  {
+    "id": "hyundai-ne1-2021-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2021,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2021/ko_KR#page=50"
+  },
+  {
+    "id": "hyundai-ne1-2021-power",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2021,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2021/ko_KR#page=51"
+  },
+  {
+    "id": "hyundai-ne1-2021-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2021,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2021/ko_KR#page=51"
+  },
+  {
+    "id": "hyundai-ne1-2021-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2021,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2021/ko_KR#page=144"
+  },
+  {
+    "id": "hyundai-ne1-2022-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2022,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2022/ko_KR#page=50"
+  },
+  {
+    "id": "hyundai-ne1-2022-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2022/ko_KR#page=49"
+  },
+  {
+    "id": "hyundai-ne1-2022-power",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2022/ko_KR#page=50"
+  },
+  {
+    "id": "hyundai-ne1-2022-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2022/ko_KR#page=50"
+  },
+  {
+    "id": "hyundai-ne1-2022-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2022,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/NE1/2022/ko_KR#page=144"
+  },
+  {
+    "id": "hyundai-ne1-2023-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2023,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2023-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2023-power",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2023-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2023-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2023,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2024-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2024,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2024-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2024-power",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2024-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2024-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2024,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1-2025-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2025-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2025-power-limit",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2025-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2025/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2026-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2026,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2026-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2026-power-limit",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2026-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2026,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2026/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2027-power-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2027,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2027-service",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2027,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2027-power-limit",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2027,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량을 보호하기 위해 구동 출력이 제한됐다는 뜻입니다. 계기판에 함께 표시된 메시지와 경고등을 확인하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1-2027-tpms",
+    "make": "현대",
+    "model": "아이오닉 5",
+    "year": 2027,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-ne1n-2024-power-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2024,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2024-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2024-power",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2024-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2024-tpms",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2024,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2025-power-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2025-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2025-power",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2025-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2025-tpms",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2026-power-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2026,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2026/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2026-service",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2026,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2026/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2026-power",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2026,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2026/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2026-traction-battery",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2026,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2026/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-ne1n-2026-tpms",
+    "make": "현대",
+    "model": "아이오닉 5 N",
+    "year": 2026,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/NE1N/2026/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-osev-2018-power-charge",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2018,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2018/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-osev-2018-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2018,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2018/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2018-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2018,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2018/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2018-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2018,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2018/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-osev-2018-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2018,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2018/ko_KR#page=392"
+  },
+  {
+    "id": "hyundai-osev-2019-power-charge",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2019,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2019/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-osev-2019-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2019,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2019/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2019-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2019,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2019/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2019-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2019,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2019/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-osev-2019-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2019,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2019/ko_KR#page=391"
+  },
+  {
+    "id": "hyundai-osev-2020-power-charge",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2020,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2020/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-osev-2020-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2020,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2020/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2020-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2020,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2020/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2020-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2020,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2020/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-osev-2020-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2020,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2020/ko_KR#page=391"
+  },
+  {
+    "id": "hyundai-osev-2022-power-charge",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2022,
+    "title": "파워다운과 배터리 잔량 경고등 동시 점등",
+    "aliases": [
+      "파워다운+배터리잔량",
+      "거북이+배터리",
+      "파워다운+충전하십시오"
+    ],
+    "content": "구동용 배터리 잔량 경고등이 파워다운 표시와 함께 켜지면 배터리를 보호하기 위해 출력이 떨어질 수 있습니다. 설명서는 즉시 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2022/ko_KR#page=46"
+  },
+  {
+    "id": "hyundai-osev-2022-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2022,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2022/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2022-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2022,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2022/ko_KR#page=53"
+  },
+  {
+    "id": "hyundai-osev-2022-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2022,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2022/ko_KR#page=45"
+  },
+  {
+    "id": "hyundai-osev-2022-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2022,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/OSEV/2022/ko_KR#page=391"
+  },
+  {
+    "id": "hyundai-sx2ev-2023-power-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2023,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2023-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2023,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2023-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2023,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2023-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2023,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2023-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2023,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2023/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2024-power-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2024,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2024-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2024,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2024-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2024,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2024-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2024,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2024-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2024,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2024/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2025-power-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2025,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2025-service",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2025,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2025-power",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2025,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2025-traction-battery",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2025,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-sx2ev-2025-tpms",
+    "make": "현대",
+    "model": "코나 일렉트릭",
+    "year": 2025,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/SX2EV/2025/ko_KR/warning_indicator_lights.html"
+  },
+  {
+    "id": "hyundai-us4ev-2027-power-service",
+    "make": "현대",
+    "model": "스타리아 일렉트릭",
+    "year": 2027,
+    "title": "파워다운과 서비스 경고등 동시 점등",
+    "aliases": [
+      "파워다운+서비스",
+      "거북이+서비스"
+    ],
+    "content": "파워다운 표시와 서비스 경고등이 함께 켜지면 현대자동차의 서비스 거점에서 차량을 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/US4EV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-us4ev-2027-service",
+    "make": "현대",
+    "model": "스타리아 일렉트릭",
+    "year": 2027,
+    "title": "전기차 서비스 경고등",
+    "aliases": [
+      "서비스경고등",
+      "전기차시스템점검"
+    ],
+    "content": "전기차 제어 계통의 이상을 알리는 경고입니다. 주행 중 켜지거나 시동을 켠 뒤 계속 표시되면 현대자동차 서비스 거점에서 점검받으세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/US4EV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-us4ev-2027-power",
+    "make": "현대",
+    "model": "스타리아 일렉트릭",
+    "year": 2027,
+    "title": "파워다운 표시등",
+    "aliases": [
+      "파워다운",
+      "거북이",
+      "출력제한",
+      "파워가제한"
+    ],
+    "content": "차량의 출력이 제한됐다는 뜻입니다. 이 표시가 켜지면 급가속이나 급출발을 피하세요.",
+    "source": "https://ownersmanual.hyundai.com/full_pdf/US4EV/2027/ko_KR#page=177"
+  },
+  {
+    "id": "hyundai-us4ev-2027-traction-battery",
+    "make": "현대",
+    "model": "스타리아 일렉트릭",
+    "year": 2027,
+    "title": "구동용 배터리 잔량 경고등",
+    "aliases": [
+      "배터리잔량",
+      "배터리충전량",
+      "고전압배터리부족",
+      "배터리를충전"
+    ],
+    "content": "주행에 사용하는 고전압 배터리의 충전량이 낮을 때 켜집니다. 설명서는 이 경고가 켜지면 충전하도록 안내합니다.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/US4EV/2027/ko_KR/id23C4LH00HL7.html"
+  },
+  {
+    "id": "hyundai-us4ev-2027-tpms",
+    "make": "현대",
+    "model": "스타리아 일렉트릭",
+    "year": 2027,
+    "title": "타이어 공기압 경고등",
+    "aliases": [
+      "타이어공기압",
+      "저압타이어",
+      "tpms"
+    ],
+    "content": "타이어 공기압이 낮을 때 표시될 수 있습니다. 타이어 상태와 공기압을 확인하고 차량에 표시된 권장 공기압에 맞추세요.",
+    "source": "https://ownersmanual.hyundai.com/full_webhelp/US4EV/2027/ko_KR/id23C4LH00HL7.html"
   }
 ]

@@ -4,7 +4,7 @@
 
 ## 로컬 실행
 
-Python 3.10 이상이 필요합니다. 별도 패키지 설치 없이 프로젝트 폴더에서 실행합니다.
+Python 3.10 이상이 필요합니다. 벡터 검색을 사용할 환경에서는 `python -m pip install -r requirements.txt`로 임베딩 모델 실행에 필요한 패키지를 설치합니다.
 
 ```powershell
 python server.py
@@ -16,8 +16,8 @@ python server.py
 - **차계부**에 충전량과 금액을 직접 기록할 수 있습니다.
 - **카드 지출**에서 샘플 가져오기를 누르면 결제 분류, 거래 ID 중복 제거, 원거래 취소를 확인할 수 있습니다. 실제 카드 API는 연동 전입니다. CSV는 UTF-8이며 거래 ID, 날짜, 가맹점, 양수 금액, 상태, 원거래 ID를 사용합니다. 샘플 거래일은 2026년 11월이므로 다른 달에는 차계부 전체 목록에서 확인하세요.
 - **주차 위치**에서 층·구역 메모와 사용자 권한을 받은 위치를 저장합니다. 지도 링크를 열 때 좌표가 지도 서비스에 전달됩니다.
-- **모니터링**에서 조회가 승인된 현대 전기차의 충전 상태를 확인합니다. 충전 시뮬레이션은 접힌 영역에서 따로 실행할 수 있습니다.
-- **경고등 안내**는 공식 설명서의 관련 항목을 검색하고, 문구가 모호하면 추가 정보를 요청합니다. 현재 전용 설명서 검색 범위는 현대 아이오닉 6 2025년형이며 지원 항목은 파워다운, 서비스 경고등, 타이어 공기압입니다.
+- **모니터링**에서 조회가 승인된 현대 전기차의 충전 상태를 확인합니다. 배터리 그림과 추이 그래프에는 이 탭에서 조회한 값을 표시합니다.
+- **경고등 안내**에서 텍스트나 계기판 사진으로 질문하고 후속 질문을 이어갈 수 있습니다. 현대 아이오닉 6와 기아 EV6 2025년형의 파워다운, 서비스 경고등, 타이어 공기압 항목을 우선 제공합니다.
 
 ## 생성형 AI 연결
 
@@ -27,25 +27,40 @@ python server.py
 
 [현대차 아이오닉 6 2025 경고등 사용설명서](https://ownersmanual.hyundai.com/full_webhelp/CE1/2025/ko_KR/id23C4LH00HL7.html)
 
+현대 국내 전기차 16개 차종의 공식 경고등 근거를 제공합니다. 아래 연식에서 확인된 서비스 경고등, 파워다운, 구동용 배터리 잔량, 타이어 공기압 등의 항목을 요약해 등록했습니다. 각 결과에서 현대 공식 웹 설명서의 항목 또는 PDF 페이지를 열 수 있습니다. [현대자동차 오너스 매뉴얼](https://ownersmanual.hyundai.com/main?countryCode=A99&langCode=ko_KR)
+
+| 차종 | 경고등 설명서 연식 |
+| --- | --- |
+| 아이오닉 5 / 아이오닉 5 N | 2021–2027 / 2024–2026 |
+| 아이오닉 6 / 아이오닉 6 N | 2023–2025 / 2025 |
+| 아이오닉 9 | 2025, 2027 |
+| 코나 일렉트릭 | 2018–2020, 2022–2025 |
+| 캐스퍼 일렉트릭 / 스타리아 일렉트릭 | 2025–2027 / 2027 |
+| 아이오닉 일렉트릭 / 블루온 | 2016–2020 / 2012 |
+| 포터 II 일렉트릭 / ST1 | 2019–2026 / 2025–2026 |
+| 일렉시티 / 일렉시티 이층버스 | 2020–2026 / 2021–2026 |
+| 일렉시티 타운 / 카운티 일렉트릭 | 2023–2025 / 2020–2025 |
+
+검색은 등록된 제조사·차종·연식이 모두 일치하는 범위에서 실행합니다. 기존 카탈로그의 ‘포터 EV’, ‘코나EV(~22년형)’ 같은 이름도 공식 차종명으로 인식합니다. 근거가 확인되지 않은 연식이나 경고는 AI 일반 안내로 표시됩니다.
+
 ## Supabase 설명서 RAG
 
-1. Supabase 프로젝트의 SQL Editor에서 `supabase/migrations/202611240001_manual_vectors.sql`을 한 번 실행합니다. Supabase CLI 프로젝트가 연결되어 있다면 마이그레이션으로 적용할 수도 있습니다.
+1. Supabase 프로젝트에 `202611240001_manual_vectors.sql`과 `202611250008_manual_e5_embeddings.sql`을 적용합니다. 기존 운영 DB에 처음 추가할 때는 적용 여부를 확인한 뒤 새 마이그레이션만 실행합니다.
 2. Python 서버를 실행할 환경에 아래 환경 변수를 설정합니다. 키는 서버 환경 변수에만 보관하고 Git과 브라우저 코드에는 넣지 않습니다.
 
 ```powershell
 $env:SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
 $env:SUPABASE_SECRET_KEY = '<서버용 Supabase secret key>'
-$env:EMBEDDINGS_OPENAI_API_KEY = '<벡터 검색용 별도 OpenAI 키>'
 $env:COPA_API_KEY = '<COPA 가상 키>'
 $env:EVLOG_MODEL = '<답변 생성에 사용할 모델 ID>'
 ```
 
-3. `python manual_rag.py`로 `data/manual_chunks.json`의 샘플 설명서 조각을 1536차원으로 임베딩하고 Supabase에 적재합니다. 같은 ID로 다시 실행하면 기존 조각을 갱신합니다. 다른 차종은 같은 JSON 구조의 파일을 `python manual_rag.py 경로.json`으로 적재합니다. 각 조각에는 차종·연식, 제목, 출처 URL을 기록합니다.
+3. `python -m pip install -r requirements.txt` 후 `python manual_rag.py`를 실행합니다. `data/manual_chunks.json`에 있는 차량 설명서 발췌 요약을 `multilingual-e5-small`로 384차원 임베딩해 Supabase의 `manual_chunks.e5_embedding`에 적재합니다. 최초 실행 때 공개 모델 파일을 내려받아 캐시합니다. 같은 ID를 다시 넣으면 기존 조각을 갱신합니다. 다른 차종은 같은 JSON 구조의 파일을 `python manual_rag.py 경로.json`으로 적재합니다.
 4. `python server.py`를 시작합니다. 배포 서버에는 같은 환경 변수와 `EVLOG_HOST=0.0.0.0`을 설정합니다. 호스팅의 `PORT`를 사용하며, 필요하면 `EVLOG_PORT`로 지정할 수 있습니다. Supabase는 DB를 호스팅하고 이 저장소의 Python 웹 서버는 별도 호스팅에서 실행합니다.
 
-검색은 입력을 같은 임베딩 모델로 변환하고, 선택한 제조사·차종·연식의 조각에서 코사인 유사도를 계산합니다. 최상위 근거와 원문 링크를 응답에 사용합니다. 검색할 근거가 없으면 추가 정보를 요청하고, 차종 데이터가 없으면 준비 중으로 표시합니다. 초기 유사도 기준은 0.35이며 실제 쿼리로 평가한 뒤 조정합니다.
+검색 시 질문을 같은 모델로 변환하고, 제조사·차종·연식이 일치하는 조각의 코사인 유사도를 계산합니다. 코사인 유사도가 0.83 이상인 최대 3개 조각을 Claude 프롬프트에 포함해 답변을 생성합니다. 질문 임베딩은 Python 서버에서 계산합니다.
 
-서버용 Supabase 키가 없으면 샘플 설명서의 키워드 검색을 사용합니다. 모델 호출이 실패하면 검색된 설명서 근거를 표시합니다. Supabase 모드에서는 경고 문구를 임베딩 API로 전송하므로 개인정보를 입력하지 않도록 안내해야 합니다.
+벡터 검색 설정이나 검색 결과가 없으면 저장소에 포함한 공식 설명서 발췌에서 키워드를 찾습니다. 관련 항목이 없으면 COPA로 일반 AI 안내를 생성하고, 설명서 기반 답변은 출처를 표시합니다. 모델 호출이 실패하면 검색된 설명서 근거를 표시합니다.
 
 [Supabase 벡터 검색 문서](https://supabase.com/docs/guides/ai/semantic-search)
 
@@ -60,13 +75,15 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 
 ## 계기판 사진 분석
 
-경고등 화면에 JPG, PNG 또는 WebP를 첨부할 수 있습니다. 브라우저는 사진을 JPEG로 줄여 요청할 때만 전송합니다. 앱에서 사진을 저장하지 않습니다. COPA의 Claude는 사진에서 경고 문구나 이름을 추출하며, 서버는 이 내용으로 해당 차종의 설명서 근거를 검색합니다. 답변 생성에는 화면에 표시하는 설명서 근거를 전달합니다.
+경고등 화면에 JPG, PNG 또는 WebP를 첨부할 수 있습니다. 브라우저는 사진을 JPEG로 줄여 해당 질문에서만 전송합니다. COPA의 Claude는 사진에서 경고 문구나 이름을 추출하며, 서버는 이 내용으로 해당 차종의 설명서 근거를 검색합니다.
 
-서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색은 서버용 Supabase 키, 별도 EMBEDDINGS_OPENAI_API_KEY와 적재된 임베딩이 필요합니다.
+`202611250009_guide_conversations.sql`을 적용하면 로그인한 사용자의 질문, 답변, 출처와 사진에서 읽은 문구가 Supabase에 저장됩니다. 지난 대화를 열면 당시 등록한 차종과 연식으로 이어서 대화하며, 모델에는 최근 8개 메시지의 텍스트를 보냅니다. 첨부 사진 자체는 대화 기록에 저장하지 않습니다. Supabase RLS는 본인 계정의 기록만 조회·저장·삭제할 수 있도록 제한합니다.
 
-## 현대·기아 차량 연결 개발 테스트
+서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색에는 서버용 Supabase 키와 적재된 임베딩이 필요합니다.
 
-제조사별 개발자 프로젝트를 만든 뒤 서버의 .env에 HYUNDAI_CLIENT_ID, HYUNDAI_CLIENT_SECRET, HYUNDAI_REDIRECT_URI 또는 KIA_CLIENT_ID, KIA_CLIENT_SECRET, KIA_REDIRECT_URI를 설정합니다. 계정 API Redirect URL에는 앱의 /vehicle-connect/callback 주소 전체를 등록합니다. 예: http://127.0.0.1:8000/vehicle-connect/callback. 배포 환경에서는 HTTPS 콜백을 사용합니다. 기본 데이터 환경은 dev이며 제조사가 허용한 경우 각 브랜드의 DATA_STAGE를 prd로 설정할 수 있습니다.
+## 현대 블루링크 차량 연결 개발 테스트
+
+현대 개발자 프로젝트를 만든 뒤 서버의 `.env`에 `HYUNDAI_CLIENT_ID`, `HYUNDAI_CLIENT_SECRET`, `HYUNDAI_REDIRECT_URI`를 설정합니다. 계정 API Redirect URL에는 앱의 `/vehicle-connect/callback`까지 포함한 HTTPS 주소를 등록합니다. 기본 데이터 환경은 `dev`이며 현대에서 운영 권한을 승인한 경우 `HYUNDAI_DATA_STAGE=prd`로 설정할 수 있습니다.
 
 본인 차량을 콘솔에서 활성화하고 제조사가 요구하는 별도 데이터 제공 동의를 완료해야 차량 목록 조회가 가능합니다. Supabase 서버 키를 설정하면 연결 상태와 만료 시간이 계정별로 Supabase에 저장됩니다. 로컬에서 서버 키를 설정하지 않으면 메모리를 사용합니다. 제조사 토큰 만료 시 다시 연결해야 합니다. 최종 주차 위치와 과거 경로를 가져오는 기능은 승인된 데이터 API의 규격 확인 후 구현합니다.
 
@@ -84,5 +101,7 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 Supabase SQL Editor에서 `supabase/migrations/202611240007_vehicle_charging_status.sql`을 적용한 뒤 배포합니다. 연결 데이터 제공이 승인된 현대 전기차를 모니터링 화면에서 선택합니다. 화면이 열려 있을 때 1분 간격으로 조회하며, 현대가 보낸 시각과 EV Log가 조회한 시각을 각각 표시합니다. 국내 API의 차량 전송 시각은 서울 시간으로 해석합니다.
 
 Supabase는 계정·차량별 최신 관측값을 저장합니다. 조회 API가 제공하는 값은 배터리 잔량, 충전 여부, 플러그 상태, 목표 잔량과 남은 시간입니다. 실제 충전량이나 결제 금액은 이 응답에 포함되지 않습니다.
+
+차량을 선택하면 주행 가능 거리, 누적 운행 거리, 전기차 배터리 잔량과 충전 상태를 함께 조회합니다. 이후에는 충전 상태만 1분마다 갱신합니다. 테스트 차량이 없으면 **현대 공식 샘플 보기**에서 각 API 규격서의 응답 예시를 확인할 수 있습니다. 샘플은 서로 다른 예시 시점의 값이며 DB에 저장하지 않습니다.
 
 [현대 전기차 충전 상태 조회 규격](https://developers.hyundai.com/web/v1/hyundai/specification/data/status_evcharging)

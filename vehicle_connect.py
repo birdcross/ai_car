@@ -1,4 +1,4 @@
-"""Hyundai and Kia account connection."""
+"""Hyundai Bluelink account connection."""
 import base64
 import json
 import os
@@ -6,6 +6,7 @@ import re
 import secrets
 import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote, urlencode, urlsplit
 from urllib.request import Request, urlopen
@@ -14,21 +15,18 @@ from vehicle_oauth_store import SupabaseOAuthStore
 
 ACCOUNT_ORIGIN = "https://prd.kr-ccapi.hyundai.com"
 DATA_ORIGINS = {"dev": "https://dev.kr-ccapi.hyundai.com", "prd": ACCOUNT_ORIGIN}
-BRANDS = {"hyundai": "현대 블루링크", "kia": "기아 커넥트"}
 LOCK = threading.Lock()
 PENDING = {}
 CONNECTED = {}
 CAR_ID = re.compile(r"[A-Za-z0-9_-]{1,128}")
 KOREA_TIME = timezone(timedelta(hours=9))
+SUMMARY_PATHS = {"range": "/dte", "odometer": "/odometer", "battery": "/ev/battery", "charging": "/ev/charging"}
 
 
-def configuration(brand):
-    if brand not in BRANDS:
-        raise ValueError("현대 또는 기아를 선택해주세요.")
-    prefix = brand.upper()
-    client = os.getenv(prefix + "_CLIENT_ID")
-    secret = os.getenv(prefix + "_CLIENT_SECRET")
-    callback = os.getenv(prefix + "_REDIRECT_URI")
+def configuration():
+    client = os.getenv("HYUNDAI_CLIENT_ID")
+    secret = os.getenv("HYUNDAI_CLIENT_SECRET")
+    callback = os.getenv("HYUNDAI_REDIRECT_URI")
     if not all((client, secret, callback)):
         return None
     url = urlsplit(callback)
@@ -36,7 +34,7 @@ def configuration(brand):
             or url.query or url.fragment
             or not (url.scheme == "https" or (url.scheme == "http" and url.hostname in {"localhost", "127.0.0.1"}))):
         raise ValueError("차량 연결 콜백 주소 설정을 확인해주세요.")
-    stage = os.getenv(prefix + "_DATA_STAGE", "dev")
+    stage = os.getenv("HYUNDAI_DATA_STAGE", "dev")
     if stage not in DATA_ORIGINS:
         raise ValueError("차량 데이터 환경은 dev 또는 prd로 설정해주세요.")
     return client, secret, callback, DATA_ORIGINS[stage]
@@ -103,10 +101,10 @@ def handle(user_id, request):
     if not isinstance(request, dict):
         raise ValueError("차량 연결 요청 형식을 확인해주세요.")
     action, brand = request.get("action"), request.get("brand")
-    if not isinstance(brand, str) or brand not in BRANDS:
-        raise ValueError("현대 또는 기아를 선택해주세요.")
+    if brand != "hyundai":
+        raise ValueError("현대 블루링크 차량 연결만 지원해요.")
     key = (user_id, brand)
-    config = configuration(brand)
+    config = configuration()
     store = None
     if os.getenv("SUPABASE_URL") and os.getenv("SUPABASE_SECRET_KEY"):
         store = SupabaseOAuthStore(user_id, brand)
@@ -120,7 +118,7 @@ def handle(user_id, request):
         if action == "disconnect":
             store.disconnect()
             return {"connected": False}
-        if config and action in {"status", "vehicles", "monitor-vehicles", "charging"}:
+        if config and action in {"status", "vehicles", "monitor-vehicles", "charging", "vehicle-summary"}:
             link = store.token(now)
     else:
         with LOCK:
@@ -133,7 +131,7 @@ def handle(user_id, request):
     if not config:
         if action == "status":
             return {"configured": False, "connected": False}
-        raise ValueError(f"{BRANDS[brand]} 개발자 프로젝트의 Client ID, Secret 및 콜백 주소가 필요해요.")
+        raise ValueError("현대 블루링크 개발자 프로젝트의 Client ID, Secret 및 콜백 주소가 필요해요.")
     client, secret, callback, origin = config
     if action == "status":
         return {"configured": True, "connected": bool(link)}
@@ -176,22 +174,39 @@ def handle(user_id, request):
             with LOCK:
                 CONNECTED[key] = (access, time.monotonic() + expires)
         return {"connected": True}
-    if action in {"vehicles", "monitor-vehicles", "charging"}:
-        if action != "vehicles" and brand != "hyundai":
-            raise ValueError("충전 모니터링은 현재 현대 전기차를 지원해요.")
+    if action in {"vehicles", "monitor-vehicles", "charging", "vehicle-summary"}:
         if not link:
             raise ValueError("먼저 제조사 계정을 연결해주세요.")
         headers = {"Authorization": "Bearer " + link[0]}
         rows = car_list(origin, headers)
-        if action == "charging":
+        if action in {"charging", "vehicle-summary"}:
             car_id = request.get("carId")
             if not isinstance(car_id, str) or not CAR_ID.fullmatch(car_id) or not any(row.get("carId") == car_id for row in rows):
                 raise ValueError("연결된 현대 전기차를 다시 선택해주세요.")
-            payload = provider_json(origin + "/api/v1/car/status/" + quote(car_id, safe="") + "/ev/charging", headers)
-            snapshot = charging_snapshot(payload)
-            if store:
+            status_url = origin + "/api/v1/car/status/" + quote(car_id, safe="")
+            if action == "charging":
+                snapshot = charging_snapshot(provider_json(status_url + SUMMARY_PATHS["charging"], headers))
+                if store:
+                    store.save_charging_status(car_id, snapshot)
+                return {"snapshot": snapshot}
+            with ThreadPoolExecutor(max_workers=len(SUMMARY_PATHS)) as pool:
+                requests = {field: pool.submit(provider_json, status_url + path, headers)
+                            for field, path in SUMMARY_PATHS.items()}
+                summary = {}
+                for field, pending in requests.items():
+                    try:
+                        payload = pending.result()
+                        if not isinstance(payload, dict) or "errCode" in payload:
+                            raise ValueError("Invalid vehicle status response")
+                        if field == "charging":
+                            payload = charging_snapshot(payload)
+                        summary[field] = payload
+                    except (OSError, ValueError, AttributeError):
+                        summary[field] = None
+            snapshot = summary["charging"]
+            if snapshot and store:
                 store.save_charging_status(car_id, snapshot)
-            return {"snapshot": snapshot}
+            return {"summary": summary}
         return {"vehicles": [
             {"name": row.get("carSellname") or row.get("carName") or "모델명 미제공",
              "nickname": row.get("carNickname") or ""} | ({"id": row["carId"]} if action == "monitor-vehicles" else {})

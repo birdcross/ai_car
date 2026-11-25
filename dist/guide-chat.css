@@ -1,0 +1,37 @@
+.guide-chat{display:grid;gap:16px;max-width:860px;margin-inline:auto}
+.guide-chat-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.guide-chat-heading h2{margin:0;font-size:1.1rem}
+.guide-chat-heading button{padding:7px 11px}
+.guide-history{padding:8px 12px;border:1px solid #293e50;border-radius:12px;background:#101a28}
+.guide-history summary{cursor:pointer;padding:4px 0;color:#eff5fc}
+#guideHistoryStatus{margin:8px 0}
+#guideHistoryStatus:empty{display:none}
+#guideHistoryList{display:grid;gap:6px;max-height:250px;overflow:auto;list-style:none;margin:8px 0 0;padding:0}
+#guideHistoryList li{display:flex;align-items:center;gap:6px}
+#guideHistoryList button{min-width:0;padding:7px 10px}
+.guide-thread-open{flex:1;text-align:left}
+.guide-thread-open[aria-current="true"]{outline:1px solid #a6d579}
+.guide-thread-open span,.guide-thread-open small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guide-thread-open small,.guide-conversation-vehicle{margin:3px 0 0;color:#bed0df}
+.guide-transcript{min-height:145px;max-height:min(50dvh,460px);overflow-y:auto;padding:14px;border:1px solid #293e50;border-radius:14px;background:#101a28}
+.guide-welcome{margin:0;max-width:32em;color:#bed0df}
+#guideMessages{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.guide-message{display:flex;justify-content:flex-start}
+.guide-message-user{justify-content:flex-end}
+.guide-message article{min-width:0;max-width:89%;padding:12px 15px;border-radius:14px 14px 14px 4px;border:1px solid #30495c;background:#1a2a3a}
+.guide-message-user article{border-radius:14px 14px 4px 14px;border-color:#426956;background:#233f37}
+.guide-message-label{color:#c7f485;font-size:.8rem}
+.guide-message-text{margin:4px 0 0;color:#eff5fc;white-space:pre-wrap;overflow-wrap:anywhere}
+.guide-message-note{margin:8px 0 0;color:#b4c8d8;font-size:.85rem}
+.guide-message img{display:block;max-width:min(100%,280px);max-height:200px;margin-top:8px;border-radius:9px;object-fit:contain}
+.guide-message a{display:block;margin-top:7px;font-size:.86rem;overflow-wrap:anywhere}
+.guide-composer{display:grid;gap:9px}
+.guide-input-label{display:grid;gap:5px}
+.guide-composer textarea{width:100%;min-height:66px;padding:11px 13px;resize:vertical;border:1px solid #415770;border-radius:12px;background:#0d1420;color:#eff5fc;font:inherit}
+.guide-composer textarea:focus-visible{outline:2px solid #a6d579;outline-offset:2px}
+.guide-composer-actions{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap}
+.guide-file-label{max-width:min(100%,310px);font-size:.85rem;color:#bed0df}
+.guide-file-label input{margin-top:4px;max-width:100%;padding:6px 8px}
+.guide-privacy,#guideChatStatus{margin:0;font-size:.8rem}
+#guideChatStatus:not(:empty){padding-top:3px;color:#c7f485}
+@media(max-width:560px){.guide-transcript{padding:10px}.guide-message article{max-width:96%}}

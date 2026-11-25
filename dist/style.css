@@ -12,5 +12,3 @@
 .charging-grid dd{margin:4px 0 0;font-weight:650;overflow-wrap:anywhere}
 #liveVehicleField{display:block;max-width:360px}
 #liveVehicleField[hidden]{display:none}
-.monitor-panel summary{cursor:pointer;font-weight:650}
-.monitor-panel[open] summary{margin-bottom:16px}
