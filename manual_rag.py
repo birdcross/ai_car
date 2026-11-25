@@ -5,11 +5,10 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
+from manual_embeddings import embed
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 SEED = PROJECT_ROOT / "data" / "manual_chunks.json"
-EMBEDDING_MODEL = "text-embedding-3-small"
-DIMENSIONS = 1536
 
 
 def load_local_env(path=PROJECT_ROOT / ".env"):
@@ -40,16 +39,6 @@ def post_json(url, headers, payload):
         return json.loads(body) if body else None
 
 
-def embed(texts):
-    result = post_json("https://api.openai.com/v1/embeddings", {
-        "Authorization": "Bearer " + os.environ["EMBEDDINGS_OPENAI_API_KEY"],
-    }, {"model": EMBEDDING_MODEL, "dimensions": DIMENSIONS, "input": texts})
-    vectors = [row["embedding"] for row in sorted(result["data"], key=lambda row: row["index"])]
-    if len(vectors) != len(texts) or any(len(vector) != DIMENSIONS for vector in vectors):
-        raise ValueError("Unexpected embedding dimensions or count.")
-    return vectors
-
-
 def supabase_request(path, payload, extra_headers=None):
     origin = os.environ["SUPABASE_URL"].rstrip("/")
     address = urlparse(origin)
@@ -63,11 +52,11 @@ def supabase_request(path, payload, extra_headers=None):
 
 
 def has_supabase_config():
-    return all(os.getenv(key) for key in ("SUPABASE_URL", "SUPABASE_SECRET_KEY", "EMBEDDINGS_OPENAI_API_KEY"))
+    return all(os.getenv(key) for key in ("SUPABASE_URL", "SUPABASE_SECRET_KEY"))
 
 
 def require_config():
-    required = ("SUPABASE_URL", "SUPABASE_SECRET_KEY", "EMBEDDINGS_OPENAI_API_KEY")
+    required = ("SUPABASE_URL", "SUPABASE_SECRET_KEY")
     missing = [key for key in required if not os.getenv(key)]
     if missing:
         raise RuntimeError("Missing environment variables: " + ", ".join(missing))
@@ -76,12 +65,13 @@ def require_config():
 def search(question, vehicle):
     require_config()
     make, model, year = vehicle
-    return supabase_request("rpc/match_manual_chunks", {
+    result = supabase_request("rpc/match_e5_manual_chunks", {
         "vehicle_make": make,
         "vehicle_model": model,
         "vehicle_year": year,
-        "query_embedding": json.dumps(embed([question])[0]),
+        "query_embedding": json.dumps(embed([question], query=True)[0]),
     })
+    return {**result, "matches": [match for match in result["matches"] if match["similarity"] >= 0.83]}
 
 
 def read_seed(path=SEED):
@@ -102,7 +92,7 @@ def ingest(path):
         batch = rows[start:start + 32]
         vectors = embed([row["title"] + "\n" + row["content"] for row in batch])
         for row, vector in zip(batch, vectors):
-            row["embedding"] = json.dumps(vector)
+            row["e5_embedding"] = json.dumps(vector)
         supabase_request("manual_chunks?on_conflict=id", batch, {
             "Prefer": "resolution=merge-duplicates,return=minimal",
         })

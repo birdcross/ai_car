@@ -123,8 +123,8 @@ def guide(question, vehicle, photo=None, history=()):
     if cloud_search:
         try:
             articles = manual_rag.search(query, vehicle_key)["matches"][:3]
-        except (RuntimeError, URLError, TimeoutError, ValueError, KeyError, TypeError, AttributeError):
-            logging.exception("Manual retrieval failed")
+        except Exception as error:
+            logging.warning("Manual retrieval failed: %s", type(error).__name__)
     source_kind = "공식 설명서 벡터 검색"
     if not articles:
         _, article = demo_search(question, vehicle_key)

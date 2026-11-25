@@ -4,7 +4,7 @@
 
 ## 로컬 실행
 
-Python 3.10 이상이 필요합니다. 별도 패키지 설치 없이 프로젝트 폴더에서 실행합니다.
+Python 3.10 이상이 필요합니다. 벡터 검색을 사용할 환경에서는 `python -m pip install -r requirements.txt`로 임베딩 모델 실행에 필요한 패키지를 설치합니다.
 
 ```powershell
 python server.py
@@ -29,23 +29,22 @@ python server.py
 
 ## Supabase 설명서 RAG
 
-1. Supabase 프로젝트의 SQL Editor에서 `supabase/migrations/202611240001_manual_vectors.sql`을 한 번 실행합니다. Supabase CLI 프로젝트가 연결되어 있다면 마이그레이션으로 적용할 수도 있습니다.
+1. Supabase 프로젝트에 `202611240001_manual_vectors.sql`과 `202611250008_manual_e5_embeddings.sql`을 적용합니다. 기존 운영 DB에 처음 추가할 때는 적용 여부를 확인한 뒤 새 마이그레이션만 실행합니다.
 2. Python 서버를 실행할 환경에 아래 환경 변수를 설정합니다. 키는 서버 환경 변수에만 보관하고 Git과 브라우저 코드에는 넣지 않습니다.
 
 ```powershell
 $env:SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
 $env:SUPABASE_SECRET_KEY = '<서버용 Supabase secret key>'
-$env:EMBEDDINGS_OPENAI_API_KEY = '<벡터 검색용 별도 OpenAI 키>'
 $env:COPA_API_KEY = '<COPA 가상 키>'
 $env:EVLOG_MODEL = '<답변 생성에 사용할 모델 ID>'
 ```
 
-3. `python manual_rag.py`로 `data/manual_chunks.json`의 샘플 설명서 조각을 1536차원으로 임베딩하고 Supabase에 적재합니다. 같은 ID로 다시 실행하면 기존 조각을 갱신합니다. 다른 차종은 같은 JSON 구조의 파일을 `python manual_rag.py 경로.json`으로 적재합니다. 각 조각에는 차종·연식, 제목, 출처 URL을 기록합니다.
+3. `python -m pip install -r requirements.txt` 후 `python manual_rag.py`를 실행합니다. `data/manual_chunks.json`에 있는 차량 설명서 발췌 요약을 `multilingual-e5-small`로 384차원 임베딩해 Supabase의 `manual_chunks.e5_embedding`에 적재합니다. 최초 실행 때 공개 모델 파일을 내려받아 캐시합니다. 같은 ID를 다시 넣으면 기존 조각을 갱신합니다. 다른 차종은 같은 JSON 구조의 파일을 `python manual_rag.py 경로.json`으로 적재합니다.
 4. `python server.py`를 시작합니다. 배포 서버에는 같은 환경 변수와 `EVLOG_HOST=0.0.0.0`을 설정합니다. 호스팅의 `PORT`를 사용하며, 필요하면 `EVLOG_PORT`로 지정할 수 있습니다. Supabase는 DB를 호스팅하고 이 저장소의 Python 웹 서버는 별도 호스팅에서 실행합니다.
 
-검색은 입력을 같은 임베딩 모델로 변환하고, 선택한 제조사·차종·연식의 조각에서 코사인 유사도를 계산합니다. 최상위 근거와 원문 링크를 응답에 사용합니다. 검색할 근거가 없으면 추가 정보를 요청하고, 차종 데이터가 없으면 준비 중으로 표시합니다. 초기 유사도 기준은 0.35이며 실제 쿼리로 평가한 뒤 조정합니다.
+검색 시 질문을 같은 모델로 변환하고, 제조사·차종·연식이 일치하는 조각의 코사인 유사도를 계산합니다. 코사인 유사도가 0.83 이상인 최대 3개 조각을 Claude 프롬프트에 포함해 답변을 생성합니다. 질문 임베딩은 Python 서버에서 계산합니다.
 
-벡터 검색 설정이나 검색 결과가 없으면 저장소에 포함한 공식 설명서 발췌에서 키워드를 찾습니다. 관련 항목이 없으면 COPA로 일반 AI 안내를 생성하고, 설명서 기반 답변은 출처를 표시합니다. 모델 호출이 실패하면 검색된 설명서 근거를 표시합니다. 벡터 모드에서는 검색 문구를 임베딩 API로 전송합니다.
+벡터 검색 설정이나 검색 결과가 없으면 저장소에 포함한 공식 설명서 발췌에서 키워드를 찾습니다. 관련 항목이 없으면 COPA로 일반 AI 안내를 생성하고, 설명서 기반 답변은 출처를 표시합니다. 모델 호출이 실패하면 검색된 설명서 근거를 표시합니다.
 
 [Supabase 벡터 검색 문서](https://supabase.com/docs/guides/ai/semantic-search)
 
@@ -62,7 +61,7 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 
 경고등 화면에 JPG, PNG 또는 WebP를 첨부할 수 있습니다. 브라우저는 사진을 JPEG로 줄여 해당 질문에서만 전송합니다. 최근 대화는 탭에만 유지되며, 답변에 최근 8개 메시지의 텍스트를 참고합니다. COPA의 Claude는 사진에서 경고 문구나 이름을 추출하며, 서버는 이 내용으로 해당 차종의 설명서 근거를 검색합니다.
 
-서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색은 서버용 Supabase 키, 별도 EMBEDDINGS_OPENAI_API_KEY와 적재된 임베딩이 필요합니다.
+서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색에는 서버용 Supabase 키와 적재된 임베딩이 필요합니다.
 
 ## 현대 블루링크 차량 연결 개발 테스트
 
