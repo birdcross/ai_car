@@ -1,7 +1,22 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="charging-monitor.css?v=monitor-reception"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=monitor-reception" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js?v=monitor-reception" defer></script><script src="charging-monitor.js?v=monitor-reception" defer></script><script src="auth.js?v=monitor-first" defer></script></head><body>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EV Log · 전기차 생활 관리</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="charging-monitor.css?v=monitor-reception"><link rel="stylesheet" href="guide-chat.css?v=guide-history"><script src="app.js?v=maintenance-notes" defer></script><script src="trips.js" defer></script><script src="vehicle-connect.js?v=monitor-reception" defer></script><script src="charging-monitor.js?v=monitor-reception" defer></script><script src="auth.js?v=monitor-first" defer></script></head><body>
 <div class="shell"><aside><a class="brand" href="#monitor"><b>ϟ</b> EV Log</a><nav id="mainNav" aria-label="주 메뉴" hidden><a href="#monitor">◉　모니터링</a><a href="#ledger">▤　차계부</a><a href="#parking">⌖　주차 위치</a><a href="#guide">◇　경고등 안내</a><a href="#cards">▣　카드 지출</a><a href="#settings">⚙　차량 설정</a></nav><div class="vehicle" id="vehicleSidebar" hidden><span>내 차량</span><strong id="selectedVehicle"></strong><small id="selectedYear"></small></div></aside>
 <main><header><span id="garageLabel">내 전기차</span><div class="account-actions"><a id="headerVehicle" href="#settings" hidden></a><a id="loginLink" href="#account">로그인</a><button id="logoutButton" type="button" class="soft" hidden>로그아웃</button></div></header>
-<section id="ledger" hidden><h1>차계부</h1><p class="sub">충전비와 정비비를 기록하세요.</p><div class="panel"><h2>지출 추가</h2><a href="#cards">카드 내역 가져오기</a><form id="expense"><div class="fields"><label>거래일<input name="date" type="date" required></label><label>유형<select name="type"><option>충전</option><option>정비</option></select></label><label>금액 (원)<input name="amount" type="number" min="1" max="100000000" required></label><label>충전량 (kWh, 선택)<input name="kwh" type="number" min="0.01" max="1000" step="0.01"></label></div><button>기록 저장</button></form></div><div class="panel"><h2>저장한 기록</h2><ul id="all" class="records"></ul></div></section>
+<section id="ledger" hidden><h1>차계부</h1><p class="sub">충전비와 정비비를 기록하세요.</p>
+  <div class="panel">
+    <h2>지출 추가</h2><a href="#cards">카드 내역 가져오기</a>
+    <form id="expense">
+      <div class="fields">
+        <label>거래일<input name="date" type="date" required></label>
+        <label>유형<select name="type"><option>충전</option><option>정비</option></select></label>
+        <label>금액 (원)<input name="amount" type="number" min="1" max="100000000" required></label>
+        <label id="expenseChargeField">충전량 (kWh, 선택)<input name="kwh" type="number" min="0.01" max="1000" step="0.01"></label>
+        <label id="expenseMaintenanceField" hidden>정비 내용 (비고)<input name="maintenanceNote" maxlength="120" placeholder="예: 앞 타이어 2개 교체" disabled></label>
+      </div>
+      <button type="submit">기록 저장</button>
+    </form>
+  </div>
+  <div class="panel"><h2>저장한 기록</h2><ul id="all" class="records"></ul></div>
+</section>
 <section id="parking" hidden><h1>내 차 주차 위치</h1>
 <div class="panel"><h2>마지막 주차 위치</h2>
 <p id="parkCurrent" class="parking-address"></p><p id="parkDetail" class="sub"></p>

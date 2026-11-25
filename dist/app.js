@@ -164,10 +164,15 @@ function recordList(list, rows) {
     const title = document.createElement('strong');
     title.textContent = item.merchant || (item.type === '충전' ? '전기차 충전' : '차량 정비');
     const meta = document.createElement('small');
-    meta.textContent = item.date + (item.kwh ? ' · ' + item.kwh + ' kWh' : '');
+    meta.textContent = item.date + (item.type === '충전' && item.kwh ? ' · ' + item.kwh + ' kWh' : '');
     const amount = document.createElement('strong');
     amount.textContent = money(item.amount);
     label.append(title, meta);
+    if (item.type === '정비' && item.maintenanceNote) {
+      const note = document.createElement('small');
+      note.textContent = '비고 · ' + item.maintenanceNote;
+      label.append(note);
+    }
     li.append(label, amount);
     list.append(li);
   }
@@ -259,18 +264,42 @@ setInterval(() => {
   if (!document.hidden && !$('parking').hidden) void refreshParking();
 }, 3000);
 
-$('expense').onsubmit = event => {
+const expenseForm = $('expense');
+
+function updateExpenseFields() {
+  const {type, kwh, maintenanceNote} = expenseForm.elements;
+  const isMaintenance = type.value === '정비';
+  $('expenseChargeField').hidden = kwh.disabled = isMaintenance;
+  $('expenseMaintenanceField').hidden = maintenanceNote.disabled = !isMaintenance;
+  maintenanceNote.required = isMaintenance;
+}
+
+expenseForm.elements.type.addEventListener('change', updateExpenseFields);
+updateExpenseFields();
+expenseForm.onsubmit = event => {
   event.preventDefault();
+  if (!recordOwner) return;
   const form = event.currentTarget;
   const values = new FormData(form);
   const type = values.get('type');
   const kwh = type === '충전' && values.get('kwh') ? Number(values.get('kwh')) : null;
-  const next = [{date: values.get('date'), type, amount: Number(values.get('amount')), kwh}, ...expenses];
+  const entry = {date: values.get('date'), type, amount: Number(values.get('amount')), kwh};
+  if (type === '정비') {
+    const note = values.get('maintenanceNote')?.trim();
+    if (!note || note.length > 120) {
+      $('feedback').textContent = '정비 내용을 120자 이내로 입력해주세요.';
+      form.elements.maintenanceNote.focus();
+      return;
+    }
+    entry.maintenanceNote = note;
+  }
+  const next = [entry, ...expenses];
   try { store('expenses', next); }
   catch { $('feedback').textContent = '기록을 저장하지 못했습니다. 브라우저 저장소를 확인하세요.'; return; }
   expenses = next;
   form.reset();
   form.elements.date.value = today;
+  updateExpenseFields();
   render();
   $('feedback').textContent = '지출 기록을 저장했어요.';
 };
@@ -892,6 +921,7 @@ function setRecordOwner(userId, signupVehicle) {
   $('importCardChoice').value = '';
   for (const id of ['feedback', 'cardStatus', 'registerCardStatus', 'vehicleStatus']) $(id).textContent = '';
   $('expense').elements.date.value = today;
+  updateExpenseFields();
   vehicleForm.elements.displayName.value = vehicle?.displayName ?? '';
   vehicleForm.elements.make.value = vehicle?.make ?? '';
   vehicleForm.elements.model.value = vehicle?.model ?? '';
