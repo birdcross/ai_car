@@ -64,9 +64,9 @@ Supabase Auth를 사용하려면 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY를 설
 
 서버 환경 변수 COPA_API_KEY가 필요합니다. 서버는 COPA의 Anthropic Messages API를 사용합니다. 기본 모델은 claude-haiku-4이며 EVLOG_MODEL=claude-sonnet-4로 변경할 수 있습니다. 사진 모델은 EVLOG_VISION_MODEL로 별도 지정할 수 있습니다. Supabase 벡터 검색은 서버용 Supabase 키, 별도 EMBEDDINGS_OPENAI_API_KEY와 적재된 임베딩이 필요합니다.
 
-## 현대·기아 차량 연결 개발 테스트
+## 현대 블루링크 차량 연결 개발 테스트
 
-제조사별 개발자 프로젝트를 만든 뒤 서버의 .env에 HYUNDAI_CLIENT_ID, HYUNDAI_CLIENT_SECRET, HYUNDAI_REDIRECT_URI 또는 KIA_CLIENT_ID, KIA_CLIENT_SECRET, KIA_REDIRECT_URI를 설정합니다. 계정 API Redirect URL에는 앱의 /vehicle-connect/callback 주소 전체를 등록합니다. 예: http://127.0.0.1:8000/vehicle-connect/callback. 배포 환경에서는 HTTPS 콜백을 사용합니다. 기본 데이터 환경은 dev이며 제조사가 허용한 경우 각 브랜드의 DATA_STAGE를 prd로 설정할 수 있습니다.
+현대 개발자 프로젝트를 만든 뒤 서버의 `.env`에 `HYUNDAI_CLIENT_ID`, `HYUNDAI_CLIENT_SECRET`, `HYUNDAI_REDIRECT_URI`를 설정합니다. 계정 API Redirect URL에는 앱의 `/vehicle-connect/callback`까지 포함한 HTTPS 주소를 등록합니다. 기본 데이터 환경은 `dev`이며 현대에서 운영 권한을 승인한 경우 `HYUNDAI_DATA_STAGE=prd`로 설정할 수 있습니다.
 
 본인 차량을 콘솔에서 활성화하고 제조사가 요구하는 별도 데이터 제공 동의를 완료해야 차량 목록 조회가 가능합니다. Supabase 서버 키를 설정하면 연결 상태와 만료 시간이 계정별로 Supabase에 저장됩니다. 로컬에서 서버 키를 설정하지 않으면 메모리를 사용합니다. 제조사 토큰 만료 시 다시 연결해야 합니다. 최종 주차 위치와 과거 경로를 가져오는 기능은 승인된 데이터 API의 규격 확인 후 구현합니다.
 
