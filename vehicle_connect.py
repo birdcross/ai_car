@@ -60,31 +60,44 @@ def car_list(origin, headers):
     return [row for row in rows if isinstance(row, dict) and row.get("carType") == "EV"]
 
 
+class ChargingDataError(ValueError):
+    """The provider returned an unusable charging observation."""
+
+
 def charging_snapshot(payload):
     def number(value, upper=None):
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not 0 <= value < float("inf") or (upper is not None and value > upper)):
-            raise ValueError("현대 충전 상태 응답의 숫자 항목을 확인할 수 없어요.")
+            raise ChargingDataError("현대 충전 상태 응답의 숫자 항목을 확인할 수 없어요.")
         return value
 
     def enum(value, upper):
         if type(value) is not int:
-            raise ValueError("현대 충전 상태 응답의 코드 항목을 확인할 수 없어요.")
+            raise ChargingDataError("현대 충전 상태 응답의 코드 항목을 확인할 수 없어요.")
         return number(value, upper)
 
+    if not isinstance(payload, dict):
+        raise ChargingDataError("현대 충전 상태 응답 형식을 확인할 수 없어요.")
     charging = payload.get("batteryCharge")
     timestamp = payload.get("timestamp")
     if not isinstance(charging, bool) or not isinstance(timestamp, str) or not re.fullmatch(r"[0-9]{14}", timestamp):
-        raise ValueError("현대 충전 상태 또는 차량 전송 시각을 확인할 수 없어요.")
+        raise ChargingDataError("현대 충전 상태 또는 차량 전송 시각을 확인할 수 없어요.")
     try:
         reported = datetime.strptime(timestamp, "%Y%m%d%H%M%S").replace(tzinfo=KOREA_TIME)
     except ValueError as error:
-        raise ValueError("현대 충전 상태의 차량 전송 시각이 올바르지 않아요.") from error
-    target = payload.get("targetSOC") or {}
-    remaining = payload.get("remainTime") or {}
+        raise ChargingDataError("현대 충전 상태의 차량 전송 시각이 올바르지 않아요.") from error
+    target = payload.get("targetSOC")
+    remaining = payload.get("remainTime")
+    if any(value is not None and not isinstance(value, dict) for value in (target, remaining)):
+        raise ChargingDataError("현대 충전 목표 또는 남은 시간 형식을 확인할 수 없어요.")
+    target = target or {}
+    remaining = remaining or {}
+    plug = enum(payload.get("batteryPlugin"), 2)
+    if charging and plug == 0:
+        raise ChargingDataError("차량이 충전 중이라고 응답했지만 플러그 상태는 미연결로 들어왔어요.")
     message_id = payload.get("msgId")
     return {
-        "battery_plugin": enum(payload.get("batteryPlugin"), 2),
+        "battery_plugin": plug,
         "battery_charge": charging,
         "soc": number(payload.get("soc"), 100),
         "target_plug_type": enum(target["plugType"], 2) if target.get("plugType") is not None else None,
@@ -185,7 +198,10 @@ def handle(user_id, request):
                 raise ValueError("연결된 현대 전기차를 다시 선택해주세요.")
             status_url = origin + "/api/v1/car/status/" + quote(car_id, safe="")
             if action == "charging":
-                snapshot = charging_snapshot(provider_json(status_url + SUMMARY_PATHS["charging"], headers))
+                try:
+                    snapshot = charging_snapshot(provider_json(status_url + SUMMARY_PATHS["charging"], headers))
+                except ChargingDataError as error:
+                    return {"snapshot": None, "chargingDataIssue": str(error)}
                 if store:
                     store.save_charging_status(car_id, snapshot)
                 return {"snapshot": snapshot}
@@ -193,20 +209,26 @@ def handle(user_id, request):
                 requests = {field: pool.submit(provider_json, status_url + path, headers)
                             for field, path in SUMMARY_PATHS.items()}
                 summary = {}
+                charging_data_issue = None
                 for field, pending in requests.items():
                     try:
                         payload = pending.result()
-                        if not isinstance(payload, dict) or "errCode" in payload:
-                            raise ValueError("Invalid vehicle status response")
                         if field == "charging":
+                            if isinstance(payload, dict) and "errCode" in payload:
+                                raise ValueError("Vehicle charging status unavailable")
                             payload = charging_snapshot(payload)
+                        elif not isinstance(payload, dict) or "errCode" in payload:
+                            raise ValueError("Invalid vehicle status response")
                         summary[field] = payload
+                    except ChargingDataError as error:
+                        summary[field] = None
+                        charging_data_issue = str(error)
                     except (OSError, ValueError, AttributeError):
                         summary[field] = None
             snapshot = summary["charging"]
             if snapshot and store:
                 store.save_charging_status(car_id, snapshot)
-            return {"summary": summary}
+            return {"summary": summary, "chargingDataIssue": charging_data_issue}
         return {"vehicles": [
             {"name": row.get("carSellname") or row.get("carName") or "모델명 미제공",
              "nickname": row.get("carNickname") or ""} | ({"id": row["carId"]} if action == "monitor-vehicles" else {})
